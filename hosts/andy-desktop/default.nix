@@ -37,6 +37,7 @@
     vim
     wget
     kitty
+    foot
     fish
     neovim
   ];
