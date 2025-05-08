@@ -6,6 +6,13 @@
     ./hardware-configuration.nix
   ];
 
+# Bootloader.
+  boot.loader.grub.enable = true;
+  boot.loader.grub.device = "/dev/nvme0n1";
+  boot.loader.grub.useOSProber = true;
+
+  nix.settings.experimental-features = ["nix-command" "flakes" ];
+
   nixpkgs.config.allowUnfree = true;
   networking.hostName = "andy-desktop";
   time.timeZone = "Europe/Sofia";
@@ -15,6 +22,7 @@
     extraGroups = [ "wheel" "networkmanager" "video" "input" ];
     shell = pkgs.fish;
   };
+
 
   networking.networkmanager.enable = true;
 
