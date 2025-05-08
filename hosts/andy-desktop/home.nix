@@ -109,9 +109,9 @@
 
     # Additional packages
     home.packages = with pkgs; [
-      rofi-wayland
-      waybar
-      dunst
-      libnotify
+      pkgs.rofi-wayland
+      pkgs.waybar
+      pkgs.dunst
+      pkgs.libnotify
     ];
 }
