@@ -26,7 +26,10 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = { inherit inputs; };
+              home-manager.extraSpecialArgs = {
+                  inherit inputs;
+                  username = "andy";
+                 };
               home-manager.users.andy = import ./hosts/andy-desktop/home.nix;
             }
           ];
