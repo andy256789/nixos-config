@@ -1,7 +1,6 @@
 { config, pkgs, inputs, username, ... }:
 
 {
-  home-manager.users.${username} = {
     home.stateVersion = "24.11";
 
     # Enable programs
@@ -115,5 +114,4 @@
       dunst
       libnotify
     ];
-  };
 }
