@@ -1,0 +1,42 @@
+{ config, pkgs, hyprland, username, ... }:
+
+{
+  imports = [
+    ./home.nix
+    ./hardware-configuration.nix
+  ];
+
+  nixpkgs.config.allowUnfree = true;
+  networking.hostName = "andy-desktop";
+  time.timeZone = "Europe/Sofia";
+
+  users.users.${username} = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" "networkmanager" "video" "input" ];
+    shell = pkgs.fish;
+  };
+
+  networking.networkmanager.enable = true;
+
+  services.xserver.enable = true;
+
+  services.displayManager.sddm.enable = true;
+  services.displayManager.defaultSession = "hyprland";
+  programs.hyprland.enable = true;
+
+  environment.systemPackages = with pkgs; [
+    git
+    wget
+    kitty
+    fish
+    neovim
+  ];
+
+  programs.fish.enable = true;
+
+  environment.sessionVariables = {
+    WLR_NO_HARDWARE_CURSORS = "1";
+  };
+
+  system.stateVersion = "24.11";
+}
