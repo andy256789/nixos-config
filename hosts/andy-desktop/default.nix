@@ -11,6 +11,8 @@
   boot.loader.grub.device = "/dev/nvme0n1";
   boot.loader.grub.useOSProber = true;
 
+  virtualisation.vmware.guest.enable = true;
+
   nix.settings.experimental-features = ["nix-command" "flakes" ];
 
   nixpkgs.config.allowUnfree = true;
