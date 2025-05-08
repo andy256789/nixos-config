@@ -39,6 +39,7 @@
     vim
     wget
     kitty
+    firefox
     foot
     fish
     neovim
