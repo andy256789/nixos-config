@@ -71,6 +71,7 @@
 
   # Shell
   programs.fish.enable = true;
+  programs.ssh.enable = true;
 
   # Environment variables
   environment.sessionVariables = {

@@ -6,7 +6,6 @@
     # Enable programs
     programs.fish.enable = true;
     programs.kitty.enable = true;
-    programs.ssh.enable = true;
 
     # Hyprland configuration
     wayland.windowManager.hyprland = {
