@@ -63,6 +63,7 @@
     foot
     fish
     neovim
+    cursor
     waybar
     rofi-wayland
     dunst
