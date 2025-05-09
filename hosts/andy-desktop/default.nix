@@ -14,18 +14,9 @@
 
   # Nix settings
   nixpkgs.config.allowUnfree = true;
-  # nix.settings = {
-  #    experimental-features = [ "nix-command" "flakes" ];
-  #    substituters = [
-  #      "https://hyprland.cachix.org/"
-  #      "https://cache.nixos.org/"
-  #    ];
-  #    trusted-public-keys = [
-  #      "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
-  #      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-  #    ];
-  # };
-
+  nix.settings = {
+    experimental-features = [ "nix-command" "flakes" ];
+  };
 
   # System settings
   networking.hostName = "andy-desktop";
@@ -53,21 +44,11 @@
     xwayland.enable = true;
   };
 
-  # System packages
+  # System packages (only system-level packages that shouldn't be in home-manager)
   environment.systemPackages = with pkgs; [
     git
     vim
     wget
-    kitty
-    firefox
-    foot
-    fish
-    neovim
-    cursor
-    waybar
-    rofi-wayland
-    dunst
-    libnotify
   ];
 
   # Shell
