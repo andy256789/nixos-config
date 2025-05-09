@@ -15,13 +15,14 @@
     fish.enable = true;
     neovim = {
       enable = true;
+      defaultEditor = true;
       viAlias = true;
       vimAlias = true;
     };
     ghostty = {
       enable = true;
       settings = {
-        font = "Maple Mono";
+        font = "JetBrains Mono";
         font-size = 12;
         background-opacity = 0.8;
         padding = 8;
@@ -34,6 +35,7 @@
     network-manager-applet.enable = true;
     swaync = {
       enable = true;
+      systemd.enable = true;
       settings = {
         positionX = "right";
         positionY = "top";

@@ -17,13 +17,10 @@
 
     # Development tools
     git
-    neovim
 
     # Fonts
     nerd-fonts.jetbrains-mono
-    #noto-fonts
     noto-fonts-cjk-sans
-    #noto-fonts-emoji
 
     # GTK theme and icons
     adwaita-qt
