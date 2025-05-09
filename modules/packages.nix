@@ -20,7 +20,7 @@
     neovim
 
     # Fonts
-    nerd-fonts.jetbrainsmono
+    nerd-fonts.jetbrains-mono
     noto-fonts
     noto-fonts-cjk
     noto-fonts-emoji
