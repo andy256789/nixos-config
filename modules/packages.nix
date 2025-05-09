@@ -24,7 +24,7 @@
 
     # GTK theme and icons
     adwaita-qt
-    gnome.adwaita-icon-theme
+    adwaita-icon-theme
     papirus-icon-theme
 
     # Additional utilities
