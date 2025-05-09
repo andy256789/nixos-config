@@ -35,7 +35,6 @@
     network-manager-applet.enable = true;
     swaync = {
       enable = true;
-      systemd.enable = true;
       settings = {
         positionX = "right";
         positionY = "top";
@@ -56,38 +55,6 @@
         fit-to-screen = true;
         relative-timestamps = true;
         show-timeout = true;
-        timeouts = true;
-        time-format = "%H:%M";
-        short-time = true;
-        show-dnd-toggle = true;
-        show-control-center = true;
-        show-notifications = true;
-        show-incoming-calls = true;
-        show-outgoing-calls = true;
-        show-music-control = true;
-        show-dnd-indicator = true;
-        show-media = true;
-        show-battery = true;
-        show-battery-percentage = true;
-        show-battery-time = true;
-        show-battery-icon = true;
-        show-battery-status = true;
-        show-battery-status-charging = true;
-        show-battery-status-discharging = true;
-        show-battery-status-full = true;
-        show-battery-status-low = true;
-        show-battery-status-critical = true;
-        show-battery-status-unknown = true;
-        show-battery-status-empty = true;
-        show-battery-status-charged = true;
-        show-battery-status-charging-symbol = true;
-        show-battery-status-discharging-symbol = true;
-        show-battery-status-full-symbol = true;
-        show-battery-status-low-symbol = true;
-        show-battery-status-critical-symbol = true;
-        show-battery-status-unknown-symbol = true;
-        show-battery-status-empty-symbol = true;
-        show-battery-status-charged-symbol = true;
       };
     };
   };
