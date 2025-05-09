@@ -20,7 +20,10 @@
     neovim
 
     # Fonts
-    maple-mono
+    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })  # Fallback until we set up Maple Mono
+    noto-fonts
+    noto-fonts-cjk
+    noto-fonts-emoji
 
     # GTK theme and icons
     adwaita-qt
