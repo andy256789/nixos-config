@@ -146,7 +146,7 @@
       # Startup applications
       exec-once = [
         "${pkgs.waybar}/bin/waybar"
-        "${pkgs.swaync}/bin/swaync"
+        "${pkgs.swaynotificationcenter}/bin/swaync"
         "${pkgs.networkmanagerapplet}/bin/nm-applet --indicator"
       ];
     };

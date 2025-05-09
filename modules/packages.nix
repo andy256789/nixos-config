@@ -12,7 +12,7 @@
 
     # System utilities
     networkmanagerapplet
-    swaync
+    swaynotificationcenter
     btop
 
     # Development tools
