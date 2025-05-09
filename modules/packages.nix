@@ -20,7 +20,7 @@
     neovim
 
     # Fonts
-    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })  # Fallback until we set up Maple Mono
+    nerd-fonts.jetbrainsmono
     noto-fonts
     noto-fonts-cjk
     noto-fonts-emoji
