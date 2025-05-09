@@ -1,15 +1,18 @@
 {
 	description = "Andy's NixOS configuration";
-	nixConfig = {
-		extra-substituters = [
-			"https://hyprland.cachix.org/"
-			"https://cache.nixos.org/"
-		];
-		extra-trusted-public-keys = [
-			"hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
-			"cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-		];
-	};
+  # https://discourse.nixos.org/t/how-to-set-up-cachix-in-flake-based-nixos-config/31781
+  # use --accept-flake-config when rebuilding
+
+  nixConfig = {
+    extra-substituters = [
+      "https://nix-community.cachix.org"
+      "https://hyprland.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+    ];
+  };
 
 	inputs = {
 		nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
