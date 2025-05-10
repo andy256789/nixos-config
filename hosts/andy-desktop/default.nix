@@ -45,9 +45,9 @@
   };
 
   # Enable OpenGL and Mesa
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
-    extraPackages = with pkgs; [ mesa.drivers ];
+    extraPackages = with pkgs; [ mesa ];
   };
 
   # System packages (only system-level packages that shouldn't be in home-manager)
