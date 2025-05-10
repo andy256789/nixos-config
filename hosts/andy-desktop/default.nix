@@ -19,7 +19,7 @@
   };
 
   # System settings
-  networking.hostName = "andy-desktop";
+  networking.hostName = settings.hostname;
   time.timeZone = "Europe/Sofia";
 
   # User configuration
