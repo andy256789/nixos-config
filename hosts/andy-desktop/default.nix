@@ -44,11 +44,21 @@
     xwayland.enable = true;
   };
 
+  # Enable OpenGL and Mesa
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+    driSupport32Bit = true;
+    extraPackages = with pkgs; [ mesa.drivers ];
+  };
+
   # System packages (only system-level packages that shouldn't be in home-manager)
   environment.systemPackages = with pkgs; [
     git
     vim
     wget
+    mesa
+    wayland-utils
   ];
 
   # Shell
@@ -59,6 +69,7 @@
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1"; # Enable Wayland for Ozone-based apps (e.g., Firefox)
     WLR_NO_HARDWARE_CURSORS = "1"; # Fix cursor issues in some VMs
+    WLR_RENDERER_ALLOW_SOFTWARE = "1";
     QT_QPA_PLATFORM = "wayland"; # Force Qt apps to use Wayland
     GDK_BACKEND = "wayland"; # Force GTK apps to use Wayland
   };
