@@ -87,12 +87,12 @@
       # Keybindings
       bind = [
         # Applications
-        "SUPER, Return, exec, ${pkgs.ghostty}/bin/ghostty"
+        "SUPER, Return, exec, ghostty"
         "SUPER, B, exec, firefox"
-        "SUPER SHIFT, Return, exec, ${pkgs.foot}/bin/foot"  # Backup terminal
-        "SUPER, E, exec, ${pkgs.nemo}/bin/nemo"
+        "SUPER SHIFT, Return, exec, foot"  # Backup terminal
+        "SUPER, E, exec, nemo"
         "SUPER, F, togglefloating"
-        "SUPER, Space, exec, ${pkgs.wofi}/bin/wofi --show drun"
+        "SUPER, Space, exec, wofi --show drun"
         
         # Window management
         "SUPER, Q, killactive"
@@ -126,12 +126,12 @@
         "SUPER SHIFT, 0, movetoworkspace, 10"
         
         # Media controls
-        ", XF86AudioRaiseVolume, exec, ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ +5%"
-        ", XF86AudioLowerVolume, exec, ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ -5%"
-        ", XF86AudioMute, exec, ${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle"
-        ", XF86AudioPlay, exec, ${pkgs.playerctl}/bin/playerctl play-pause"
-        ", XF86AudioNext, exec, ${pkgs.playerctl}/bin/playerctl next"
-        ", XF86AudioPrev, exec, ${pkgs.playerctl}/bin/playerctl previous"
+        ", XF86AudioRaiseVolume, exec, pactl set-sink-volume @DEFAULT_SINK@ +5%"
+        ", XF86AudioLowerVolume, exec, pactl set-sink-volume @DEFAULT_SINK@ -5%"
+        ", XF86AudioMute, exec, pactl set-sink-mute @DEFAULT_SINK@ toggle"
+        ", XF86AudioPlay, exec, playerctl play-pause"
+        ", XF86AudioNext, exec, playerctl next"
+        ", XF86AudioPrev, exec, playerctl previous"
       ];
 
       # Mouse bindings
@@ -142,9 +142,9 @@
 
       # Startup applications
       exec-once = [
-        "${pkgs.waybar}/bin/waybar"
-        "${pkgs.swaynotificationcenter}/bin/swaync"
-        "${pkgs.networkmanagerapplet}/bin/nm-applet --indicator"
+        "waybar"
+        "swaync"
+        "nm-applet --indicator"
       ];
     };
   };

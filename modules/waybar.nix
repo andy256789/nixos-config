@@ -53,9 +53,6 @@
           tooltip-format = "{title}";
           on-click = "activate";
           on-click-middle = "close";
-          ignore-list = [
-            "kitty"
-          ];
         };
 
         "clock" = {
