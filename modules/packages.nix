@@ -14,6 +14,7 @@
     networkmanagerapplet
     swaynotificationcenter
     btop
+    wofi
 
     # Development tools
     git
