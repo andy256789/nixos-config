@@ -4,7 +4,11 @@
   home.packages = with pkgs; [
     # Terminal
     ghostty
+    alacritty
+    kitty
+    xterm
     foot
+    terminator
 
     # File managers
     nemo
@@ -15,6 +19,7 @@
     swaynotificationcenter
     btop
     wofi
+    fastfetch
 
     # Development tools
     git
