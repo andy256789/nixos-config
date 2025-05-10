@@ -56,10 +56,6 @@
           new_optimizations = true;
           xray = true;
         };
-        drop_shadow = true;
-        shadow_range = 4;
-        shadow_render_power = 3;
-        "col.shadow" = "rgba(1a1a1aee)";
       };
 
       # Animation settings
@@ -85,7 +81,7 @@
         workspace_swipe_fingers = 3;
         workspace_swipe_invert = false;
         workspace_swipe_distance = 200;
-        workspace_swipe_on_new = true;
+ #       workspace_swipe_on_new = true;
       };
 
       # Keybindings

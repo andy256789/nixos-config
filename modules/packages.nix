@@ -18,6 +18,9 @@
     # Development tools
     git
 
+    #Browser
+    firefox
+
     # Fonts
     nerd-fonts.jetbrains-mono
     noto-fonts-cjk-sans
