@@ -1,4 +1,4 @@
-{ config, pkgs, hyprland, username, ... }:
+{ config, pkgs, hyprland, settings, ... }:
 
 {
   imports = [
@@ -23,7 +23,7 @@
   time.timeZone = "Europe/Sofia";
 
   # User configuration
-  users.users.${username} = {
+  users.users.${settings.username} = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "video" "input" ];
     shell = pkgs.fish;
