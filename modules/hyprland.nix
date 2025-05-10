@@ -88,6 +88,7 @@
       bind = [
         # Applications
         "SUPER, Return, exec, ${pkgs.ghostty}/bin/ghostty"
+        "SUPER, B, exec, firefox"
         "SUPER SHIFT, Return, exec, ${pkgs.foot}/bin/foot"  # Backup terminal
         "SUPER, E, exec, ${pkgs.nemo}/bin/nemo"
         "SUPER, F, togglefloating"
