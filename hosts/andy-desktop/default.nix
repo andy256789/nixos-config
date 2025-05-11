@@ -10,7 +10,7 @@
   boot.loader.grub.device = "/dev/nvme0n1";
   boot.loader.grub.useOSProber = true;
 
-  virtualisation.vmware.guest.enable = true;
+  #virtualisation.vmware.guest.enable = true;
 
   # Nix settings
   nixpkgs.config.allowUnfree = true;
