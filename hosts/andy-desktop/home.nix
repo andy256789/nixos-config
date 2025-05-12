@@ -29,7 +29,7 @@
     
     wallpapers = {
       enable = true;
-      wallpaper = "${config.home.homeDirectory}/wallpapers/catppuccin/cat-lavender.png";
+      wallpaper = "anime-cyberpunk.png";
       transition = "wipe";
       transitionStep = 90;
       transitionDuration = 4;

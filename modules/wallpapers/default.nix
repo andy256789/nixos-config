@@ -5,18 +5,13 @@ with lib;
 let
   cfg = config.modules.wallpapers;
 in {
-  imports = [
-    ./catppuccin.nix
-  ];
-  
   options.modules.wallpapers = {
     enable = mkEnableOption "Enable wallpaper management";
     
     wallpaper = mkOption {
-      type = types.path;
+      type = types.str;
       description = "Path to wallpaper image";
-      example = "./wallpapers/my-wallpaper.png";
-      default = "${config.home.homeDirectory}/wallpapers/catppuccin/cat-lavender.png";
+      default = "anime-cool.png";
     };
     
     transition = mkOption {
@@ -43,6 +38,12 @@ in {
       swww
     ];
     
+    # Copy wallpapers to home directory
+    home.file."wallpapers" = {
+      source = ./images;
+      recursive = true;
+    };
+    
     # Create script to set wallpaper
     home.file.".local/bin/set-wallpaper" = {
       executable = true;
@@ -56,7 +57,7 @@ in {
         fi
         
         # Apply wallpaper with specified settings
-        swww img ${cfg.wallpaper} \
+        swww img ${config.home.homeDirectory}/wallpapers/${cfg.wallpaper} \
           --transition-type ${cfg.transition} \
           --transition-step ${toString cfg.transitionStep} \
           --transition-duration ${toString cfg.transitionDuration}
