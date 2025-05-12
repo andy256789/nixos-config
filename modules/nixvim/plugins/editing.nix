@@ -40,7 +40,7 @@ in {
   config = mkIf (cfg.enable && cfg.editing.enable) {
     programs.nixvim = {
       # Initialize LSP diagnostics visibility global variable
-      extraConfigLua = ''
+      lua.extraConfig = ''
         _G.isLspDiagnosticsVisible = true
       '';
       

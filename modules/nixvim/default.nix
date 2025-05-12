@@ -19,13 +19,9 @@ in {
   };
 
   config = mkIf cfg.enable {
-    programs.nixvim = {
-      enable = true;
-      
-      # Default configurations that should always be enabled
-      viAlias = true;
-      vimAlias = true;
-      defaultEditor = true;
-    };
+    programs.nixvim.enable = true;
+    programs.nixvim.viAlias = true;
+    programs.nixvim.vimAlias = true;
+    programs.nixvim.defaultEditor = true;
   };
 } 

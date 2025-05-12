@@ -124,7 +124,7 @@ in {
       ];
       
       # Enable autotag
-      extraConfigLua = ''
+      lua.extraConfig = ''
         require('nvim-ts-autotag').setup()
       '';
     };

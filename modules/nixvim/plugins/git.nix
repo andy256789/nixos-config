@@ -48,9 +48,6 @@ in {
             unmerged = {
               folded = false;
             };
-            recent = {
-              folded = false;
-            };
           };
         };
 

@@ -56,82 +56,79 @@ in {
   };
 
   config = mkIf cfg.enable {
-    programs.nixvim = {
-      globals = {
-        # Disable netrw banner
-        netrw_banner = 0;
-        editorconfig = true;
-      };
-
-      options = {
-        # Cursor appearance
-        guicursor = "";
-        
-        # Line numbers
-        relativenumber = true;
-        number = true;
-
-        # Indentation settings
-        expandtab = true;     # Use spaces instead of tabs
-        smarttab = true;      # Smart handling of tab key
-        shiftwidth = cfg.tabWidth; 
-        tabstop = cfg.tabWidth;
-        softtabstop = cfg.tabWidth;
-        autoindent = cfg.enableAutoIndent;
-        smartindent = cfg.enableSmartIndent;
-        
-        # Line wrap
-        wrap = false;         # Don't wrap lines
-
-        # UI settings
-        termguicolors = true; # Enable 24-bit RGB color
-        showmode = false;     # Don't show mode in command line
-        signcolumn = if cfg.showSignColumn then "yes" else "no";
-        cursorline = true;    # Highlight current line
-        scrolloff = 8;        # Keep 8 lines above/below cursor when scrolling
-        sidescrolloff = 8;    # Keep 8 columns left/right of cursor when scrolling
-        colorcolumn = cfg.colorColumn;
-        background = "dark";
-        
-        # Search settings
-        ignorecase = true;    # Case insensitive search
-        smartcase = true;     # Unless uppercase letters are used
-        hlsearch = true;      # Highlight search matches
-        incsearch = true;     # Show matches while typing
-        inccommand = "split"; # Preview replacements in a split
-
-        # Behavior
-        hidden = true;        # Allow switching buffers without saving
-        backup = false;       # Don't create backup files
-        swapfile = false;     # Don't create swap files
-        undofile = true;      # Persistent undo history
-        updatetime = 50;      # Faster completion
-        mouse = cfg.mouse;    # Mouse support
-        
-        # Split window behavior
-        splitright = true;    # Split vertical window to the right
-        splitbelow = true;    # Split horizontal window to the bottom
-        
-        # File name handling
-        isfname = "+=@-@";    # Add @ to filename characters
-        
-        # Clipboard
-        clipboard = cfg.clipboard;
-        
-        # Backspace behavior
-        backspace = [ "start" "eol" "indent" ];
-        
-        # Folding settings
-        foldenable = true;
-        foldmethod = "manual";
-        foldlevel = 99;
-        foldcolumn = "0";
-      };
-      
-      # Set up undo directory
-      extraConfigVim = ''
-        let &undodir = expand("~/.vim/undodir")
-      '';
+    programs.nixvim.globals = {
+      # Disable netrw banner
+      netrw_banner = 0;
+      editorconfig = true;
     };
+
+    programs.nixvim.options = {
+      # Cursor appearance
+      guicursor = "";
+      
+      # Line numbers
+      relativenumber = true;
+      number = true;
+
+      # Indentation settings
+      expandtab = true;     # Use spaces instead of tabs
+      smarttab = true;      # Smart handling of tab key
+      shiftwidth = cfg.tabWidth; 
+      tabstop = cfg.tabWidth;
+      softtabstop = cfg.tabWidth;
+      autoindent = cfg.enableAutoIndent;
+      smartindent = cfg.enableSmartIndent;
+      
+      # Line wrap
+      wrap = false;         # Don't wrap lines
+
+      # UI settings
+      termguicolors = true; # Enable 24-bit RGB color
+      showmode = false;     # Don't show mode in command line
+      signcolumn = if cfg.showSignColumn then "yes" else "no";
+      cursorline = true;    # Highlight current line
+      scrolloff = 8;        # Keep 8 lines above/below cursor when scrolling
+      sidescrolloff = 8;    # Keep 8 columns left/right of cursor when scrolling
+      colorcolumn = cfg.colorColumn;
+      background = "dark";
+      
+      # Search settings
+      ignorecase = true;    # Case insensitive search
+      smartcase = true;     # Unless uppercase letters are used
+      hlsearch = true;      # Highlight search matches
+      incsearch = true;     # Show matches while typing
+      inccommand = "split"; # Preview replacements in a split
+
+      # Behavior
+      hidden = true;        # Allow switching buffers without saving
+      backup = false;       # Don't create backup files
+      swapfile = false;     # Don't create swap files
+      undofile = true;      # Persistent undo history
+      updatetime = 50;      # Faster completion
+      mouse = cfg.mouse;    # Mouse support
+      
+      # Split window behavior
+      splitright = true;    # Split vertical window to the right
+      splitbelow = true;    # Split horizontal window to the bottom
+      
+      # File name handling
+      isfname = "+=@-@";    # Add @ to filename characters
+      
+      # Clipboard
+      clipboard = cfg.clipboard;
+      
+      # Backspace behavior
+      backspace = [ "start" "eol" "indent" ];
+      
+      # Folding settings
+      foldenable = true;
+      foldmethod = "manual";
+      foldlevel = 99;
+      foldcolumn = "0";
+    };
+    
+    programs.nixvim.extraConfigVim = ''
+      let &undodir = expand("~/.vim/undodir")
+    '';
   };
 } 

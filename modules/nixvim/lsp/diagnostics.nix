@@ -72,7 +72,7 @@ in {
       };
 
       # Configure global diagnostic settings
-      extraConfigLua = ''
+      lua.extraConfig = ''
         -- Customize diagnostic signs
         local signs = { Error = " ", Warn = " ", Hint = "󰌵 ", Info = " " }
 

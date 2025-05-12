@@ -3,6 +3,7 @@
 {
   imports = [
     ../../modules
+    inputs.nixvim.homeManagerModules.nixvim
   ];
 
   home.stateVersion = "24.11";
