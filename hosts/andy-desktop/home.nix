@@ -1,14 +1,66 @@
-{ config, pkgs, inputs, settings, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   imports = [
-    ../../modules/hyprland.nix
-    ../../modules/waybar.nix
-    ../../modules/packages.nix
-    ../../modules/gtk.nix
+    ../../modules
   ];
 
   home.stateVersion = "24.11";
+
+  # Enable themes with default settings
+  themes.enable = true;
+
+  # Enable modules with customizations
+  modules = {
+    hyprland = {
+      enable = true;
+      terminal = "ghostty";
+      browser = "firefox";
+      fileManager = "nemo";
+    };
+    
+    waybar.enable = true;
+    
+    gtk = {
+      enable = true;
+      iconTheme = "Papirus-Dark";
+      cursorTheme = "Breeze";
+    };
+    
+    packages = {
+      enable = true;
+      terminal.enable = true;
+      fileManagers.enable = true;
+      development.enable = true;
+      browsers.enable = true;
+      media.enable = true;
+      utilities.enable = true;
+      communication.enable = true;
+    };
+    
+    ghostty = {
+      enable = true;
+      fontSize = 12;
+      paddingX = 10;
+      paddingY = 10;
+      cursorStyle = "beam";
+    };
+    
+    swaync = {
+      enable = true;
+      position = {
+        x = "right";
+        y = "top";
+      };
+      timeout = {
+        default = 10;
+        low = 5;
+        critical = 0;
+      };
+      margin = 10;
+      iconSize = 64;
+    };
+  };
 
   # Enable programs
   programs = {
@@ -19,51 +71,10 @@
       viAlias = true;
       vimAlias = true;
     };
-    ghostty = {
-      enable = true;
-      settings = {
-        font-family = "JetBrains Mono";
-        font-size = 12;
-        background-opacity = 0.8;
-      };
-    };
   };
 
   # Enable services
   services = {
     network-manager-applet.enable = true;
-    swaync = {
-      enable = true;
-      settings = {
-        positionX = "right";
-        positionY = "top";
-        layer = "overlay";
-        control-center-layer = "overlay";
-        layer-shell = true;
-        cssPriority = "application";
-        control-center-margin-top = 10;
-        control-center-margin-bottom = 10;
-        control-center-margin-right = 10;
-        control-center-margin-left = 10;
-        notification-icon-size = 64;
-        notification-body-image-height = 100;
-        notification-body-image-width = 200;
-        timeout = 10;
-        timeout-low = 5;
-        timeout-critical = 0;
-        fit-to-screen = true;
-        relative-timestamps = true;
-        show-timeout = true;
-      };
-    };
-  };
-
-  # XDG portal configuration
-  xdg.portal = {
-    enable = true;
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-gtk
-      xdg-desktop-portal-hyprland
-    ];
   };
 }
