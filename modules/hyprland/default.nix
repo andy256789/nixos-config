@@ -270,14 +270,5 @@ in {
         ];
       };
     };
-    
-    # Ensure cursor theme is properly set for Hyprland
-    home.pointerCursor = {
-      name = "Bibata-Modern-Ice";
-      package = pkgs.bibata-cursors;
-      size = 24;
-      x11.enable = true;
-      gtk.enable = true;
-    };
  };
 } 
