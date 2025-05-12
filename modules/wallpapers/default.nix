@@ -52,7 +52,7 @@ in {
         
         # Initialize swww if not running
         if ! pgrep -x swww-daemon > /dev/null; then
-          swww init
+          swww-daemon
           sleep 1
         fi
         
