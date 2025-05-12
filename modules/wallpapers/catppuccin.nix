@@ -6,11 +6,6 @@ let
   cfg = config.modules.wallpapers;
 in {
   config = mkIf cfg.enable {
-    home.file."wallpapers" = {
-      source = ./images;
-      recursive = true;
-    };
-    
     # Download Catppuccin wallpapers
     home.activation.downloadCatppuccinWallpapers = lib.hm.dag.entryAfter ["writeBoundary"] ''
       $DRY_RUN_CMD mkdir -p ${config.home.homeDirectory}/wallpapers/catppuccin
