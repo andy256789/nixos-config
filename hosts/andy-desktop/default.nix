@@ -39,8 +39,16 @@
   # Networking
   networking.networkmanager.enable = true;
 
-  # Display and window manager
+# Display and window manager
   services.xserver.enable = true;
+  services.xserver.extraConfig = ''
+	  Section "Monitor"
+	  Identifier "DP-2"
+	  Modeline "2560x1440_170.00" 974.00 2560 2792 3080 3600 1440 1443 1448 1592 -hsync +vsync
+	  Option "PreferredMode" "2560x1440_170.00"
+	  EndSection
+	  '';
+
   services.displayManager.sddm = {
     enable = true;
     wayland.enable = true;

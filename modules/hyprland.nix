@@ -9,9 +9,11 @@
 
     settings = {
       # Monitor configuration
-      monitor = [
-        ",preferred,auto,1"
-      ];
+#     monitor = [
+#       ",preferred,auto,1"
+#     ];
+      monitor="DP-1,2560x1440@170,0x0,1";
+
 
       # General settings
       general = {
