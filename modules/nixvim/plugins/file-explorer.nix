@@ -107,9 +107,9 @@ in {
       keymaps = mkIf (cfg.fileExplorer.enable) [
         {
           key = "<leader>e";
-          action = cfg.fileExplorer.type == "neo-tree" 
-            ? ":Neotree toggle<CR>" 
-            : ":NvimTreeToggle<CR>";
+          action = if cfg.fileExplorer.type == "neo-tree" 
+            then ":Neotree toggle<CR>" 
+            else ":NvimTreeToggle<CR>";
           mode = "n";
           options = {
             desc = "Toggle file explorer";
@@ -118,9 +118,9 @@ in {
         }
         {
           key = "<leader>o";
-          action = cfg.fileExplorer.type == "neo-tree" 
-            ? ":Neotree focus<CR>" 
-            : ":NvimTreeFocus<CR>";
+          action = if cfg.fileExplorer.type == "neo-tree" 
+            then ":Neotree focus<CR>" 
+            else ":NvimTreeFocus<CR>";
           mode = "n";
           options = {
             desc = "Focus file explorer";
