@@ -66,6 +66,7 @@
 	};
 # System packages (only system-level packages that shouldn't be in home-manager)
 	environment.systemPackages = with pkgs; [
+		home-manager
 		git
 		vim
 		wget
