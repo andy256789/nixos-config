@@ -70,8 +70,8 @@ in {
         env = [
           "XCURSOR_SIZE,${toString (config.home.pointerCursor.size or 24)}"
           "QT_QPA_PLATFORMTHEME,qt5ct"
-#          "HYPRCURSOR_SIZE,${toString (config.home.pointerCursor.size or 24)}"
-#          "HYPRCURSOR_THEME,${gtkCfg.cursorTheme}"
+          "HYPRCURSOR_SIZE,${toString (config.home.pointerCursor.size or 24)}"
+          "HYPRCURSOR_THEME,${gtkCfg.cursorTheme}"
         ];
 
         # General settings
@@ -170,7 +170,7 @@ in {
           "float,title:^(Picture-in-Picture)$"
           "float,title:^(Volume Control)$"
           "center,class:^(wofi)$"
-          "animation slide,class:^(wofi)$" 
+          "animation windowsIn,class:^(wofi)$,slide" 
         ];
 
         # Keybindings
