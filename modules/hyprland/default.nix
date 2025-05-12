@@ -70,8 +70,7 @@ in {
           "XCURSOR_SIZE,24"
           "QT_QPA_PLATFORMTHEME,qt5ct"
           "HYPRCURSOR_SIZE,24"
-          "XCURSOR_THEME,Bibata-Modern-Ice"
-          "GDK_CURSOR_THEME,Bibata-Modern-Ice"
+          "HYPRCURSOR_THEME,Bibata-Modern-Ice"
         ];
 
         # General settings
