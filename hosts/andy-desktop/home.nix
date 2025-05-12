@@ -24,7 +24,7 @@
     gtk = {
       enable = true;
       iconTheme = "Papirus-Dark";
-      cursorTheme = "Breeze";
+      cursorTheme = "Bibata-Modern-Ice";
     };
     
     packages = {
@@ -43,7 +43,7 @@
       fontSize = 12;
       paddingX = 10;
       paddingY = 10;
-      cursorStyle = "beam";
+      cursorStyle = "bar";
     };
     
     swaync = {
