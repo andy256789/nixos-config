@@ -73,80 +73,32 @@
     # NixVim Configuration
     nixvim = {
       enable = true;
-
-      # Editor options
-      lineNumbers = "both";
-      tabWidth = 4;
+      
+      # Basic editor settings
+      lineNumbers = "relative";
+      tabWidth = 2;
       mouse = "a";
       
-      # Colorscheme options
-      colorscheme = {
-        name = "catppuccin";
-        variant = "auto"; # Will follow system theme
-        transparent = false;
-      };
+      # Simple colorscheme
+      colorscheme = "catppuccin";
       
-      # UI components
-      ui = {
-        statusline = {
-          enable = true;
-          plugin = "lualine";
-        };
-        bufferline.enable = true;
-        indentBlankline.enable = true;
-        whichkey.enable = true;
-      };
-      
-      # File Explorer
-      fileExplorer = {
-        enable = true;
-        type = "neo-tree";
-      };
-      
-      # Fuzzy finder
-      telescope.enable = true;
-      
-      # Git integration
-      git.enable = true;
-      
-      # Completion system
-      completion.enable = true;
-      
-      # Editing enhancements
-      editing = {
-        enable = true;
-        commentToggle.enable = true;
-        surround.enable = true;
-        formatting.enable = true;
-      };
-      
-      # LSP support
-      lsp = {
-        enable = true;
-        format.enable = true;
-        
-        # Configure language servers
-        servers = { };
+      # Core plugins
+      plugins = {
+        telescope.enable = true;
+        lualine.enable = true;
+        neo-tree.enable = true;
+        treesitter.enable = true;
+        gitsigns.enable = true;
+        comment-nvim.enable = true;
       };
       
       # Language support
-      languages = {
-        nix.enable = true;
-        typescript.enable = true;
-        rust.enable = true;
-        go.enable = true;
-        python.enable = true;
-        lua.enable = true;
-        html.enable = true;
-      };
-      
-      # Diagnostics
-      diagnostics = {
-        enable = true;
-        trouble.enable = true;
-        virtualText.enable = true;
-        signs.enable = true;
-      };
+      extraPlugins = with pkgs.vimPlugins; [
+        vim-nix
+        typescript-vim
+        rust-vim
+        vim-go
+      ];
     };
   };
 

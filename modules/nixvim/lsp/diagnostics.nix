@@ -6,82 +6,53 @@ let
   cfg = config.modules.nixvim;
 in {
   options.modules.nixvim.diagnostics = {
-    enable = mkOption {
-      type = types.bool;
-      default = true;
-      description = "Enable diagnostic tools";
-    };
-    
-    trouble = {
-      enable = mkOption {
-        type = types.bool;
-        default = true;
-        description = "Enable Trouble for diagnostics";
+    icons = {
+      error = mkOption {
+        type = types.str;
+        default = " ";
+        description = "Icon for error diagnostics";
       };
-    };
-    
-    virtualText = {
-      enable = mkOption {
-        type = types.bool;
-        default = true;
-        description = "Show diagnostics as virtual text";
+      
+      warn = mkOption {
+        type = types.str;
+        default = " ";
+        description = "Icon for warning diagnostics";
       };
-    };
-    
-    signs = {
-      enable = mkOption {
-        type = types.bool;
-        default = true;
-        description = "Show diagnostic signs in the sign column";
+      
+      info = mkOption {
+        type = types.str;
+        default = " ";
+        description = "Icon for info diagnostics";
+      };
+      
+      hint = mkOption {
+        type = types.str;
+        default = "󰌵 ";
+        description = "Icon for hint diagnostics";
       };
     };
   };
 
-  config = mkIf (cfg.enable && cfg.lsp.enable) {
+  config = mkIf cfg.enable {
     programs.nixvim = {
       plugins = {
-        # Trouble for diagnostics visualization
-        trouble = mkIf cfg.diagnostics.trouble.enable {
+        lsp-lines = {
           enable = true;
-          autoClose = true;
-          autoPreview = true;
-          autoFold = true;
-          autoOpen = false;
-          mode = "document_diagnostics";
-          height = 15;
-          padding = true;
-          icons = true;
-          signs = {
-            error = "";
-            warning = "";
-            hint = "";
-            information = "";
-            other = "";
-          };
-          
-          useDefaultKeys = true;
-          settings = {
-            auto_jump = {
-              "lsp_definitions" = false;
-              "lsp_implementations" = false;
-              "lsp_references" = false;
-              "lsp_type_definitions" = false;
-            };
-          };
+        };
+        
+        trouble = {
+          enable = true;
+          useDiagnosticSigns = true;
         };
       };
-
-      # Configure global diagnostic settings
-      lua.extraConfig = ''
-        -- Customize diagnostic signs
-        local signs = { Error = " ", Warn = " ", Hint = "󰌵 ", Info = " " }
-
-        -- Customize diagnostic display
+      
+      extraConfigLua = ''
+        -- Configure diagnostics display
         vim.diagnostic.config({
-          virtual_text = ${if cfg.diagnostics.virtualText.enable then "{ prefix = '● ' }" else "false"},
-          signs = ${if cfg.diagnostics.signs.enable then "true" else "false"},
-          update_in_insert = false,
+          virtual_text = false,
+          signs = true,
           underline = true,
+          update_in_insert = false,
           severity_sort = true,
           float = {
             focusable = true,
@@ -93,71 +64,19 @@ in {
           },
         })
         
-        -- Set diagnostic signs
+        -- Change diagnostic symbols in the sign column
+        local signs = {
+          Error = "${cfg.diagnostics.icons.error}",
+          Warn = "${cfg.diagnostics.icons.warn}",
+          Hint = "${cfg.diagnostics.icons.hint}",
+          Info = "${cfg.diagnostics.icons.info}",
+        }
+        
         for type, icon in pairs(signs) do
           local hl = "DiagnosticSign" .. type
           vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
         end
       '';
-
-      # Add keymaps for diagnostics tools
-      keymaps = [
-        # Trouble
-        {
-          key = "<leader>xx";
-          action = ":TroubleToggle<CR>";
-          mode = "n";
-          options = {
-            desc = "Toggle Trouble";
-            silent = true;
-          };
-        }
-        {
-          key = "<leader>xd";
-          action = ":TroubleToggle document_diagnostics<CR>";
-          mode = "n";
-          options = {
-            desc = "Document diagnostics";
-            silent = true;
-          };
-        }
-        {
-          key = "<leader>xw";
-          action = ":TroubleToggle workspace_diagnostics<CR>";
-          mode = "n";
-          options = {
-            desc = "Workspace diagnostics";
-            silent = true;
-          };
-        }
-        {
-          key = "<leader>xl";
-          action = ":TroubleToggle loclist<CR>";
-          mode = "n";
-          options = {
-            desc = "Location list";
-            silent = true;
-          };
-        }
-        {
-          key = "<leader>xq";
-          action = ":TroubleToggle quickfix<CR>";
-          mode = "n";
-          options = {
-            desc = "Quickfix list";
-            silent = true;
-          };
-        }
-        {
-          key = "<leader>xr";
-          action = ":TroubleToggle lsp_references<CR>";
-          mode = "n";
-          options = {
-            desc = "LSP references";
-            silent = true;
-          };
-        }
-      ];
     };
   };
 } 

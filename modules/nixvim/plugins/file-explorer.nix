@@ -6,126 +6,89 @@ let
   cfg = config.modules.nixvim;
 in {
   options.modules.nixvim.fileExplorer = {
-    enable = mkOption {
-      type = types.bool;
-      default = true;
-      description = "Enable file explorer";
-    };
-
     type = mkOption {
-      type = types.enum [ "neo-tree" "nvim-tree" ];
-      default = "neo-tree";
+      type = types.enum [ "nvim-tree" "neo-tree" "none" ];
+      default = "nvim-tree";
       description = "File explorer plugin to use";
     };
   };
 
-  config = mkIf (cfg.enable && cfg.fileExplorer.enable) {
+  config = mkIf cfg.enable {
     programs.nixvim = {
       plugins = {
-        neo-tree = {
-          enable = cfg.fileExplorer.type == "neo-tree";
-          closeIfLastWindow = true;
-          defaultSource = "filesystem";
-          enableGitStatus = true;
-          enableModifiedMarkers = true;
-          enableRefreshOnWrite = true;
-          sources = [ "filesystem" "buffers" "git_status" "document_symbols" ];
-          addBlankLineAtTop = true;
-          popupBorderStyle = "rounded";
-          
-          window = {
-            position = "left";
-            width = 30;
-            mappings = {
-              "<space>" = "toggle_node";
-              "h" = "close_node";
-              "l" = "open";
-            };
-          };
-          
-          filesystem = {
-            followCurrentFile = true;
-            useLibuvFileWatcher = true;
-            filteredItems = {
-              hideByName = [
-                "node_modules"
-                ".git"
-                ".DS_Store"
-              ];
-              alwaysShow = [
-                ".gitignored"
-              ];
-              neverShow = [
-                ".DS_Store"
-                "thumbs.db"
-              ];
-            };
-          };
-        };
-
         nvim-tree = {
           enable = cfg.fileExplorer.type == "nvim-tree";
           disableNetrw = true;
           hijackNetrw = true;
           openOnSetup = false;
-          ignoreFileTypeFilters = [ "dashboard" "startify" "alpha" ];
-          sort = {
-            sorter = "name";
-            folders_first = true;
-            files_first = false;
-          };
+          respectBufCwd = true;
+          sortBy = "name";
+          syncRootWithCwd = true;
+          git.enable = true;
+          
           view = {
             width = 30;
             side = "left";
-            number = false;
-            relativenumber = false;
-            signcolumn = "yes";
           };
+          
           renderer = {
-            addTrailing = true;
-            groupEmpty = true;
             highlightGit = true;
-            highlightOpenedFiles = "all";
-            rootFolderLabel = ":~:s?$?/..?";
+            indentMarkers.enable = true;
+            icons = {
+              gitPlacement = "after";
+              show = {
+                file = true;
+                folder = true;
+                folderArrow = true;
+                git = true;
+              };
+            };
           };
-          filters = {
-            dotfiles = false;
-            custom = [ "^.git$" "node_modules" "\\.cache" ];
-          };
-          git = {
-            enable = true;
-            ignore = true;
-          };
-          actions = {
-            changeDir.enable = true;
-            openFile.quitOnOpen = false;
+        };
+        
+        neo-tree = {
+          enable = cfg.fileExplorer.type == "neo-tree";
+          closeIfLastWindow = true;
+          popupBorderStyle = "rounded";
+          
+          window = {
+            width = 30;
+            position = "left";
+            mappings = {
+              "<cr>" = "open";
+              "q" = "close_window";
+              "v" = "open_vsplit";
+              "a" = "add";
+              "d" = "delete";
+              "r" = "rename";
+              "c" = "copy_to_clipboard";
+              "x" = "cut_to_clipboard";
+              "p" = "paste_from_clipboard";
+            };
           };
         };
       };
-
-      # Add keymaps for file explorer
-      keymaps = mkIf (cfg.fileExplorer.enable) [
+      
+      keymaps = [
         {
           key = "<leader>e";
-          action = if cfg.fileExplorer.type == "neo-tree" 
-            then ":Neotree toggle<CR>" 
-            else ":NvimTreeToggle<CR>";
+          action = ":NvimTreeToggle<CR>";
           mode = "n";
-          options = {
+          options = { 
             desc = "Toggle file explorer";
             silent = true;
           };
+          condition = cfg.fileExplorer.type == "nvim-tree";
         }
         {
-          key = "<leader>o";
-          action = if cfg.fileExplorer.type == "neo-tree" 
-            then ":Neotree focus<CR>" 
-            else ":NvimTreeFocus<CR>";
+          key = "<leader>e";
+          action = ":Neotree toggle<CR>";
           mode = "n";
-          options = {
-            desc = "Focus file explorer";
+          options = { 
+            desc = "Toggle file explorer";
             silent = true;
           };
+          condition = cfg.fileExplorer.type == "neo-tree";
         }
       ];
     };

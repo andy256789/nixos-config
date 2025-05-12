@@ -1,11 +1,14 @@
 { config, lib, pkgs, ... }:
 
-{
+with lib;
+
+let
+  cfg = config.modules.nixvim;
+in {
   imports = [
-    ./file-explorer.nix
     ./telescope.nix
-    ./git.nix
     ./completion.nix
-    ./editing.nix
+    ./git.nix
+    ./file-explorer.nix
   ];
 } 

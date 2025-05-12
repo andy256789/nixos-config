@@ -1,4 +1,4 @@
-{ config, lib, pkgs, inputs, ... }:
+{ config, lib, pkgs, ... }:
 
 with lib;
 
@@ -6,12 +6,11 @@ let
   cfg = config.modules.nixvim;
 in {
   imports = [
-    ./options.nix
-    ./plugins
-    ./keymaps.nix
-    ./colorscheme.nix
-    ./lsp
+    ./core.nix
     ./ui.nix
+    ./keymaps.nix
+    ./plugins
+    ./lsp
   ];
 
   options.modules.nixvim = {
@@ -19,9 +18,11 @@ in {
   };
 
   config = mkIf cfg.enable {
-    programs.nixvim.enable = true;
-    programs.nixvim.viAlias = true;
-    programs.nixvim.vimAlias = true;
-    programs.nixvim.defaultEditor = true;
+    programs.nixvim = {
+      enable = true;
+      viAlias = true;
+      vimAlias = true;
+      defaultEditor = true;
+    };
   };
 } 

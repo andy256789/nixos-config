@@ -5,145 +5,60 @@ with lib;
 let
   cfg = config.modules.nixvim;
 in {
-  options.modules.nixvim.git = {
-    enable = mkOption {
-      type = types.bool;
-      default = true;
-      description = "Enable Git integration plugins";
-    };
-  };
-
-  config = mkIf (cfg.enable && cfg.git.enable) {
+  config = mkIf cfg.enable {
     programs.nixvim = {
       plugins = {
-        # Git commands inside neovim
-        neogit = {
+        gitsigns = {
           enable = true;
-          disableSigns = false;
-          disableHint = false;
-          disableContextHighlighting = false;
-          disableCommitConfirmation = false;
-          autoRefresh = true;
-          kind = "split";
-          
-          sections = {
-            recent = {
-              folded = false;
-            };
-            untracked = {
-              folded = true;
-            };
-            unstaged = {
-              folded = false;
-            };
-            staged = {
-              folded = false;
-            };
-            stashes = {
-              folded = true;
-            };
-            unpulled = {
-              folded = true;
-            };
-            unmerged = {
-              folded = false;
-            };
+          currentLineBlame = true;
+          signs = {
+            add.text = "+";
+            change.text = "~";
+            delete.text = "_";
+            topdelete.text = "‾";
+            changedelete.text = "~";
           };
         };
-
-        # Lazygit integration
-        lazygit = {
+        
+        diffview = {
           enable = true;
-        };
-
-        # Git blame annotations
-        gitblame = {
-          enable = true;
-          messageTemplate = "<author> • <summary> • <date>";
-          delay = 1000;
-          virtualTextFormat = {
-            delay = 1000;
-            format = "* %s";
-          };
-        };
-
-        # Git integration for buffers
-        fugitive = {
-          enable = true;
+          defaultArgs.DiffviewOpen = { "--untracked-files=no" };
         };
       };
-
-      # Git mappings
+      
       keymaps = [
-        # Neogit
+        # Gitsigns mappings
         {
-          key = "<leader>gg";
-          action = ":Neogit<CR>";
+          key = "]c";
+          action = "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'";
           mode = "n";
-          options = {
-            desc = "Open Neogit";
-            silent = true;
+          options = { 
+            desc = "Jump to next hunk";
+            expr = true;
           };
         }
-        # Lazygit
         {
-          key = "<leader>gl";
-          action = ":LazyGit<CR>";
+          key = "[c";
+          action = "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'";
           mode = "n";
-          options = {
-            desc = "Open LazyGit";
-            silent = true;
+          options = { 
+            desc = "Jump to previous hunk";
+            expr = true;
           };
         }
-        # Git blame toggle
+        
+        # DiffView mappings
         {
-          key = "<leader>gb";
-          action = ":GitBlameToggle<CR>";
+          key = "<leader>gd";
+          action = ":DiffviewOpen<CR>";
           mode = "n";
-          options = {
-            desc = "Toggle Git blame";
-            silent = true;
-          };
+          options = { desc = "Open diffview"; };
         }
-        # Git status
-        {
-          key = "<leader>gs";
-          action = ":Git<CR>";
-          mode = "n";
-          options = {
-            desc = "Git status";
-            silent = true;
-          };
-        }
-        # Git commit
         {
           key = "<leader>gc";
-          action = ":Git commit<CR>";
+          action = ":DiffviewClose<CR>";
           mode = "n";
-          options = {
-            desc = "Git commit";
-            silent = true;
-          };
-        }
-        # Git push
-        {
-          key = "<leader>gp";
-          action = ":Git push<CR>";
-          mode = "n";
-          options = {
-            desc = "Git push";
-            silent = true;
-          };
-        }
-        # Git pull
-        {
-          key = "<leader>gu";
-          action = ":Git pull<CR>";
-          mode = "n";
-          options = {
-            desc = "Git pull";
-            silent = true;
-          };
+          options = { desc = "Close diffview"; };
         }
       ];
     };
