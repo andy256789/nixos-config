@@ -147,7 +147,7 @@ in {
             "borderangle, 1, 8, default"
             "fade, 1, 5, smoothIn"
             "fadeDim, 1, 5, smoothIn"
-            "workspaces, 1, 6, overshot, slidehorizontal"
+            "workspaces, 1, 6, overshot, slide"
           ];
         };
 
