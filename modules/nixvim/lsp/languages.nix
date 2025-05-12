@@ -33,10 +33,10 @@ in {
           incrementalSelection = {
             enable = true;
             keymaps = {
-              initSelection = "<CR>";
-              nodeIncremental = "<CR>";
-              nodeDecremental = "<BS>";
-              scopeIncremental = "<TAB>";
+              initSelection = { __raw = "<CR>"; };
+              nodeIncremental = { __raw = "<CR>"; };
+              nodeDecremental = { __raw = "<BS>"; };
+              scopeIncremental = { __raw = "<TAB>"; };
             };
           };
         };

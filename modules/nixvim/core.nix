@@ -23,77 +23,79 @@ in {
       default = "unnamedplus";
       description = "Clipboard register to use";
     };
+    
+    lineNumbers = mkOption {
+      type = types.enum [ "relative" "number" "both" "none" ];
+      default = "both";
+      description = "Line number display mode";
+    };
+    
+    mouse = mkOption {
+      type = types.enum [ "a" "n" "v" "i" "c" "" ];
+      default = "a";
+      description = "Mouse mode (a=all, n=normal, v=visual, i=insert, c=command)";
+    };
   };
 
   config = mkIf cfg.enable {
     programs.nixvim = {
-      globals = {
-        mapleader = " ";
-        maplocalleader = " ";
+      # Set leader keys through config
+      config = {
+        globals = {
+          mapleader = " ";
+          maplocalleader = " ";
+        };
       };
       
-      options = {
-        # Appearance
-        termguicolors = true;
-        showmode = false;
-        signcolumn = "yes";
-        cursorline = true;
-        colorcolumn = cfg.colorColumn;
-        background = "dark";
-        
-        # Line numbers
-        relativenumber = true;
-        number = true;
-        
-        # Scrolling
-        scrolloff = 8;
-        sidescrolloff = 8;
-        
-        # Indentation
-        expandtab = true;
-        smarttab = true;
-        shiftwidth = cfg.tabWidth;
-        tabstop = cfg.tabWidth;
-        softtabstop = cfg.tabWidth;
-        autoindent = true;
-        smartindent = true;
-        
-        # Line wrap
-        wrap = false;
-        
-        # Search
-        ignorecase = true;
-        smartcase = true;
-        hlsearch = true;
-        incsearch = true;
-        inccommand = "split";
-        
-        # Behavior
-        hidden = true;
-        backup = false;
-        swapfile = false;
-        undofile = true;
-        updatetime = 50;
-        mouse = "a";
-        
-        # Split windows
-        splitright = true;
-        splitbelow = true;
-        
-        # Filename handling
-        isfname = "+=@-@";
-        
-        # Clipboard integration
-        clipboard = cfg.clipboard;
-        
-        # Backspace behavior
-        backspace = [ "start" "eol" "indent" ];
-        
-        # Folding settings
-        foldenable = true;
-        foldmethod = "manual";
-        foldlevel = 99;
-      };
+      # Set options
+      options.termguicolors = true;
+      options.showmode = false;
+      options.signcolumn = "yes";
+      options.cursorline = true;
+      options.colorcolumn = cfg.colorColumn;
+      options.background = "dark";
+      
+      options.relativenumber = (cfg.lineNumbers == "relative" || cfg.lineNumbers == "both");
+      options.number = (cfg.lineNumbers == "number" || cfg.lineNumbers == "both");
+      
+      options.scrolloff = 8;
+      options.sidescrolloff = 8;
+      
+      options.expandtab = true;
+      options.smarttab = true;
+      options.shiftwidth = cfg.tabWidth;
+      options.tabstop = cfg.tabWidth;
+      options.softtabstop = cfg.tabWidth;
+      options.autoindent = true;
+      options.smartindent = true;
+      
+      options.wrap = false;
+      
+      options.ignorecase = true;
+      options.smartcase = true;
+      options.hlsearch = true;
+      options.incsearch = true;
+      options.inccommand = "split";
+      
+      options.hidden = true;
+      options.backup = false;
+      options.swapfile = false;
+      options.undofile = true;
+      options.updatetime = 50;
+      options.mouse = cfg.mouse;
+      
+      options.splitright = true;
+      options.splitbelow = true;
+      
+      options.isfname = "+=@-@";
+      
+      options.clipboard = cfg.clipboard;
+      
+      options.backspace = [ "start" "eol" "indent" ];
+      
+      options.foldenable = true;
+      options.foldmethod = "manual";
+      options.foldlevel = 99;
     };
   };
 } 

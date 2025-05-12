@@ -22,7 +22,9 @@ in {
         
         diffview = {
           enable = true;
-          defaultArgs.DiffviewOpen = { "--untracked-files=no" };
+          defaultArgs = {
+            DiffviewOpen = [ "--untracked-files=no" ];
+          };
         };
       };
       
