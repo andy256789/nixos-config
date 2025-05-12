@@ -61,14 +61,16 @@ in {
       colorschemes.catppuccin = {
         enable = cfg.ui.theme == "catppuccin";
         flavour = cfg.ui.variant;
-        transparent_background = cfg.ui.transparency;
-        integrations = {
-          cmp = true;
-          gitsigns = true;
-          nvimtree = true;
-          telescope.enabled = true;
-          treesitter = true;
-          native_lsp.enabled = true;
+        settings = {
+          transparent_background = cfg.ui.transparency;
+          integrations = {
+            cmp = true;
+            gitsigns = true;
+            nvimtree = true;
+            telescope.enabled = true;
+            treesitter = true;
+            native_lsp.enabled = true;
+          };
         };
       };
       

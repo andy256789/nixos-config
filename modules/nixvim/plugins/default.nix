@@ -8,7 +8,7 @@ in {
   imports = [
     ./telescope.nix
     ./completion.nix
-    ./git.nix
+    # ./git.nix
     ./file-explorer.nix
   ];
 } 

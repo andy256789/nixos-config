@@ -7,26 +7,6 @@ let
 in {
   config = mkIf cfg.enable {
     programs.nixvim = {
-      plugins = {
-        gitsigns = {
-          enable = true;
-          currentLineBlame = true;
-          signs = {
-            add.text = "+";
-            change.text = "~";
-            delete.text = "_";
-            topdelete.text = "‾";
-            changedelete.text = "~";
-          };
-        };
-        
-        diffview = {
-          enable = true;
-          defaultArgs = {
-            DiffviewOpen = [ "--untracked-files=no" ];
-          };
-        };
-      };
       
       keymaps = [
         # Gitsigns mappings
