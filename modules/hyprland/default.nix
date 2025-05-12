@@ -70,7 +70,7 @@ in {
           "XCURSOR_SIZE,24"
           "QT_QPA_PLATFORMTHEME,qt5ct"
           "HYPRCURSOR_SIZE,24"
-          "XCURSOR_THEME,${config.modules.gtk.cursorTheme}"
+          "XCURSOR_THEME,Bibata-Modern-Ice"
         ];
 
         # General settings
@@ -91,7 +91,6 @@ in {
           pseudotile = true;
           preserve_split = true;
           force_split = 2;
-          no_gaps_when_only = false;
         };
 
         # Input configuration
