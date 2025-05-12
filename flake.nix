@@ -52,5 +52,15 @@
 				];
 			};
 		};
+		
+		homeConfigurations = {
+		  "${settings.username}-${settings.hostname}" = home-manager.lib.homeManagerConfiguration {
+		    pkgs = nixpkgs.legacyPackages.${settings.system};
+		    extraSpecialArgs = { inherit inputs settings; };
+		    modules = [
+		      ./hosts/${settings.hostname}/home.nix
+		    ];
+		  };
+		};
 	};
 }
