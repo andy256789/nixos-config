@@ -4,11 +4,7 @@
   home.packages = with pkgs; [
     # Terminal
     ghostty
-    alacritty
-    kitty
-    xterm
     foot
-    terminator
 
     # File managers
     nemo
@@ -23,6 +19,7 @@
 
     # Development tools
     git
+    code-cursor
 
     #Browser
     firefox
