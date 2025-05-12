@@ -71,6 +71,7 @@ in {
           "QT_QPA_PLATFORMTHEME,qt5ct"
           "HYPRCURSOR_SIZE,24"
           "XCURSOR_THEME,Bibata-Modern-Ice"
+          "GDK_CURSOR_THEME,Bibata-Modern-Ice"
         ];
 
         # General settings
@@ -265,9 +266,18 @@ in {
           "blueman-applet"
           "wl-paste --watch cliphist store"  # Clipboard history
           "hypridle"  # Screen locking
+          "hyprctl setcursor Bibata-Modern-Ice 24"  # Set cursor theme directly
         ];
       };
     };
     
+    # Ensure cursor theme is properly set for Hyprland
+    home.pointerCursor = {
+      name = "Bibata-Modern-Ice";
+      package = pkgs.bibata-cursors;
+      size = 24;
+      x11.enable = true;
+      gtk.enable = true;
+    };
  };
 } 
