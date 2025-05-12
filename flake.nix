@@ -1,9 +1,6 @@
 {
 	description = "Andy's NixOS configuration";
-  # https://discourse.nixos.org/t/how-to-set-up-cachix-in-flake-based-nixos-config/31781
-  # use --accept-flake-config when rebuilding
-
-  nixConfig = {
+	nixConfig = {
     extra-substituters = [
       "https://nix-community.cachix.org"
       "https://hyprland.cachix.org"
@@ -26,31 +23,33 @@
 		};
 	};
 
-	outputs = { self, nixpkgs, home-manager, hyprland, ... }@inputs:
-		let
-		system = "x86_64-linux";
-	in {
+	outputs = { self, nixpkgs, home-manager, hyprland, ... }@inputs: let
+    settings = {
+      stateVersion = "24.11";  
+
+      system   = "x86_64-linux";
+      hostname = "andy-desktop";
+      username = "andy";
+    };
+
+  in {
 		nixosConfigurations = {
 			andy-desktop = nixpkgs.lib.nixosSystem {
-				inherit system;
+				specialArgs = { inherit inputs settings; };
 				modules = [
-					./hosts/andy-desktop
-						home-manager.nixosModules.home-manager
-						{
-							home-manager.useGlobalPkgs = true;
-							home-manager.useUserPackages = true;
-							home-manager.extraSpecialArgs = {
-								inherit inputs;
-								username = "andy";
-							};
-							home-manager.users.andy = import ./hosts/andy-desktop/home.nix;
-						}
+					./hosts/${settings.hostname}
+
+					home-manager.nixosModules.home-manager
+					{
+						home-manager = {
+			              useGlobalPkgs    = true;
+  			              useUserPackages  = true;
+                          extraSpecialArgs = { inherit inputs settings; };
+
+                          users.${settings.username} = import ./hosts/${settings.hostname}/home.nix;
+                        };
+					}
 				];
-				specialArgs = {
-					inherit self inputs hyprland;
-					username = "andy";
-					host = "andy-desktop";
-				};
 			};
 		};
 	};
