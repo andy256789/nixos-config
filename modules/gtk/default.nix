@@ -29,7 +29,7 @@ in {
       adwaita-qt
       tela-icon-theme
       materia-theme
-      gnome.adwaita-icon-theme
+      adwaita-icon-theme
       whitesur-gtk-theme
       bibata-cursors
       # Font dependencies
