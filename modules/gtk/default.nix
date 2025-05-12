@@ -17,7 +17,7 @@ in {
     
     cursorTheme = mkOption {
       type = types.str;
-      default = "Breeze";
+      default = "Bibata-Modern-Ice";
       description = "Cursor theme name";
     };
   };
@@ -27,14 +27,15 @@ in {
       gnome-themes-extra
       papirus-icon-theme
       adwaita-qt
-      breeze-icons
-      breeze-gtk
+      tela-icon-theme
+      materia-theme
       gnome.adwaita-icon-theme
       whitesur-gtk-theme
+      bibata-cursors
       # Font dependencies
       noto-fonts
       noto-fonts-emoji
-      (nerdfonts.override { fonts = [ "JetBrainsMono" "NerdFontsSymbolsOnly" ]; })
+      nerd-fonts.jetbrains-mono
     ];
 
     gtk = {
@@ -49,7 +50,7 @@ in {
       };
       cursorTheme = {
         name = cfg.cursorTheme;
-        package = pkgs.breeze-cursors;
+        package = pkgs.bibata-cursors;
         size = 24;
       };
       font = {
@@ -99,7 +100,7 @@ in {
     # Set cursor for Wayland and X11
     home.pointerCursor = {
       name = cfg.cursorTheme;
-      package = pkgs.breeze-cursors;
+      package = pkgs.bibata-cursors;
       size = 24;
       x11.enable = true;
       gtk.enable = true;
