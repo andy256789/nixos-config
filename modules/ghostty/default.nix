@@ -28,8 +28,8 @@ in {
     };
     
     cursorStyle = mkOption {
-      type = types.enum [ "block" "beam" "underline" ];
-      default = "beam";
+      type = types.enum [ "block" "bar" "underline" "block_hollow" ];
+      default = "bar";
       description = "Cursor style";
     };
     
@@ -68,8 +68,9 @@ in {
         "selection-foreground" = theme.colors.background;
         
         # Tab bar
-        "tab-bar-show-new-tab-button" = true;
-        "tab-bar-show-close-button" = true;
+        # These settings are not currently supported in Ghostty
+        # "tab-bar-show-new-tab-button" = true;
+        # "tab-bar-show-close-button" = true;
       } // cfg.extraSettings;
     };
   };
