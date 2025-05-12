@@ -6,21 +6,6 @@ let
   cfg = config.modules.hyprland;
   theme = config.themes;
 in {
-    # Install required packages for Hyprland
-    home.packages = with pkgs; [
-      wofi                  # Application launcher
-      dunst                 # Notification daemon
-      libnotify             # Notification library
-      swww                  # Wallpaper daemon
-      grimblast             # Screenshot tool
-      wl-clipboard          # Clipboard tools
-      cliphist              # Clipboard history
-      hypridle              # Screen locking
-      hyprlock              # Screen locker
-      networkmanagerapplet  # Network manager applet
-      pavucontrol           # Audio control
-    ];
- 
   options.modules.hyprland = {
     enable = mkEnableOption "Enable Hyprland";
     
@@ -56,6 +41,21 @@ in {
   };
 
   config = mkIf cfg.enable {
+    # Install required packages for Hyprland
+    home.packages = with pkgs; [
+      wofi                  # Application launcher
+      dunst                 # Notification daemon
+      libnotify             # Notification library
+      swww                  # Wallpaper daemon
+      grimblast             # Screenshot tool
+      wl-clipboard          # Clipboard tools
+      cliphist              # Clipboard history
+      hypridle              # Screen locking
+      hyprlock              # Screen locker
+      networkmanagerapplet  # Network manager applet
+      pavucontrol           # Audio control
+    ];
+
     wayland.windowManager.hyprland = {
       enable = true;
       package = pkgs.hyprland;
