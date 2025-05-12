@@ -5,6 +5,7 @@ with lib;
 let
   cfg = config.modules.hyprland;
   theme = config.themes;
+  gtkCfg = config.modules.gtk;
 in {
   options.modules.hyprland = {
     enable = mkEnableOption "Enable Hyprland";
@@ -67,10 +68,10 @@ in {
 
         # Environment variables
         env = [
-          "XCURSOR_SIZE,24"
+          "XCURSOR_SIZE,${toString (config.home.pointerCursor.size or 24)}"
           "QT_QPA_PLATFORMTHEME,qt5ct"
-          "HYPRCURSOR_SIZE,24"
-          "HYPRCURSOR_THEME,Bibata-Modern-Ice"
+          "HYPRCURSOR_SIZE,${toString (config.home.pointerCursor.size or 24)}"
+          "HYPRCURSOR_THEME,${gtkCfg.cursorTheme}"
         ];
 
         # General settings
@@ -265,7 +266,7 @@ in {
           "blueman-applet"
           "wl-paste --watch cliphist store"  # Clipboard history
           "hypridle"  # Screen locking
-          "hyprctl setcursor Bibata-Modern-Ice 24"  # Set cursor theme directly
+          "hyprctl setcursor ${gtkCfg.cursorTheme} ${toString (config.home.pointerCursor.size or 24)}"  # Set cursor theme directly
         ];
       };
     };
