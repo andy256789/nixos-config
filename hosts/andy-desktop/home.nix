@@ -27,6 +27,14 @@
       cursorTheme = "Bibata-Modern-Ice";
     };
     
+    wallpapers = {
+      enable = true;
+      wallpaper = "${config.home.homeDirectory}/wallpapers/catppuccin/cat-lavender.png";
+      transition = "wipe";
+      transitionStep = 90;
+      transitionDuration = 4;
+    };
+    
     packages = {
       enable = true;
       terminal.enable = true;

@@ -267,6 +267,7 @@ in {
           "wl-paste --watch cliphist store"  # Clipboard history
           "hypridle"  # Screen locking
           "hyprctl setcursor ${gtkCfg.cursorTheme} ${toString (config.home.pointerCursor.size or 24)}"  # Set cursor theme directly
+          "$HOME/.local/bin/set-wallpaper"  # Set wallpaper
         ];
       };
     };

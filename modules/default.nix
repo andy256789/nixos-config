@@ -9,5 +9,6 @@
     ./packages
     ./ghostty
     ./swaync
+    ./wallpapers
   ];
 } 
