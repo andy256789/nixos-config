@@ -164,6 +164,7 @@ in {
                 # Window/workspace rules
                 windowrulev2 = [
                     "opacity 0.9 0.9,class:^(ghostty)$"
+                    "opacity 0.9 0.9,class:^(yazi)$"
                     "float,class:^(pavucontrol)$"
                     "float,class:^(nm-connection-editor)$"
                     "float,class:^(nwg-look)$"
@@ -193,22 +194,22 @@ in {
                     "SUPER SHIFT, S, swapnext"
 
                     # Window focus
-                    "SUPER, left, movefocus, l"
-                    "SUPER, right, movefocus, r"
-                    "SUPER, up, movefocus, u"
-                    "SUPER, down, movefocus, d"
+                    "SUPER, h, movefocus, l"
+                    "SUPER, l, movefocus, r"
+                    "SUPER, k, movefocus, u"
+                    "SUPER, j, movefocus, d"
 
                     # Move windows
-                    "SUPER SHIFT, left, movewindow, l"
-                    "SUPER SHIFT, right, movewindow, r"
-                    "SUPER SHIFT, up, movewindow, u"
-                    "SUPER SHIFT, down, movewindow, d"
+                    "SUPER SHIFT, h, movewindow, l"
+                    "SUPER SHIFT, l, movewindow, r"
+                    "SUPER SHIFT, k, movewindow, u"
+                    "SUPER SHIFT, j, movewindow, d"
 
                     # Resize windows
-                    "SUPER ALT, left, resizeactive, -20 0"
-                    "SUPER ALT, right, resizeactive, 20 0"
-                    "SUPER ALT, up, resizeactive, 0 -20"
-                    "SUPER ALT, down, resizeactive, 0 20"
+                    "SUPER ALT, h, resizeactive, -20 0"
+                    "SUPER ALT, l, resizeactive, 20 0"
+                    "SUPER ALT, k, resizeactive, 0 -20"
+                    "SUPER ALT, j, resizeactive, 0 20"
 
                     # Workspace navigation
                     "SUPER, 1, workspace, 1"
@@ -267,7 +268,8 @@ in {
                     "wl-paste --watch cliphist store"  # Clipboard history
                     "hypridle"  # Screen locking
                     "hyprctl setcursor ${gtkCfg.cursorTheme} ${toString (config.home.pointerCursor.size or 24)}"  # Set cursor theme directly
-                    "$HOME/.local/bin/set-wallpaper"  # Set wallpaper
+                    "swww-daemon"  # Initialize swww
+                    "swww img ${theme.wallpaper}"  # Set wallpaper
                 ];
             };
         };

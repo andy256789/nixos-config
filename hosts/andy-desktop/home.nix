@@ -11,13 +11,23 @@
     # Enable themes with default settings
     themes.enable = true;
 
+    # Enable programs
+    programs = {
+        fish.enable = true;
+    };
+
+    # Enable services
+    services = {
+        network-manager-applet.enable = true;
+    };
+
     # Enable modules with customizations
     modules = {
         hyprland = {
             enable = true;
             terminal = "ghostty";
             browser = "firefox";
-            fileManager = "nemo";
+            fileManager = "yazi";
         };
 
         waybar.enable = true;
@@ -31,9 +41,6 @@
         wallpapers = {
             enable = true;
             wallpaper = "anime-cyberpunk.png";
-            transition = "wipe";
-            transitionStep = 90;
-            transitionDuration = 4;
         };
 
         packages = {
@@ -71,15 +78,12 @@
         };
 
         nixvim.enable = true;
-    };
-
-    # Enable programs
-    programs = {
-        fish.enable = true;
-    };
-
-    # Enable services
-    services = {
-        network-manager-applet.enable = true;
+        
+        yazi = {
+            enable = true;
+            theme = "tokyonight";
+            vimBindings = true;
+            transparency = 0.9;
+        };
     };
 }

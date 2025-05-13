@@ -11,5 +11,6 @@
         ./swaync
         ./wallpapers
         ./nixvim
+        ./yazi
     ];
 } 
