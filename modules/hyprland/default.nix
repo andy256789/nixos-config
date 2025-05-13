@@ -180,8 +180,8 @@ in {
                     "SUPER, Return, exec, ${cfg.terminal}"
                     "SUPER, B, exec, ${cfg.browser}"
                     "SUPER, E, exec, ${cfg.fileManager}"
+                    "SUPER SHIFT, E, exec, yazi"
                     "SUPER, Space, exec, ${cfg.launcher}"
-                    "SUPER, C, exec, code"
 
                     # Window management
                     "SUPER, Q, killactive"
