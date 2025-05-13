@@ -191,6 +191,7 @@ in {
                     "SUPER, P, pseudo"
                     "SUPER, U, togglesplit"
                     "SUPER SHIFT, S, swapnext"
+                    "SUPER, D, exec, hyprctl dispatch workspace empty"
 
                     # Window focus
                     "SUPER, h, movefocus, l"
