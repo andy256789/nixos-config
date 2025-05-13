@@ -102,6 +102,11 @@ in {
                     wget
                     curl
                     rsync
+                    
+                    #wayland controls
+                    light
+                    playerctl
+                    pactl
                 ];
                 description = "Utility packages to install";
             };
