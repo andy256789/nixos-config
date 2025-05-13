@@ -1,10 +1,10 @@
-{  config, lib, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 with lib;
+
 let
   cfg = config.modules.nixvim;
-in
-{
+in {
   options.modules.nixvim = {
     enable = mkEnableOption "enable nixvim";
   };
