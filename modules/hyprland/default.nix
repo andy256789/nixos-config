@@ -180,7 +180,6 @@ in {
                     "SUPER, Return, exec, ${cfg.terminal}"
                     "SUPER, B, exec, ${cfg.browser}"
                     "SUPER, E, exec, ${cfg.fileManager}"
-                    "SUPER SHIFT, E, exec, yazi"
                     "SUPER, Space, exec, ${cfg.launcher}"
 
                     # Window management
@@ -190,7 +189,7 @@ in {
                     "SUPER SHIFT, F, fullscreen, 1"
                     "SUPER, V, togglefloating"
                     "SUPER, P, pseudo"
-                    "SUPER, J, togglesplit"
+                    "SUPER, U, togglesplit"
                     "SUPER SHIFT, S, swapnext"
 
                     # Window focus
@@ -206,10 +205,10 @@ in {
                     "SUPER SHIFT, j, movewindow, d"
 
                     # Resize windows
-                    "SUPER ALT, h, resizeactive, -20 0"
-                    "SUPER ALT, l, resizeactive, 20 0"
-                    "SUPER ALT, k, resizeactive, 0 -20"
-                    "SUPER ALT, j, resizeactive, 0 20"
+                    "SUPER ALT, h, resizeactive, -50 0"
+                    "SUPER ALT, l, resizeactive, 50 0"
+                    "SUPER ALT, k, resizeactive, 0 -50"
+                    "SUPER ALT, j, resizeactive, 0 50"
 
                     # Workspace navigation
                     "SUPER, 1, workspace, 1"
