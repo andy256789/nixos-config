@@ -44,6 +44,9 @@
             # UI
             scrolloff = 8;
             signcolumn = "yes";
+            # Transparency
+            winblend = 10;
+            pumblend = 10;
 
             # Folding
             foldenable = true;

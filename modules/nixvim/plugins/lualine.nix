@@ -17,7 +17,12 @@
             sections = {
                 lualine_a = ["mode"];
                 lualine_b = [
-                    "branch"
+                    ''
+                      {
+                        'branch',
+                        icons_enabled = true,
+                      }
+                    ''
                     ''
                       {
                         'diff',
@@ -44,7 +49,7 @@
                     ''
                 ];
                 lualine_x = ["encoding" "fileformat" "filetype"];
-                lualine_y = ["progress"];
+                lualine_y = [];
                 lualine_z = ["location"];
             };
 
