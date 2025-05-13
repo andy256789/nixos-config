@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  inputs,
   ...
 }:
 
@@ -11,18 +10,11 @@ let
   cfg = config.modules.nixvim;
 in
 {
-  imports = [ ];
-
   options.modules.nixvim = {
     enable = mkEnableOption "Enable nixvim";
   };
 
   config = mkIf cfg.enable {
-    # Import the nixvim module
-    imports = [ 
-      inputs.nixvim.homeManagerModules.nixvim
-    ];
-
     programs.nixvim = {
       enable = true;
       

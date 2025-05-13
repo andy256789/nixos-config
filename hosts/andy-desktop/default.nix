@@ -69,6 +69,7 @@
 		home-manager
 		git
 		vim
+		neovim
 		wget
 		mesa
 		wayland-utils
