@@ -1,5 +1,5 @@
 {
-  config.plugins.treesitter = {
+  config.programs.nixvim.plugins.treesitter = {
     enable = true;
     indent = true;
     

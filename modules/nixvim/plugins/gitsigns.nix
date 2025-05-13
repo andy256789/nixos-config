@@ -1,7 +1,5 @@
 {
-  description = "Gitsigns configuration";
-
-  config.plugins.gitsigns = {
+  config.programs.nixvim.plugins.gitsigns = {
     enable = true;
     
     signs = {

@@ -1,5 +1,5 @@
 {
-  config.plugins.lualine = {
+  config.programs.nixvim.plugins.lualine = {
     enable = true;
     theme = "tokyonight";
     

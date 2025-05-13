@@ -1,5 +1,5 @@
 {
-  config = {
+  config.programs.nixvim = {
     globals = {
       mapleader = " ";
       maplocalleader = " ";
@@ -259,25 +259,25 @@
         options = { desc = "Toggle LSP diagnostics"; };
       }
     ];
-
-    # Highlight yanked text 
-    autoGroups = {
-      highlight_yank = { clear = true; };
-    };
-
-    autoCmd = [
-      {
-        event = "TextYankPost";
-        group = "highlight_yank";
-        desc = "Highlight when yanking (copying) text";
-        callback = {
-          __raw = ''
-            function()
-              vim.highlight.on_yank()
-            end
-          '';
-        };
-      }
-    ];
   };
+
+  # Move autoGroups and autoCmd inside programs.nixvim
+  config.programs.nixvim.autoGroups = {
+    highlight_yank = { clear = true; };
+  };
+
+  config.programs.nixvim.autoCmd = [
+    {
+      event = "TextYankPost";
+      group = "highlight_yank";
+      desc = "Highlight when yanking (copying) text";
+      callback = {
+        __raw = ''
+          function()
+            vim.highlight.on_yank()
+          end
+        '';
+      };
+    }
+  ];
 } 

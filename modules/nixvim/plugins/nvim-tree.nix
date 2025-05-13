@@ -1,5 +1,5 @@
 {
-  config.plugins.nvim-tree = {
+  config.programs.nixvim.plugins.nvim-tree = {
     enable = true;
     
     # Hijack netrw window on startup

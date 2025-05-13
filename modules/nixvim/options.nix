@@ -1,8 +1,9 @@
 {
-  config = {
+  config.programs.nixvim = {
     # Disable netrw banner
     globals = {
       netrw_banner = 0;
+      editorconfig = true;
     };
 
     # General cursor and display settings
@@ -70,8 +71,5 @@
       # Mouse
       mouse = "a";
     };
-
-    # EditorConfig support
-    globals.editorconfig = true;
   };
 } 

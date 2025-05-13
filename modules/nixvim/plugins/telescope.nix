@@ -1,5 +1,5 @@
 {
-  config.plugins.telescope = {
+  config.programs.nixvim.plugins.telescope = {
     enable = true;
     defaults = {
       file_ignore_patterns = [
