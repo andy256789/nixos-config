@@ -3,7 +3,6 @@
 {
   imports = [
     ../../modules
-    inputs.nixvim.homeManagerModules.nixvim
   ];
 
   home.stateVersion = "24.11";
@@ -70,38 +69,7 @@
       iconSize = 64;
     };
 
-    # NixVim Configuration
-    nixvim = {
-      enable = true;
-      
-      # Basic editor settings
-      lineNumbers = "relative";
-      tabWidth = 2;
-      mouse = "a";
-      
-      # Simple colorscheme
-      colorscheme = "catppuccin";
-      
-      # Core plugins
-      plugins = {
-        telescope.enable = true;
-        lualine.enable = true;
-        neo-tree.enable = true;
-        treesitter.enable = true;
-        gitsigns.enable = true;
-        comment-nvim.enable = true;
-      };
-      
-      # Language support
-      extraPlugins = with pkgs.vimPlugins; [
-        vim-nix
-        typescript-vim
-        rust-vim
-        vim-go
-      ];
-    };
-  };
-
+    
   # Enable programs
   programs = {
     fish.enable = true;
