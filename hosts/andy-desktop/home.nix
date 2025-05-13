@@ -69,7 +69,9 @@
       iconSize = 64;
     };
 
-    
+    nixvim.enable = true;
+  };
+
   # Enable programs
   programs = {
     fish.enable = true;
