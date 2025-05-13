@@ -27,7 +27,7 @@
             enable = true;
             terminal = "ghostty";
             browser = "firefox";
-            fileManager = "yazi";
+            fileManager = "nemo";
         };
 
         waybar.enable = true;
