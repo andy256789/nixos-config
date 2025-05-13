@@ -106,7 +106,7 @@ in {
                     #wayland controls
                     light
                     playerctl
-                    pactl
+                    pulseaudio
                 ];
                 description = "Utility packages to install";
             };
