@@ -16,40 +16,10 @@
 
             sections = {
                 lualine_a = ["mode"];
-                lualine_b = [
-                    ''
-                      {
-                        'branch',
-                        icons_enabled = true,
-                      }
-                    ''
-                    ''
-                      {
-                        'diff',
-                        symbols = {
-                          added = ' ',
-                          modified = ' ',
-                          removed = ' ',
-                        }
-                      }
-                    ''
-                ];
-                lualine_c = [
-                    ''
-                      {
-                        'filename',
-                        file_size_color = 'Status_Line',
-                        symbols = {
-                          modified = ' ',
-                          readonly = ' ',
-                          unnamed = '[No Name]',
-                          newfile = '[New]',
-                        }
-                      }
-                    ''
-                ];
+                lualine_b =["branch"];
+                lualine_c = ["filename"];
                 lualine_x = ["encoding" "fileformat" "filetype"];
-                lualine_y = [];
+                lualine_y = ["progress"];
                 lualine_z = ["location"];
             };
 
