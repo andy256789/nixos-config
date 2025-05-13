@@ -3,21 +3,21 @@
 with lib;
 
 let
-  cfg = config.modules.nixvim;
+    cfg = config.modules.nixvim;
 in {
-  imports = [
-    ./options.nix
-    ./keymaps.nix
-    ./plugins
-  ];
+    imports = [
+        ./options.nix
+        ./keymaps.nix
+        ./plugins
+    ];
 
-  options.modules.nixvim = {
-    enable = mkEnableOption "enable nixvim";
-  };
-
-  config = mkIf cfg.enable {
-    programs.nixvim = {
-      enable = true;
+    options.modules.nixvim = {
+        enable = mkEnableOption "enable nixvim";
     };
-  };
+
+    config = mkIf cfg.enable {
+        programs.nixvim = {
+            enable = true;
+        };
+    };
 }

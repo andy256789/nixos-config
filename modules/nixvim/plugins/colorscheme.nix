@@ -1,5 +1,5 @@
 {
-  config.programs.nixvim.colorschemes = {
-    tokyonight.enable = true;
-  };
+    config.programs.nixvim.colorschemes = {
+        tokyonight.enable = true;
+    };
 } 

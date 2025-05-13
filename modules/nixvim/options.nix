@@ -28,7 +28,6 @@
             swapfile = false;
             backup = false;
             undofile = true;
-            undodir = "$HOME/.vim/undodir";
 
             # Search
             incsearch = true;
