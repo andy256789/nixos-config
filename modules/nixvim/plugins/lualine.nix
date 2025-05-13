@@ -18,26 +18,30 @@
         lualine_a = ["mode"];
         lualine_b = [
           "branch"
+          ''
           {
-            name = "diff";
+            'diff',
             symbols = {
-              added = " ";
-              modified = " ";
-              removed = " ";
-            };
+              added = ' ',
+              modified = ' ',
+              removed = ' ',
+            }
           }
+          ''
         ];
         lualine_c = [
+          ''
           {
-            name = "filename";
-            fileSizeColor = "Status_Line";
+            'filename',
+            file_size_color = 'Status_Line',
             symbols = {
-              modified = " ";
-              readonly = " ";
-              unnamed = "[No Name]";
-              newfile = "[New]";
-            };
+              modified = ' ',
+              readonly = ' ',
+              unnamed = '[No Name]',
+              newfile = '[New]',
+            }
           }
+          ''
         ];
         lualine_x = ["encoding" "fileformat" "filetype"];
         lualine_y = ["progress"];
