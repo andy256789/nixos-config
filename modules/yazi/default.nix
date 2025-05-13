@@ -4,7 +4,6 @@ with lib;
 
 let
   cfg = config.modules.yazi;
-  theme = config.themes;
 in {
   options.modules.yazi = {
     enable = mkEnableOption "Enable yazi file manager";
@@ -13,12 +12,6 @@ in {
       type = types.str;
       default = "tokyonight";
       description = "Theme for yazi";
-    };
-
-    vimBindings = mkOption {
-      type = types.bool;
-      default = false;
-      description = "Enable vim keybindings";
     };
 
     transparency = mkOption {
@@ -53,74 +46,28 @@ in {
         };
 
         opener = {
-          edit = [
-            { exec = "nvim \"$@\""; }
-          ];
-          
-          open = [
-            { exec = "xdg-open \"$@\""; }
-          ];
-          
-          reveal = [
-            { exec = "exiftool \"$1\"; echo \"Press enter to exit\"; read"; orphan = true; }
-          ];
+          edit = [{ exec = "nvim \"$@\""; }];
+          open = [{ exec = "xdg-open \"$@\""; }];
+          reveal = [{ exec = "exiftool \"$1\"; echo \"Press enter to exit\"; read"; orphan = true; }];
         };
 
-        open = {
-          rules = [
-            { name = "*/"; use = "editor"; }
-            { mime = "text/*"; use = "editor"; }
-            { mime = "image/*"; use = "open"; }
-            { mime = "video/*"; use = "open"; }
-            { mime = "audio/*"; use = "open"; }
-            { mime = "application/pdf"; use = "open"; }
-            { mime = "application/json"; use = "editor"; }
-            { mime = "*/javascript"; use = "editor"; }
-            { mime = "*/x-wine-extension-ini"; use = "editor"; }
-          ];
-        };
-      };
-
-      keymap = mkIf cfg.vimBindings {
-        manager.prepend_keymap = [
-          # Vim-style navigation
-          { on = ["h"]; run = "leave"; }
-          { on = ["j"]; run = "cursor_move_down"; }
-          { on = ["k"]; run = "cursor_move_up"; }
-          { on = ["l"]; run = "enter"; }
-          { on = ["g", "g"]; run = "cursor_move_home"; }
-          { on = ["G"]; run = "cursor_move_end"; }
-          { on = ["H"]; run = "cd .."; }
-          { on = ["L"]; run = "open"; }
-          
-          # Vim-style yanking (copying)
-          { on = ["y", "y"]; run = "copy_filename"; }
-          { on = ["Y"]; run = "copy_filepath"; }
-          
-          # Vim-style visual mode
-          { on = ["v"]; run = "select --state=visual"; }
-          { on = ["V"]; run = "select_all --state=visual"; }
-          
-          # Common vim operations
-          { on = ["d", "d"]; run = "remove"; }
-          { on = ["p"]; run = "paste"; }
-          { on = ["u"]; run = "undo"; }
-          { on = ["Ctrl+r"]; run = "redo"; }
-          
-          # Search
-          { on = ["/"]; run = "search"; }
-          { on = ["n"]; run = "search_next"; }
-          { on = ["N"]; run = "search_prev"; }
-          
-          # Quick navigation
-          { on = ["~"]; run = "cd ~"; }
-          { on = ["\\"]; run = "cd /"; }
+        open.rules = [
+          { name = "*/"; use = "editor"; }
+          { mime = "text/*"; use = "editor"; }
+          { mime = "image/*"; use = "open"; }
+          { mime = "video/*"; use = "open"; }
+          { mime = "audio/*"; use = "open"; }
+          { mime = "application/pdf"; use = "open"; }
+          { mime = "application/json"; use = "editor"; }
+          { mime = "*/javascript"; use = "editor"; }
+          { mime = "*/x-wine-extension-ini"; use = "editor"; }
         ];
       };
 
+      # Tokyo Night theme with transparency
       theme = {
-        color = if cfg.theme == "tokyonight" then {
-          # Based on Tokyo Night theme
+        color = {
+          # Tokyo Night theme colors
           black = "#15161e";
           red = "#f7768e";
           green = "#9ece6a";
@@ -137,14 +84,14 @@ in {
           bright_magenta = "#bb9af7";
           bright_cyan = "#7dcfff";
           bright_white = "#c0caf5";
-        } else {};
+        };
         
         ui = {
           default = { fg = "white"; bg = { rgba = "black ${toString cfg.transparency}"; }; };
           
           # Selection
           selection = { fg = "black"; bg = "blue"; };
-          selected_line = { fg = null; bg = "bright_black"; bold = true; };
+          selected_line = { bg = "bright_black"; bold = true; };
           
           # Borders
           border = { fg = "bright_black"; bg = { rgba = "black ${toString cfg.transparency}"; }; };
@@ -155,19 +102,19 @@ in {
           statusline_directory = { fg = "blue"; bg = { rgba = "bright_black ${toString cfg.transparency}"; }; bold = true; };
           
           # Headers
-          title = { fg = "blue"; bg = null; bold = true; };
+          title = { fg = "blue"; bold = true; };
           
           # Panels
           filetype = {
-            dir = { fg = "blue"; bg = null; bold = true; };
-            file = { fg = "white"; bg = null; };
-            symlink = { fg = "cyan"; bg = null; italic = true; };
-            pipe = { fg = "yellow"; bg = null; };
-            socket = { fg = "magenta"; bg = null; };
-            executable = { fg = "green"; bg = null; bold = true; };
+            dir = { fg = "blue"; bold = true; };
+            file = { fg = "white"; };
+            symlink = { fg = "cyan"; italic = true; };
+            pipe = { fg = "yellow"; };
+            socket = { fg = "magenta"; };
+            executable = { fg = "green"; bold = true; };
             
             # Default for other types
-            ".*" = { fg = "white"; bg = null; };
+            ".*" = { fg = "white"; };
           };
         };
       };

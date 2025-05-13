@@ -82,7 +82,6 @@
         yazi = {
             enable = true;
             theme = "tokyonight";
-            vimBindings = true;
             transparency = 0.9;
         };
     };

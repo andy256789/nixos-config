@@ -269,7 +269,7 @@ in {
                     "hypridle"  # Screen locking
                     "hyprctl setcursor ${gtkCfg.cursorTheme} ${toString (config.home.pointerCursor.size or 24)}"  # Set cursor theme directly
                     "swww-daemon"  # Initialize swww
-                    "swww img ${theme.wallpaper}"  # Set wallpaper
+                    "swww img ${config.home.homeDirectory}/wallpapers/${config.modules.wallpapers.wallpaper}"  # Set wallpaper
                 ];
             };
         };
