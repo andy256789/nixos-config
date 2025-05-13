@@ -40,6 +40,12 @@ in {
           git
           code-cursor
           
+          # Compilers and build tools
+          gcc
+          gnumake
+          cmake
+          pkg-config
+          
           # Language servers and formatters
           nodePackages.typescript-language-server
           nodePackages.prettier
