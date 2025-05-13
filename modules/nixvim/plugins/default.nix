@@ -6,6 +6,5 @@
     ./colorscheme.nix
     ./nvim-tree.nix
     ./lualine.nix
-    ./gitsigns.nix
   ];
 } 
