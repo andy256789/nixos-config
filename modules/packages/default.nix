@@ -113,6 +113,7 @@ in {
                 type = types.listOf types.package;
                 default = with pkgs; [
                     discord
+                    obsidian
                 ];
                 description = "Communication packages to install";
             };
