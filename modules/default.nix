@@ -10,6 +10,5 @@
     ./ghostty
     ./swaync
     ./wallpapers
-    ./nixvim
   ];
 } 

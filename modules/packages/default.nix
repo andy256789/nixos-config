@@ -15,9 +15,6 @@ in {
         default = with pkgs; [
           ghostty
           foot
-          kitty
-          tmux
-          zellij
         ];
         description = "Terminal packages to install";
       };
@@ -30,7 +27,6 @@ in {
         default = with pkgs; [
           nemo
           yazi
-          ranger
         ];
         description = "File manager packages to install";
       };
@@ -42,19 +38,12 @@ in {
         type = types.listOf types.package;
         default = with pkgs; [
           git
-          git-lfs
           code-cursor
-          lazygit
-          gh
-          vscode
-          helix
           
           # Language servers and formatters
           nodePackages.typescript-language-server
           nodePackages.prettier
           nixpkgs-fmt
-          rust-analyzer
-          rustfmt
         ];
         description = "Development packages to install";
       };
@@ -66,7 +55,6 @@ in {
         type = types.listOf types.package;
         default = with pkgs; [
           firefox
-          brave
         ];
         description = "Browser packages to install";
       };
@@ -80,8 +68,6 @@ in {
           mpv
           imv
           spotify
-          playerctl
-          pamixer
         ];
         description = "Media packages to install";
       };
@@ -121,8 +107,6 @@ in {
         type = types.listOf types.package;
         default = with pkgs; [
           discord
-          element-desktop
-          telegram-desktop
         ];
         description = "Communication packages to install";
       };
