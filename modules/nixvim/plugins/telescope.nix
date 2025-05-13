@@ -1,6 +1,4 @@
 {
-  description = "Telescope plugin configuration";
-
   config.plugins.telescope = {
     enable = true;
     defaults = {

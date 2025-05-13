@@ -1,6 +1,4 @@
 {
-  description = "Treesitter plugin configuration";
-
   config.plugins.treesitter = {
     enable = true;
     indent = true;

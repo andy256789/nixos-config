@@ -1,6 +1,4 @@
 {
-  description = "NixVim options configuration";
-
   config = {
     # Disable netrw banner
     globals = {

@@ -1,6 +1,4 @@
 {
-  description = "Colorscheme configuration";
-
   config.colorschemes.tokyonight = {
     enable = true;
     style = "night";

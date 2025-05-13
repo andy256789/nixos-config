@@ -1,6 +1,4 @@
 {
-  description = "Lualine statusline configuration";
-
   config.plugins.lualine = {
     enable = true;
     theme = "tokyonight";

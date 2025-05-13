@@ -1,6 +1,4 @@
 {
-  description = "NvimTree file explorer configuration";
-
   config.plugins.nvim-tree = {
     enable = true;
     

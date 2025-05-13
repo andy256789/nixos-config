@@ -1,6 +1,4 @@
 {
-  description = "LSP configuration";
-
   config.plugins = {
     lsp = {
       enable = true;

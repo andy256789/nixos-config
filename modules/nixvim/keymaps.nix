@@ -1,6 +1,4 @@
 {
-  description = "NixVim keymaps configuration";
-
   config = {
     globals = {
       mapleader = " ";
