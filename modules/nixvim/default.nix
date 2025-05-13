@@ -1,9 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{  config, lib, pkgs, ... }:
 
 with lib;
 let
@@ -11,14 +6,13 @@ let
 in
 {
   options.modules.nixvim = {
-    enable = mkEnableOption "Enable nixvim";
+    enable = mkEnableOption "enable nixvim";
   };
 
   config = mkIf cfg.enable {
     programs.nixvim = {
       enable = true;
-      
-      # Basic vim options
+
       globals = {
         mapleader = " ";
       };
@@ -34,67 +28,53 @@ in
         smartcase = true;
         clipboard = "unnamedplus";
       };
-      
-      # Colorscheme
+
       colorschemes.tokyonight = {
         enable = true;
         style = "night";
       };
 
-      # Basic plugins
       plugins = {
-        # File explorer
         nvim-tree = {
           enable = true;
           openOnSetup = true;
         };
-        
-        # Status line
+
         lualine.enable = true;
-        
-        # Fuzzy finder
         telescope.enable = true;
-        
-        # Git integration
         gitsigns.enable = true;
-        
-        # Better highlighting
         treesitter.enable = true;
       };
-      
-      # Keymaps
+
       keymaps = [
-        # File explorer
         {
           mode = "n";
           key = "<leader>e";
-          action = "<cmd>NvimTreeToggle<CR>";
+          action = "<cmd>NvimTreeToggle<cr>";
           options = {
             silent = true;
-            desc = "Toggle file explorer";
+            desc = "toggle file explorer";
           };
         }
-        
-        # Telescope (fuzzy finder)
         {
           mode = "n";
           key = "<leader>ff";
-          action = "<cmd>Telescope find_files<CR>";
+          action = "<cmd>Telescope find_files<cr>";
           options = {
             silent = true;
-            desc = "Find files";
+            desc = "find files";
           };
         }
         {
           mode = "n";
           key = "<leader>fg";
-          action = "<cmd>Telescope live_grep<CR>";
+          action = "<cmd>Telescope live_grep<cr>";
           options = {
             silent = true;
-            desc = "Live grep";
+            desc = "live grep";
           };
         }
       ];
     };
   };
-} 
+}
