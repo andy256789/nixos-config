@@ -43,7 +43,8 @@ in {
                 @define-color error-color #{${theme.colors.accent.error}};
 
                 window {
-                    margin: 0px;
+                    margin: 0;
+                    padding: 0;
                     background-color: @bg-color;
                     border-radius: ${toString theme.border.radius}px;
                     border: 2px solid @accent-color;
@@ -71,12 +72,14 @@ in {
                 }
 
                 #outer-box {
-                    margin: 0px;
-                    background-color: transparent;
+                    margin: 0;
+                    padding: 0;
+                    background-color: @bg-color;
+                    border-radius: ${toString theme.border.radius}px;
                 }
 
                 #scroll {
-                    margin: 0px;
+                    margin: 0;
                     border: none;
                 }
 
