@@ -39,7 +39,6 @@
             # Colors
             termguicolors = true;
             background = "dark";
-            colorcolumn = "80";
 
             # UI
             scrolloff = 8;
