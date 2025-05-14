@@ -17,12 +17,12 @@ in {
                 mainBar = {
                     layer = "top";
                     position = "top";
-                    height = 32;
-                    spacing = 4;
-                    margin-top = 0;
+                    height = 30;
+                    spacing = 5;
+                    margin-top = 5;
                     margin-bottom = 0;
-                    margin-left = 0;
-                    margin-right = 0;
+                    margin-left = 5;
+                    margin-right = 5;
                     modules-left = [
                         "hyprland/workspaces"
                         "hyprland/window"
@@ -168,41 +168,53 @@ in {
           font-size: ${toString theme.fonts.size.normal}px;
           font-weight: bold;
           min-height: 0;
-          transition-property: background-color;
-          transition-duration: 0.2s;
+          transition-property: background-color, color;
+          transition-duration: 0.3s;
         }
 
         window#waybar {
-          background: rgba(21, 18, 27, ${toString theme.opacity.panel});
+          background: transparent;
+          color: ${theme.colors.foreground};
+        }
+
+        tooltip {
+          background: ${theme.colors.background};
+          border: 1px solid ${theme.colors.accent.primary};
+          border-radius: ${toString theme.border.radius}px;
+        }
+
+        tooltip label {
           color: ${theme.colors.foreground};
         }
 
         #workspaces {
-          background: ${theme.colors.background};
-          margin: 5px;
-          padding: 0px 5px;
+          background: rgba(${builtins.substring 1 6 theme.colors.background}, ${toString theme.opacity.panel});
+          margin: 3px 3px;
+          padding: 0 2px;
           border-radius: ${toString theme.border.radius}px;
-          border: 0px;
+          border: 1px solid rgba(${builtins.substring 1 6 theme.colors.accent.primary}, 0.2);
         }
 
         #workspaces button {
-          padding: 0px 5px;
-          margin: 5px 0px;
+          padding: 0 5px;
+          margin: 3px 2px;
           border-radius: ${toString theme.border.radius}px;
           color: ${theme.colors.foreground};
           background: transparent;
-          transition: all 0.2s ease;
+          transition: all 0.3s ease;
         }
 
         #workspaces button:hover {
-          background: rgba(0, 0, 0, 0.2);
+          background: rgba(${builtins.substring 1 6 theme.colors.accent.secondary}, 0.2);
+          color: ${theme.colors.accent.primary};
           box-shadow: inherit;
           text-shadow: inherit;
         }
 
         #workspaces button.active {
-          background: ${theme.colors.accent.primary};
+          background: linear-gradient(45deg, ${theme.colors.accent.primary}, ${theme.colors.accent.tertiary});
           color: ${theme.colors.background};
+          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
         }
 
         #workspaces button.urgent {
@@ -211,11 +223,12 @@ in {
         }
 
         #window {
-          background: ${theme.colors.background};
-          margin: 5px;
-          padding: 0px 10px;
+          background: rgba(${builtins.substring 1 6 theme.colors.background}, ${toString theme.opacity.panel});
+          margin: 3px;
+          padding: 0 10px;
           border-radius: ${toString theme.border.radius}px;
           color: ${theme.colors.foreground};
+          border: 1px solid rgba(${builtins.substring 1 6 theme.colors.accent.primary}, 0.2);
         }
 
         #clock,
@@ -226,11 +239,12 @@ in {
         #pulseaudio,
         #tray,
         #backlight {
-          background: ${theme.colors.background};
-          padding: 0px 10px;
-          margin: 5px 2px;
+          background: rgba(${builtins.substring 1 6 theme.colors.background}, ${toString theme.opacity.panel});
+          padding: 0 10px;
+          margin: 3px 2px;
           border-radius: ${toString theme.border.radius}px;
           color: ${theme.colors.foreground};
+          border: 1px solid rgba(${builtins.substring 1 6 theme.colors.accent.primary}, 0.2);
         }
 
         #clock {
@@ -238,6 +252,7 @@ in {
           margin-left: 0;
           margin-right: 0;
           font-weight: bold;
+          background: linear-gradient(45deg, rgba(${builtins.substring 1 6 theme.colors.background}, ${toString theme.opacity.panel}), rgba(${builtins.substring 1 6 theme.colors.accent.primary}, 0.2));
         }
 
         #battery {
@@ -250,6 +265,11 @@ in {
 
         #battery.warning:not(.charging) {
           color: ${theme.colors.accent.warning};
+          animation-name: blink;
+          animation-duration: 0.5s;
+          animation-timing-function: linear;
+          animation-iteration-count: infinite;
+          animation-direction: alternate;
         }
 
         #battery.critical:not(.charging) {
@@ -315,16 +335,6 @@ in {
             background-color: ${theme.colors.accent.error};
             color: ${theme.colors.background};
           }
-        }
-
-        tooltip {
-          background: ${theme.colors.background};
-          border: 1px solid ${theme.colors.accent.primary};
-          border-radius: ${toString theme.border.radius}px;
-        }
-
-        tooltip label {
-          color: ${theme.colors.foreground};
         }
             '';
         };

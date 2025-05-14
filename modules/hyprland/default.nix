@@ -82,13 +82,15 @@ in {
 
                 # General settings
                 general = {
-                    gaps_in = 5;
-                    gaps_out = 10;
+                    gaps_in = 4;
+                    gaps_out = 8;
                     border_size = 2;
                     layout = "dwindle";
                     resize_on_border = true;
                     extend_border_grab_area = 15;
                     hover_icon_on_border = true;
+                    col.active_border = "rgba(${builtins.substring 1 6 theme.colors.accent.primary}ee) rgba(${builtins.substring 1 6 theme.colors.accent.tertiary}ee) 45deg";
+                    col.inactive_border = "rgba(${builtins.substring 1 6 theme.colors.background}aa)";
                 };
 
                 # Layout settings
@@ -122,12 +124,18 @@ in {
                 decoration = {
                     rounding = theme.border.radius;
                     active_opacity = 1.0;
-                    inactive_opacity = 0.95;
+                    inactive_opacity = 0.97;
                     fullscreen_opacity = 1.0;
+                    drop_shadow = true;
+                    shadow_range = 12;
+                    shadow_render_power = 2;
+                    shadow_ignore_window = true;
+                    shadow_offset = "0 2";
+                    col.shadow = "rgba(00000044)";
                     blur = {
                         enabled = true;
-                        size = 8;
-                        passes = 2;
+                        size = 6;
+                        passes = 3;
                         new_optimizations = true;
                         xray = true;
                         ignore_opacity = true;
@@ -138,20 +146,20 @@ in {
                 animations = {
                     enabled = true;
                     bezier = [
-                        "myBezier, 0.05, 0.9, 0.1, 1.05"
-                        "overshot, 0.13, 0.99, 0.29, 1.1"
+                        "myBezier, 0.05, 0.9, 0.1, 1.0"
                         "smoothOut, 0.36, 0, 0.66, -0.56"
                         "smoothIn, 0.25, 1, 0.5, 1"
+                        "easeInOutCirc, 0.85, 0, 0.15, 1"
                     ];
                     animation = [
-                        "windows, 1, 5, myBezier, slide"
-                        "windowsOut, 1, 5, smoothOut, slide"
-                        "windowsMove, 1, 5, smoothIn, slide"
+                        "windows, 1, 4, myBezier, slide"
+                        "windowsOut, 1, 4, smoothOut, slide"
+                        "windowsMove, 1, 4, smoothIn, slide"
                         "border, 1, 10, default"
                         "borderangle, 1, 8, default"
                         "fade, 1, 5, smoothIn"
                         "fadeDim, 1, 5, smoothIn"
-                        "workspaces, 1, 6, overshot, slide"
+                        "workspaces, 1, 5, easeInOutCirc"
                     ];
                 };
 
