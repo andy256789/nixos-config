@@ -36,7 +36,7 @@ in {
 
         monitors = mkOption {
             type = types.listOf types.str;
-            default = ["DP-2,2560x1440@169.83,0x0,1.25"];
+            default = ["DP-2,2560x1440@169.83,0x0,1"];
             description = "Monitor configuration";
         };
     };
@@ -65,6 +65,10 @@ in {
 
             settings = {
                 monitor = cfg.monitors;
+
+                xwayland = {
+                    force_zero_scaling = true;
+                };
 
                 # Environment variables
                 env = [
@@ -268,7 +272,7 @@ in {
                     "wl-paste --watch cliphist store"  # Clipboard history
                     "hypridle"  # Screen locking
                     "hyprctl setcursor ${gtkCfg.cursorTheme} ${toString (config.home.pointerCursor.size or 24)}"  # Set cursor theme directly
-                    "swww-daemon & swww img ${config.home.homeDirectory}/wallpapers/${config.modules.wallpapers.wallpaper}"  # Set wallpaper
+                    "swww init && swww img ${config.home.homeDirectory}/wallpapers/${config.modules.wallpapers.wallpaper}"  # Set wallpaper
                 ];
             };
         };
