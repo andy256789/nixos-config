@@ -84,13 +84,13 @@ in {
                 general = {
                     gaps_in = 4;
                     gaps_out = 8;
-                    border_size = 2;
+                    border_size = 1;
                     layout = "dwindle";
+                    "col.active_border" = "rgba(${builtins.substring 1 6 theme.colors.accent.primary}ee) rgba(${builtins.substring 1 6 theme.colors.accent.tertiary}ee) 45deg";
+                    "col.inactive_border" = "rgba(${builtins.substring 1 6 theme.colors.background}aa)";
                     resize_on_border = true;
                     extend_border_grab_area = 15;
                     hover_icon_on_border = true;
-                    col.active_border = "rgba(${builtins.substring 1 6 theme.colors.accent.primary}ee) rgba(${builtins.substring 1 6 theme.colors.accent.tertiary}ee) 45deg";
-                    col.inactive_border = "rgba(${builtins.substring 1 6 theme.colors.background}aa)";
                 };
 
                 # Layout settings
@@ -126,12 +126,6 @@ in {
                     active_opacity = 1.0;
                     inactive_opacity = 0.97;
                     fullscreen_opacity = 1.0;
-                    drop_shadow = true;
-                    shadow_range = 12;
-                    shadow_render_power = 2;
-                    shadow_ignore_window = true;
-                    shadow_offset = "0 2";
-                    col.shadow = "rgba(00000044)";
                     blur = {
                         enabled = true;
                         size = 6;

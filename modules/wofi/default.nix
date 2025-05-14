@@ -33,9 +33,9 @@ in {
             };
             
             style = ''
-                @define-color bg-color #{rgba(${builtins.substring 1 6 theme.colors.background}, ${toString theme.opacity.panel})};
+                @define-color bg-color #{rgba(30, 30, 46, ${toString theme.opacity.panel})};
                 @define-color fg-color #{${theme.colors.foreground}};
-                @define-color base-color #{rgba(${builtins.substring 1 6 theme.colors.background}, 0.7)};
+                @define-color base-color #{rgba(30, 30, 46, 0.7)};
                 @define-color accent-color #{${theme.colors.accent.primary}};
                 @define-color secondary-color #{${theme.colors.accent.secondary}};
                 @define-color tertiary-color #{${theme.colors.accent.tertiary}};
@@ -47,7 +47,7 @@ in {
                     padding: 0;
                     background-color: @bg-color;
                     border-radius: ${toString theme.border.radius}px;
-                    border: 2px solid rgba(${builtins.substring 1 6 theme.colors.accent.primary}, 0.8);
+                    border: 2px solid rgba(137, 180, 250, 0.8);
                     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
                 }
 
@@ -65,7 +65,7 @@ in {
                 #input:focus {
                     border: none;
                     outline: none;
-                    box-shadow: 0 0 0 2px rgba(${builtins.substring 1 6 theme.colors.accent.primary}, 0.3);
+                    box-shadow: 0 0 0 2px rgba(137, 180, 250, 0.3);
                 }
 
                 #inner-box {
@@ -101,7 +101,7 @@ in {
                 }
 
                 #entry:selected {
-                    background: linear-gradient(90deg, rgba(${builtins.substring 1 6 theme.colors.accent.primary}, 0.9), rgba(${builtins.substring 1 6 theme.colors.accent.tertiary}, 0.7));
+                    background: linear-gradient(90deg, rgba(137, 180, 250, 0.9), rgba(203, 166, 247, 0.7));
                     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
                 }
 

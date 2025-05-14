@@ -17,7 +17,7 @@ in {
                 mainBar = {
                     layer = "top";
                     position = "top";
-                    height = 30;
+                    height = 32;
                     spacing = 5;
                     margin-top = 5;
                     margin-bottom = 0;
@@ -35,8 +35,6 @@ in {
                         "network"
                         "cpu"
                         "memory"
-                        "backlight"
-                        "battery"
                         "tray"
                     ];
 
@@ -98,28 +96,6 @@ in {
                             warning = 70;
                             critical = 90;
                         };
-                    };
-
-                    "backlight" = {
-                        format = "{icon} {percent}%";
-                        format-icons = ["󰃛" "󰃜" "󰃝" "󰃞" "󰃟" "󰃠"];
-                        on-scroll-up = "light -A 5";
-                        on-scroll-down = "light -U 5";
-                        smooth-scrolling-threshold = 1;
-                    };
-
-                    "battery" = {
-                        states = {
-                            warning = 30;
-                            critical = 15;
-                        };
-                        format = "{icon} {capacity}%";
-                        format-charging = "󰂄 {capacity}%";
-                        format-plugged = "󰚥 {capacity}%";
-                        format-alt = "{icon} {time}";
-                        format-icons = ["󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹"];
-                        tooltip-format = "{capacity}% - {time} remaining";
-                        interval = 30;
                     };
 
                     "network" = {
@@ -188,11 +164,11 @@ in {
         }
 
         #workspaces {
-          background: rgba(${builtins.substring 1 6 theme.colors.background}, ${toString theme.opacity.panel});
+          background: rgba(30, 30, 46, ${toString theme.opacity.panel});
           margin: 3px 3px;
           padding: 0 2px;
           border-radius: ${toString theme.border.radius}px;
-          border: 1px solid rgba(${builtins.substring 1 6 theme.colors.accent.primary}, 0.2);
+          border: 1px solid rgba(137, 180, 250, 0.2);
         }
 
         #workspaces button {
@@ -205,7 +181,7 @@ in {
         }
 
         #workspaces button:hover {
-          background: rgba(${builtins.substring 1 6 theme.colors.accent.secondary}, 0.2);
+          background: rgba(166, 227, 161, 0.2);
           color: ${theme.colors.accent.primary};
           box-shadow: inherit;
           text-shadow: inherit;
@@ -223,28 +199,26 @@ in {
         }
 
         #window {
-          background: rgba(${builtins.substring 1 6 theme.colors.background}, ${toString theme.opacity.panel});
+          background: rgba(30, 30, 46, ${toString theme.opacity.panel});
           margin: 3px;
           padding: 0 10px;
           border-radius: ${toString theme.border.radius}px;
           color: ${theme.colors.foreground};
-          border: 1px solid rgba(${builtins.substring 1 6 theme.colors.accent.primary}, 0.2);
+          border: 1px solid rgba(137, 180, 250, 0.2);
         }
 
         #clock,
-        #battery,
         #cpu,
         #memory,
         #network,
         #pulseaudio,
-        #tray,
-        #backlight {
-          background: rgba(${builtins.substring 1 6 theme.colors.background}, ${toString theme.opacity.panel});
+        #tray {
+          background: rgba(30, 30, 46, ${toString theme.opacity.panel});
           padding: 0 10px;
           margin: 3px 2px;
           border-radius: ${toString theme.border.radius}px;
           color: ${theme.colors.foreground};
-          border: 1px solid rgba(${builtins.substring 1 6 theme.colors.accent.primary}, 0.2);
+          border: 1px solid rgba(137, 180, 250, 0.2);
         }
 
         #clock {
@@ -252,33 +226,7 @@ in {
           margin-left: 0;
           margin-right: 0;
           font-weight: bold;
-          background: linear-gradient(45deg, rgba(${builtins.substring 1 6 theme.colors.background}, ${toString theme.opacity.panel}), rgba(${builtins.substring 1 6 theme.colors.accent.primary}, 0.2));
-        }
-
-        #battery {
-          color: ${theme.colors.accent.secondary};
-        }
-
-        #battery.charging, #battery.plugged {
-          color: ${theme.colors.accent.secondary};
-        }
-
-        #battery.warning:not(.charging) {
-          color: ${theme.colors.accent.warning};
-          animation-name: blink;
-          animation-duration: 0.5s;
-          animation-timing-function: linear;
-          animation-iteration-count: infinite;
-          animation-direction: alternate;
-        }
-
-        #battery.critical:not(.charging) {
-          color: ${theme.colors.accent.error};
-          animation-name: blink;
-          animation-duration: 0.5s;
-          animation-timing-function: linear;
-          animation-iteration-count: infinite;
-          animation-direction: alternate;
+          background: linear-gradient(45deg, rgba(30, 30, 46, ${toString theme.opacity.panel}), rgba(137, 180, 250, 0.2));
         }
 
         #cpu {
@@ -319,10 +267,6 @@ in {
 
         #pulseaudio.muted {
           color: ${theme.colors.accent.error};
-        }
-
-        #backlight {
-          color: ${theme.colors.accent.quaternary};
         }
 
         #tray {
