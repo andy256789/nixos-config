@@ -36,7 +36,7 @@ in {
 
         monitors = mkOption {
             type = types.listOf types.str;
-            default = ["DP-2,2560x1440@169.83,0x0,1"];
+            default = ["DP-2,2560x1440@169.83,0x0,1.25"];
             description = "Monitor configuration";
         };
     };
@@ -55,6 +55,8 @@ in {
             hyprlock              # Screen locker
             networkmanagerapplet  # Network manager applet
             pavucontrol           # Audio control
+            playerctl             # Audio control
+            pulseaudio
         ];
 
         wayland.windowManager.hyprland = {
@@ -246,10 +248,6 @@ in {
                     ", XF86AudioPlay, exec, playerctl play-pause"
                     ", XF86AudioNext, exec, playerctl next"
                     ", XF86AudioPrev, exec, playerctl previous"
-
-                    # Brightness controls
-                    ", XF86MonBrightnessUp, exec, light -A 5"
-                    ", XF86MonBrightnessDown, exec, light -U 5"
 
                     # Screenshots
                     "SUPER, Print, exec, grimblast copy area"

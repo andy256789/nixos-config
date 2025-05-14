@@ -102,11 +102,6 @@ in {
                     wget
                     curl
                     rsync
-                    
-                    #wayland controls
-                    light
-                    playerctl
-                    pulseaudio
                 ];
                 description = "Utility packages to install";
             };
