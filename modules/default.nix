@@ -12,5 +12,6 @@
         ./wallpapers
         ./nixvim
         ./yazi
+        ./wofi
     ];
 } 
