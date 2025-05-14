@@ -1,5 +1,12 @@
 {
     config.programs.nixvim.colorschemes = {
-        tokyonight.enable = true;
+        tokyonight = {
+            enable = true;
+            transparent = true;
+            styles = {
+                sidebars = "transparent";
+                floats = "transparent";
+            };
+        };
     };
 } 

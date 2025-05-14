@@ -11,7 +11,7 @@
                     installCargo = true; 
                     installRustc = true;
                 };
-                nil_ls.enable = true; # Nix language server
+                nil_ls.enable = true; 
                 pyright.enable = true;
                 bashls.enable = true;
                 gopls.enable = true;
