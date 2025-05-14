@@ -98,6 +98,7 @@ in {
                     duf
                     ncdu
                     unzip
+                    unrar
                     p7zip
                     wget
                     curl
