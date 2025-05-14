@@ -36,7 +36,7 @@ in {
 
         monitors = mkOption {
             type = types.listOf types.str;
-            default = ["DP-2,2560x1440@169.83,0x0,1.2"];
+            default = ["DP-2,2560x1440@169.83,0x0,1.5"];
             description = "Monitor configuration";
         };
     };
