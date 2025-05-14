@@ -36,7 +36,7 @@ in {
 
         monitors = mkOption {
             type = types.listOf types.str;
-            default = ["DP-2,2560x1440@169.83,0x0,1.5"];
+            default = ["DP-2,2560x1440@169.83,0x0,1.25"];
             description = "Monitor configuration";
         };
     };
@@ -268,8 +268,7 @@ in {
                     "wl-paste --watch cliphist store"  # Clipboard history
                     "hypridle"  # Screen locking
                     "hyprctl setcursor ${gtkCfg.cursorTheme} ${toString (config.home.pointerCursor.size or 24)}"  # Set cursor theme directly
-                    "swww-daemon"  # Initialize swww
-                    "swww img ${config.home.homeDirectory}/wallpapers/${config.modules.wallpapers.wallpaper}"  # Set wallpaper
+                    "swww-daemon & swww img ${config.home.homeDirectory}/wallpapers/${config.modules.wallpapers.wallpaper}"  # Set wallpaper
                 ];
             };
         };

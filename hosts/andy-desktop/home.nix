@@ -40,7 +40,7 @@
 
         wallpapers = {
             enable = true;
-            wallpaper = "anime-cyberpunk.png";
+            wallpaper = "anime-cool.png";
         };
 
         packages = {
