@@ -35,6 +35,7 @@ in {
                         "network"
                         "cpu"
                         "memory"
+                        "battery"  
                         "tray"
                     ];
 
@@ -127,6 +128,19 @@ in {
                         on-scroll-up = "pactl set-sink-volume @DEFAULT_SINK@ +1%";
                         on-scroll-down = "pactl set-sink-volume @DEFAULT_SINK@ -1%";
                         smooth-scrolling-threshold = 1;
+                    };
+
+                    "battery" = {
+                        states = {
+                            warning = 20;
+                            critical = 10;
+                        };
+                        format = "{icon} {capacity}%";
+                        format-charging = " {capacity}%";
+                        format-plugged = " {capacity}%";
+                        format-alt = "{time} {capacity}%";
+                        tooltip = true;
+                        format-icons = ["" "" "" "" ""];
                     };
 
                     "tray" = {
