@@ -70,6 +70,9 @@
         wayland.enable = true;
     };
 
+    services.flatpak.enable = true;
+    services.flatpak.packages = ["flathub"];
+
     programs.hyprland = {
         enable = true;
         package = pkgs.hyprland;

@@ -84,6 +84,7 @@ in {
             packages = mkOption {
                 type = types.listOf types.package;
                 default = with pkgs; [
+                    flatpak
                     btop
                     fastfetch
                     ripgrep
