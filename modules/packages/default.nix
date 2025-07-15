@@ -47,6 +47,7 @@ in {
                     pkg-config
 
                     # Language servers and formatters
+                    clang-tools
                     nodePackages.typescript-language-server
                     nodePackages.prettier
                     nixpkgs-fmt
