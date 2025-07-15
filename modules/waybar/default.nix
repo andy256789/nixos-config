@@ -222,6 +222,7 @@ in {
         }
 
         #clock,
+        #battery,
         #cpu,
         #memory,
         #network,
