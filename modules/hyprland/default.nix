@@ -56,8 +56,10 @@ in {
             networkmanagerapplet  # Network manager applet
             pavucontrol           # Audio control
             playerctl             # Audio control
-            pulseaudio
-            brightnessctl
+            pulseaudio            # Audio gui
+            brightnessctl         # Brightness control
+            wlogout               # Logout manager
+            blueman               # Bluetooth control
         ];
 
         wayland.windowManager.hyprland = {

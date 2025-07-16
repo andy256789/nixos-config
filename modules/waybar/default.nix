@@ -31,13 +31,15 @@ in {
                         "clock"
                     ];
                     modules-right = [
+                        "bluetooth"
+                        "network"
                         "pulseaudio"
-                        #"network"
                         "cpu"
                         "memory"
                         "backlight"
-                        "tray"
                         "battery"
+                        "tray"
+                        "custom/power"
                     ];
 
                     "hyprland/workspaces" = {
@@ -79,6 +81,21 @@ in {
                         };
                     };
 
+                    "bluetooth" = {
+                        format = "";
+                        format-connected = "󰂱 {device_alias}";
+                        format-connected-battery = "󰂱 {device_alias} ({device_battery_percentage}%)";
+                        format-disabled = "󰂲";
+                        format-off = "󰂲";
+                        tooltip-format = "Bluetooth: {status}";
+                        tooltip-format-connected = "Bluetooth: {status}\nConnected devices:\n{device_enumerate}";
+                        tooltip-format-enumerate-connected = "• {device_alias}\t{device_address}";
+                        tooltip-format-enumerate-connected-battery = "• {device_alias}\t{device_address}\t({device_battery_percentage}%)";
+                        on-click = "blueman-manager";
+                        on-click-right = "bluetoothctl power toggle";
+                        max-length = 25;
+                    };
+
                     "cpu" = {
                         interval = 2;
                         format = "󰻠 {usage}%";
@@ -108,6 +125,7 @@ in {
                         format-alt = "󱛇 {bandwidthUpBits} | 󱛅 {bandwidthDownBits}";
                         tooltip-format = "Interface: {ifname}\nIP: {ipaddr}\nSignal: {signalStrength}%\nFrequency: {frequency}GHz";
                         on-click-right = "nm-connection-editor";
+                        max-length = 20;
                     };
 
                     "pulseaudio" = {
@@ -129,6 +147,7 @@ in {
                         on-scroll-up = "pactl set-sink-volume @DEFAULT_SINK@ +1%";
                         on-scroll-down = "pactl set-sink-volume @DEFAULT_SINK@ -1%";
                         smooth-scrolling-threshold = 1;
+                        max-length = 15;
                     };
 
                     "battery" = {
@@ -137,11 +156,12 @@ in {
                             critical = 10;
                         };
                         format = "{icon} {capacity}%";
-                        format-charging = " {capacity}%";
-                        format-plugged = " {capacity}%";
+                        format-charging = "󰂄 {capacity}%";
+                        format-plugged = "󰂄 {capacity}%";
                         format-alt = "{time} {capacity}%";
                         tooltip = true;
-                        format-icons = ["" "" "" "" ""];
+                        format-icons = ["󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹"];
+                        tooltip-format = "Battery: {capacity}%\nTime: {time}\nPower: {power}W";
                     };
 
                     "backlight" = {
@@ -154,11 +174,20 @@ in {
                             warning = 20;
                             critical = 10;
                         };
+                        tooltip-format = "Brightness: {percent}%";
                     };
 
                     "tray" = {
                         icon-size = 18;
                         spacing = 8;
+                    };
+
+                    "custom/power" = {
+                        format = "⏻";
+                        tooltip = false;
+                        on-click = "wlogout";
+                        on-click-right = "systemctl poweroff";
+                        on-click-middle = "systemctl reboot";
                     };
                 };
             };
@@ -241,15 +270,19 @@ in {
         #memory,
         #network,
         #pulseaudio,
-        #tray {
+        #bluetooth,
+        #tray,
+        #custom-power {
           background: rgba(30, 30, 46, ${toString theme.opacity.panel});
           padding: 0 10px;
           margin: 3px 2px;
           border-radius: ${toString theme.border.radius}px;
           color: ${theme.colors.foreground};
           border: 1px solid rgba(137, 180, 250, 0.2);
+          transition: all 0.3s ease;
         }
 
+        /* Improved right module styling */
         #clock {
           color: ${theme.colors.accent.primary};
           margin-left: 0;
@@ -258,32 +291,23 @@ in {
           background: ${theme.colors.background};
         }
 
-        #cpu {
-          color: ${theme.colors.accent.quaternary};
+        #bluetooth {
+          color: ${theme.colors.accent.primary};
+          min-width: 24px;
         }
 
-        #cpu.warning {
-          color: ${theme.colors.accent.warning};
-        }
-
-        #cpu.critical {
+        #bluetooth.disabled,
+        #bluetooth.off {
           color: ${theme.colors.accent.error};
         }
 
-        #memory {
-          color: ${theme.colors.accent.tertiary};
-        }
-
-        #memory.warning {
-          color: ${theme.colors.accent.warning};
-        }
-
-        #memory.critical {
-          color: ${theme.colors.accent.error};
+        #bluetooth.connected {
+          color: ${theme.colors.accent.secondary};
         }
 
         #network {
           color: ${theme.colors.accent.primary};
+          min-width: 120px;
         }
 
         #network.disconnected {
@@ -292,10 +316,74 @@ in {
 
         #pulseaudio {
           color: ${theme.colors.accent.primary};
+          min-width: 60px;
         }
 
         #pulseaudio.muted {
           color: ${theme.colors.accent.error};
+        }
+
+        #cpu {
+          color: ${theme.colors.accent.quaternary};
+          min-width: 60px;
+        }
+
+        #cpu.warning {
+          color: ${theme.colors.accent.warning};
+        }
+
+        #cpu.critical {
+          color: ${theme.colors.accent.error};
+          animation: blink 1s infinite;
+        }
+
+        #memory {
+          color: ${theme.colors.accent.tertiary};
+          min-width: 60px;
+        }
+
+        #memory.warning {
+          color: ${theme.colors.accent.warning};
+        }
+
+        #memory.critical {
+          color: ${theme.colors.accent.error};
+          animation: blink 1s infinite;
+        }
+
+        #backlight {
+          color: ${theme.colors.accent.secondary};
+          min-width: 60px;
+        }
+
+        #backlight.warning {
+          color: ${theme.colors.accent.warning};
+        }
+
+        #backlight.critical {
+          color: ${theme.colors.accent.error};
+        }
+
+        #battery {
+          color: ${theme.colors.accent.secondary};
+          min-width: 60px;
+        }
+
+        #battery.charging {
+          color: ${theme.colors.accent.primary};
+        }
+
+        #battery.plugged {
+          color: ${theme.colors.accent.primary};
+        }
+
+        #battery.warning:not(.charging) {
+          color: ${theme.colors.accent.warning};
+        }
+
+        #battery.critical:not(.charging) {
+          color: ${theme.colors.accent.error};
+          animation: blink 1s infinite;
         }
 
         #tray {
@@ -303,13 +391,42 @@ in {
           border-radius: ${toString theme.border.radius}px;
         }
 
+        #custom-power {
+          color: ${theme.colors.accent.error};
+          font-size: ${toString (theme.fonts.size.normal + 2)}px;
+          padding: 0 8px;
+          min-width: 28px;
+          margin-right: 5px;
+        }
+
+        #custom-power:hover {
+          background: rgba(243, 139, 168, 0.3);
+          color: ${theme.colors.accent.error};
+          transform: scale(1.05);
+        }
+
+        /* Add hover effects for better interactivity */
+        #bluetooth:hover,
+        #network:hover,
+        #pulseaudio:hover,
+        #cpu:hover,
+        #memory:hover,
+        #backlight:hover,
+        #battery:hover {
+          background: rgba(137, 180, 250, 0.2);
+          transform: translateY(-1px);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
         @keyframes blink {
-          to {
-            background-color: ${theme.colors.accent.error};
-            color: ${theme.colors.background};
+          0%, 50% {
+            opacity: 1;
+          }
+          51%, 100% {
+            opacity: 0.5;
           }
         }
             '';
         };
     };
-} 
+}
