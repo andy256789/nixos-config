@@ -60,6 +60,7 @@ in {
             brightnessctl         # Brightness control
             wlogout               # Logout manager
             blueman               # Bluetooth control
+            bluez
         ];
 
         wayland.windowManager.hyprland = {

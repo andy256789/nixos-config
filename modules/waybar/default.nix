@@ -32,7 +32,6 @@ in {
                     ];
                     modules-right = [
                         "bluetooth"
-                        "network"
                         "pulseaudio"
                         "cpu"
                         "memory"
@@ -115,17 +114,6 @@ in {
                             warning = 70;
                             critical = 90;
                         };
-                    };
-
-                    "network" = {
-                        format-wifi = "󰤨 {essid}";
-                        format-ethernet = "󰈀 Connected";
-                        format-linked = "󰌘 Connected";
-                        format-disconnected = "󰌙 Disconnected";
-                        format-alt = "󱛇 {bandwidthUpBits} | 󱛅 {bandwidthDownBits}";
-                        tooltip-format = "Interface: {ifname}\nIP: {ipaddr}\nSignal: {signalStrength}%\nFrequency: {frequency}GHz";
-                        on-click-right = "nm-connection-editor";
-                        max-length = 20;
                     };
 
                     "pulseaudio" = {
@@ -282,7 +270,6 @@ in {
           transition: all 0.3s ease;
         }
 
-        /* Improved right module styling */
         #clock {
           color: ${theme.colors.accent.primary};
           margin-left: 0;
@@ -293,7 +280,6 @@ in {
 
         #bluetooth {
           color: ${theme.colors.accent.primary};
-          min-width: 24px;
         }
 
         #bluetooth.disabled,
@@ -305,18 +291,8 @@ in {
           color: ${theme.colors.accent.secondary};
         }
 
-        #network {
-          color: ${theme.colors.accent.primary};
-          min-width: 120px;
-        }
-
-        #network.disconnected {
-          color: ${theme.colors.accent.error};
-        }
-
         #pulseaudio {
           color: ${theme.colors.accent.primary};
-          min-width: 60px;
         }
 
         #pulseaudio.muted {
@@ -325,7 +301,6 @@ in {
 
         #cpu {
           color: ${theme.colors.accent.quaternary};
-          min-width: 60px;
         }
 
         #cpu.warning {
@@ -334,12 +309,10 @@ in {
 
         #cpu.critical {
           color: ${theme.colors.accent.error};
-          animation: blink 1s infinite;
         }
 
         #memory {
           color: ${theme.colors.accent.tertiary};
-          min-width: 60px;
         }
 
         #memory.warning {
@@ -348,7 +321,6 @@ in {
 
         #memory.critical {
           color: ${theme.colors.accent.error};
-          animation: blink 1s infinite;
         }
 
         #backlight {
@@ -383,30 +355,25 @@ in {
 
         #battery.critical:not(.charging) {
           color: ${theme.colors.accent.error};
-          animation: blink 1s infinite;
         }
 
         #tray {
-          margin-right: 5px;
           border-radius: ${toString theme.border.radius}px;
         }
 
         #custom-power {
           color: ${theme.colors.accent.error};
           font-size: ${toString (theme.fonts.size.normal + 2)}px;
-          padding: 0 8px;
           min-width: 28px;
           margin-right: 5px;
         }
 
         #custom-power:hover {
-          background: rgba(243, 139, 168, 0.3);
           color: ${theme.colors.accent.error};
-          transform: scale(1.05);
         }
 
-        /* Add hover effects for better interactivity */
         #bluetooth:hover,
+        #custom-power:hover,
         #network:hover,
         #pulseaudio:hover,
         #cpu:hover,
@@ -414,19 +381,9 @@ in {
         #backlight:hover,
         #battery:hover {
           background: rgba(137, 180, 250, 0.2);
-          transform: translateY(-1px);
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
-
-        @keyframes blink {
-          0%, 50% {
-            opacity: 1;
-          }
-          51%, 100% {
-            opacity: 0.5;
-          }
-        }
-            '';
+           '';
         };
     };
 }
