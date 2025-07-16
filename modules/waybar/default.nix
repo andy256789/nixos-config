@@ -35,9 +35,9 @@ in {
                         "network"
                         "cpu"
                         "memory"
-                        "battery"
-                        "backlight"  # Added backlight module
+                        "backlight"
                         "tray"
+                        "battery"
                     ];
 
                     "hyprland/workspaces" = {
@@ -236,6 +236,7 @@ in {
 
         #clock,
         #battery,
+        #backlight,
         #cpu,
         #memory,
         #network,
@@ -254,7 +255,7 @@ in {
           margin-left: 0;
           margin-right: 0;
           font-weight: bold;
-          background: ${theme.colors.background};  # Changed to solid background
+          background: ${theme.colors.background};
         }
 
         #cpu {
