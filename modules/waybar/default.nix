@@ -32,7 +32,7 @@ in {
                     ];
                     modules-right = [
                         "pulseaudio"
-                        "network"
+                        #"network"
                         "cpu"
                         "memory"
                         "backlight"
@@ -147,8 +147,8 @@ in {
                     "backlight" = {
                         format = "󰃠 {percent}%";
                         tooltip = true;
-                        on-scroll-up = "light -A 5";
-                        on-scroll-down = "light -U 5";
+                        on-scroll-up = "brightnessctl set 5%+";
+                        on-scroll-down = "brightnessctl set 5%-";
                         min-length = 8;
                         states = {
                             warning = 20;
