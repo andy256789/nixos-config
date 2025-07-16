@@ -35,7 +35,8 @@ in {
                         "network"
                         "cpu"
                         "memory"
-                        "battery"  
+                        "battery"
+                        "backlight"  # Added backlight module
                         "tray"
                     ];
 
@@ -143,6 +144,18 @@ in {
                         format-icons = ["" "" "" "" ""];
                     };
 
+                    "backlight" = {
+                        format = "󰃠 {percent}%";
+                        tooltip = true;
+                        on-scroll-up = "light -A 5";
+                        on-scroll-down = "light -U 5";
+                        min-length = 8;
+                        states = {
+                            warning = 20;
+                            critical = 10;
+                        };
+                    };
+
                     "tray" = {
                         icon-size = 18;
                         spacing = 8;
@@ -241,7 +254,7 @@ in {
           margin-left: 0;
           margin-right: 0;
           font-weight: bold;
-          background: linear-gradient(45deg, rgba(30, 30, 46, ${toString theme.opacity.panel}), rgba(137, 180, 250, 0.2));
+          background: ${theme.colors.background};  # Changed to solid background
         }
 
         #cpu {
