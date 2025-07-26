@@ -46,6 +46,7 @@ in {
                     gnumake
                     cmake
                     pkg-config
+                    openssl
 
                     # Language servers and formatters
                     nodejs

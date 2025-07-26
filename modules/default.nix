@@ -3,6 +3,7 @@
 {
     imports = [
         ./themes
+        ./prisma
         ./waybar
         ./hyprland
         ./gtk
