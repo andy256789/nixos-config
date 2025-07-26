@@ -51,6 +51,11 @@ in {
                     nodejs
                     pnpm
                     docker
+                    postgresql
+                    prisma-engines
+
+                    
+
                     clang-tools
                     nodePackages.typescript-language-server
                     nodePackages.prettier
