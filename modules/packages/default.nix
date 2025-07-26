@@ -39,6 +39,7 @@ in {
                 default = with pkgs; [
                     git
                     code-cursor
+                    vscode
 
                     # Compilers and build tools
                     gcc
