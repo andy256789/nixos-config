@@ -47,6 +47,9 @@ in {
                     pkg-config
 
                     # Language servers and formatters
+                    nodejs
+                    pnpm
+                    docker
                     clang-tools
                     nodePackages.typescript-language-server
                     nodePackages.prettier
