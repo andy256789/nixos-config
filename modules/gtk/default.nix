@@ -24,6 +24,7 @@ in {
 
     config = mkIf cfg.enable {
         home.packages = with pkgs; [
+            #Theme dependencies
             gnome-themes-extra
             papirus-icon-theme
             adwaita-qt

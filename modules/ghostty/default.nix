@@ -67,10 +67,6 @@ in {
                 "selection-background" = theme.colors.accent.tertiary;
                 "selection-foreground" = theme.colors.background;
 
-                # Tab bar
-                # These settings are not currently supported in Ghostty
-                # "tab-bar-show-new-tab-button" = true;
-                # "tab-bar-show-close-button" = true;
             } // cfg.extraSettings;
         };
     };
