@@ -102,9 +102,12 @@
 
                     window = {
                         completion = {
-                            winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None";
+                            border = "rounded";
                             col_offset = -3;
                             side_padding = 0;
+                        };
+                        documentation = {
+                            border = "rounded";
                         };
                     };
                 };

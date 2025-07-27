@@ -400,7 +400,7 @@
             callback = {
                 __raw = ''
           function()
-              vim.highlight.on_yank()
+              pcall(vim.highlight.on_yank)
           end
           '';
             };

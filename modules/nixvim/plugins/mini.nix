@@ -94,7 +94,9 @@
                 callback = {
                     __raw = ''
                         function()
-                            require("mini.trailspace").unhighlight()
+                            pcall(function()
+                                require("mini.trailspace").unhighlight()
+                            end)
                         end
                     '';
                 };

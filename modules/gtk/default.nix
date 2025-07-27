@@ -30,7 +30,6 @@ in {
             adwaita-qt
             materia-theme
             adwaita-icon-theme
-            whitesur-gtk-theme
             bibata-cursors
             # Font dependencies
             noto-fonts
@@ -41,8 +40,8 @@ in {
         gtk = {
             enable = true;
             theme = {
-                name = "WhiteSur-Dark";
-                package = pkgs.whitesur-gtk-theme;
+                name = "Adwaita-dark";
+                package = pkgs.gnome-themes-extra;
             };
             iconTheme = {
                 name = cfg.iconTheme;
@@ -69,6 +68,26 @@ in {
                 gtk-application-prefer-dark-theme = true;
                 gtk-cursor-theme-size = 24;
             };
+            
+            # Add CSS to fix color parsing issues
+            gtk3.extraCss = ''
+                /* Fix any color parsing issues */
+                * {
+                    outline-color: rgba(255, 255, 255, 0.3);
+                    outline-style: dashed;
+                    outline-offset: -3px;
+                    outline-width: 1px;
+                    -gtk-outline-radius: 2px;
+                }
+            '';
+            
+            gtk4.extraCss = ''
+                /* Ensure proper color handling in GTK4 */
+                * {
+                    outline: 1px dashed rgba(255, 255, 255, 0.3);
+                    outline-offset: -3px;
+                }
+            '';
         };
 
         qt = {

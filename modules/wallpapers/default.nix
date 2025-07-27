@@ -11,7 +11,7 @@ in {
         wallpaper = mkOption {
             type = types.str;
             description = "Path to wallpaper image";
-            default = "anime-cool.png";
+            default = "anime-black-hole.png";
         };
     };
 
