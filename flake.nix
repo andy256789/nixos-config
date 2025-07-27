@@ -19,7 +19,7 @@
 
     outputs = { self, nixpkgs, home-manager, hyprland, nixvim, ... }@inputs: let
         settings = {
-            stateVersion = "24.11";  
+            stateVersion = "25.05";  
 
             system   = "x86_64-linux";
             hostname = "andy-desktop";

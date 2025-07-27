@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, inputs, settings, ... }:
 
 {
     imports = [
@@ -6,7 +6,13 @@
         inputs.nixvim.homeManagerModules.nixvim
     ];
 
-    home.stateVersion = "24.11";
+    nixpkgs.config.allowUnfree = true;
+
+    home = {
+        username = settings.username;
+        homeDirectory = "/home/${settings.username}";
+        stateVersion = "25.05";
+    };
 
     # Enable themes with default settings
     themes.enable = true;

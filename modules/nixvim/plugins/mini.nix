@@ -7,12 +7,13 @@
                 modules = {
                     comment = {
                         options = {
-                            custom_commentstring = ''
-                                function()
-                                    return require('ts_context_commentstring.internal').calculate_commentstring({ key = 'commentstring' })
-                                        or vim.bo.commentstring
-                                end
-                            '';
+                            custom_commentstring = {
+                                __raw = ''
+                                    function()
+                                        return vim.bo.commentstring
+                                    end
+                                '';
+                            };
                         };
                     };
                     files = {
