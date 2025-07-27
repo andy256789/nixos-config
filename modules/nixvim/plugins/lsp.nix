@@ -60,12 +60,6 @@
                             mode = "i";
                         };
                     };
-                    diagnostic = {
-                        "<leader>d" = {
-                            action = "open_float";
-                            desc = "Show line diagnostics";
-                        };
-                    };
                     extra = [
                         {
                             mode = "n";
