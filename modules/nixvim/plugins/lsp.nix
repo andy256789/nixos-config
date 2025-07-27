@@ -50,10 +50,6 @@
                             action = "rename";
                             desc = "Smart rename";
                         };
-                        "<leader>d" = {
-                            action = "open_float";
-                            desc = "Show line diagnostics";
-                        };
                         "<C-h>" = {
                             action = "signature_help";
                             desc = "Show signature help";
@@ -61,6 +57,12 @@
                         };
                     };
                     extra = [
+                        {
+                            mode = "n";
+                            key = "<leader>d";
+                            action = "<cmd>lua vim.diagnostic.open_float()<CR>";
+                            options = { desc = "Show line diagnostics"; };
+                        }
                         {
                             mode = "n";
                             key = "gR";

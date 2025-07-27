@@ -3,7 +3,7 @@
         enable = true;
         settings = {
             options = {
-                theme = "tokyonight";
+                theme = "rose-pine";
                 component_separators = {
                     left = "|";
                     right = "|";

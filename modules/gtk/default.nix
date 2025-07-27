@@ -27,7 +27,6 @@ in {
             gnome-themes-extra
             papirus-icon-theme
             adwaita-qt
-            tela-icon-theme
             materia-theme
             adwaita-icon-theme
             whitesur-gtk-theme

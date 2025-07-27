@@ -70,12 +70,7 @@
             updatetime = 50;
 
             # Clipboard
-            clipboard = {
-                providers = {
-                    wl-copy.enable = true; # Wayland 
-                };
-                register = "unnamedplus";
-            };
+            clipboard = "unnamedplus";
             # Mouse
             mouse = "a";
         };

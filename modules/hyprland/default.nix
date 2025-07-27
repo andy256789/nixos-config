@@ -44,22 +44,21 @@ in {
     config = mkIf cfg.enable {
         # Install required packages for Hyprland
         home.packages = with pkgs; [
-            wofi                  # Application launcher
-            dunst                 # Notification daemon
-            libnotify             # Notification library
-            swww                  # Wallpaper daemon
-            grimblast             # Screenshot tool
-            wl-clipboard          # Clipboard tools
-            cliphist              # Clipboard history
-            hypridle              # Screen locking
-            hyprlock              # Screen locker
-            networkmanagerapplet  # Network manager applet
-            pavucontrol           # Audio control
-            playerctl             # Audio control
-            pulseaudio            # Audio gui
-            brightnessctl         # Brightness control
-            wlogout               # Logout manager
-            blueman               # Bluetooth control
+            wofi
+            libnotify
+            swww
+            grimblast
+            wl-clipboard
+            cliphist
+            hypridle
+            hyprlock
+            networkmanagerapplet
+            pavucontrol
+            playerctl
+            pulseaudio
+            brightnessctl
+            wlogout
+            blueman
             bluez
         ];
 
@@ -273,10 +272,14 @@ in {
                     "swaync"
                     "nm-applet --indicator"
                     "blueman-applet"
-                    "wl-paste --watch cliphist store"  # Clipboard history
-                    "hypridle"  # Screen locking
-                    "hyprctl setcursor ${gtkCfg.cursorTheme} ${toString (config.home.pointerCursor.size or 24)}"  # Set cursor theme directly
-                    "swww init && swww img ${config.home.homeDirectory}/wallpapers/${config.modules.wallpapers.wallpaper}"  # Set wallpaper
+                    "wl-paste --watch cliphist store"
+                    "hypridle"
+                    "hyprctl setcursor ${gtkCfg.cursorTheme} ${toString (config.home.pointerCursor.size or 24)}"
+                    "swww-daemon"
+                ];
+
+                exec = [
+                    "swww img ${config.home.homeDirectory}/wallpapers/${config.modules.wallpapers.wallpaper}"
                 ];
             };
         };
