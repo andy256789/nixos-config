@@ -46,7 +46,7 @@
 
         wallpapers = {
             enable = true;
-            wallpaper = "anime-cool.png";
+            wallpaper = "anime-black-hole.png";
         };
 
         packages = {
