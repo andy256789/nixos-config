@@ -27,6 +27,7 @@
             # Files
             swapfile = false;
             backup = false;
+            undodir = "/home/andy/.vim/undodir";
             undofile = true;
 
             # Search
@@ -43,9 +44,11 @@
             # UI
             scrolloff = 8;
             signcolumn = "yes";
-            # Transparency
-            winblend = 10;
-            pumblend = 10;
+            colorcolumn = "80";
+            
+            # Transparency and blend
+            winblend = 0;
+            pumblend = 0;
 
             # Folding
             foldenable = true;

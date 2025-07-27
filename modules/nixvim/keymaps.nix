@@ -185,6 +185,132 @@
                 };
             }
 
+            # Indentation in visual mode
+            {
+                mode = "v";
+                key = "<";
+                action = "<gv";
+                options = {
+                    silent = true;
+                    desc = "indent left and reselect";
+                };
+            }
+            {
+                mode = "v";
+                key = ">";
+                action = ">gv";
+                options = {
+                    silent = true;
+                    desc = "indent right and reselect";
+                };
+            }
+
+            # Paste without losing yanked content
+            {
+                mode = "x";
+                key = "<leader>p";
+                action = "\"_dP";
+                options = { desc = "paste without losing yanked content"; };
+            }
+            {
+                mode = "v";
+                key = "p";
+                action = "\"_dp";
+                options = {
+                    silent = true;
+                    desc = "paste without losing yanked content";
+                };
+            }
+
+            # Copy to system clipboard
+            {
+                mode = "n";
+                key = "<leader>Y";
+                action = "\"+Y";
+                options = {
+                    silent = true;
+                    desc = "copy line to system clipboard";
+                };
+            }
+
+            # Delete without yanking
+            {
+                mode = ["n" "v"];
+                key = "<leader>d";
+                action = "\"_d";
+                options = { desc = "delete without yanking"; };
+            }
+
+            # Ctrl+C as escape and clear search
+            {
+                mode = "i";
+                key = "<C-c>";
+                action = "<Esc>";
+                options = { desc = "escape insert mode"; };
+            }
+            {
+                mode = "n";
+                key = "<C-c>";
+                action = ":nohl<CR>";
+                options = {
+                    silent = true;
+                    desc = "clear search highlight";
+                };
+            }
+
+            # Format code
+            {
+                mode = "n";
+                key = "<leader>f";
+                action = "<cmd>lua vim.lsp.buf.format()<CR>";
+                options = { desc = "format code"; };
+            }
+
+            # Disable Q
+            {
+                mode = "n";
+                key = "Q";
+                action = "<nop>";
+            }
+
+            # Tmux sessionizer
+            {
+                mode = "n";
+                key = "<C-f>";
+                action = "<cmd>silent !tmux neww tmux-sessionizer<CR>";
+                options = { desc = "start new tmux session"; };
+            }
+
+            # Delete character without yanking
+            {
+                mode = "n";
+                key = "x";
+                action = "\"_x";
+                options = {
+                    silent = true;
+                    desc = "delete character without yanking";
+                };
+            }
+
+            # Replace word under cursor globally
+            {
+                mode = "n";
+                key = "<leader>s";
+                action = ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>";
+                options = { desc = "replace word under cursor globally"; };
+            }
+
+            # Make file executable
+            {
+                mode = "n";
+                key = "<leader>x";
+                action = "<cmd>!chmod +x %<CR>";
+                options = {
+                    silent = true;
+                    desc = "make file executable";
+                };
+            }
+
             # Tab management
             {
                 mode = "n";

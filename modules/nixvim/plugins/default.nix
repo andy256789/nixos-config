@@ -6,5 +6,21 @@
         ./colorscheme.nix
         ./nvim-tree.nix
         ./lualine.nix
+        ./harpoon.nix
+        ./auto-session.nix
+        ./trouble.nix
+        ./cmp.nix
+        ./undotree.nix
+        ./oil.nix
+        ./todo-comments.nix
+        ./nvim-surround.nix
+        ./terminal.nix
+        ./conform.nix
+        ./lint.nix
+        ./utils.nix
+        ./ufo.nix
+        ./mini.nix
+        ./navigation.nix
+        ./filetypes.nix
     ];
 } 

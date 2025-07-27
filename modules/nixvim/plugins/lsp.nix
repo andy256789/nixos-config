@@ -1,95 +1,141 @@
 {
-    config.programs.nixvim.plugins = {
-        lsp = {
-            enable = true;
-            inlayHints = true;
-            servers = {
-                ts_ls.enable = true;
-                lua_ls.enable = true;
-                clangd.enable = true;
-                rust_analyzer = {
-                    enable = true;
-                    installCargo = true; 
-                    installRustc = true;
+    config.programs.nixvim = {
+        plugins = {
+            lsp = {
+                enable = true;
+                inlayHints = true;
+                servers = {
+                    ts_ls.enable = true;
+                    lua_ls = {
+                        enable = true;
+                        settings = {
+                            Lua = {
+                                diagnostic.settings = {
+                                    globals = [ "vim" ];
+                                };
+                                completion = {
+                                    callSnippet = "Replace";
+                                };
+                            };
+                        };
+                    };
+                    clangd.enable = true;
+                    rust_analyzer = {
+                        enable = true;
+                        installCargo = true; 
+                        installRustc = true;
+                    };
+                    nil_ls.enable = true; 
+                    pyright.enable = true;
+                    bashls.enable = true;
+                    gopls.enable = true;
                 };
-                nil_ls.enable = true; 
-                pyright.enable = true;
-                bashls.enable = true;
-                gopls.enable = true;
-            };
 
-            keymaps = {
-                silent = true;
-                lspBuf = {
-                    gd = {
-                        action = "definition";
-                        desc = "Goto Definition";
+                keymaps = {
+                    silent = true;
+                    lspBuf = {
+                        gD = {
+                            action = "declaration";
+                            desc = "Go to declaration";
+                        };
+                        K = {
+                            action = "hover";
+                            desc = "Show documentation for what is under cursor";
+                        };
+                        "<leader>vca" = {
+                            action = "code_action";
+                            desc = "See available code actions";
+                        };
+                        "<leader>rn" = {
+                            action = "rename";
+                            desc = "Smart rename";
+                        };
+                        "<leader>d" = {
+                            action = "open_float";
+                            desc = "Show line diagnostics";
+                        };
+                        "<C-h>" = {
+                            action = "signature_help";
+                            desc = "Show signature help";
+                            mode = "i";
+                        };
                     };
-                    gr = {
-                        action = "references";
-                        desc = "Goto References";
+                    diagnostic = {
+                        "<leader>d" = {
+                            action = "open_float";
+                            desc = "Show line diagnostics";
+                        };
                     };
-                    gD = {
-                        action = "declaration";
-                        desc = "Goto Declaration";
-                    };
-                    gI = {
-                        action = "implementation";
-                        desc = "Goto Implementation";
-                    };
-                    gT = {
-                        action = "type_definition";
-                        desc = "Type Definition";
-                    };
+                    extra = [
+                        {
+                            mode = "n";
+                            key = "gR";
+                            action = "<cmd>Telescope lsp_references<CR>";
+                            options = { desc = "Show LSP references"; };
+                        }
+                        {
+                            mode = "n";
+                            key = "gd";
+                            action = "<cmd>Telescope lsp_definitions<CR>";
+                            options = { desc = "Show LSP definitions"; };
+                        }
+                        {
+                            mode = "n";
+                            key = "gi";
+                            action = "<cmd>Telescope lsp_implementations<CR>";
+                            options = { desc = "Show LSP implementations"; };
+                        }
+                        {
+                            mode = "n";
+                            key = "gt";
+                            action = "<cmd>Telescope lsp_type_definitions<CR>";
+                            options = { desc = "Show LSP type definitions"; };
+                        }
+                        {
+                            mode = "n";
+                            key = "<leader>D";
+                            action = "<cmd>Telescope diagnostics bufnr=0<CR>";
+                            options = { desc = "Show buffer diagnostics"; };
+                        }
+                        {
+                            mode = "n";
+                            key = "<leader>rs";
+                            action = ":LspRestart<CR>";
+                            options = { desc = "Restart LSP"; };
+                        }
+                    ];
                 };
             };
         };
 
-        lsp-format.enable = true;
-
-        # Autocompletion setup
-        cmp = {
-            enable = true;
-            autoEnableSources = true;
-
+        diagnostic = {
             settings = {
-                formatting = {
-                    format = ''
-                        function(entry, vim_item)
-                            vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind)
-                            vim_item.menu = ({
-                                buffer = "[Buffer]",
-                                nvim_lsp = "[LSP]",
-                                luasnip = "[LuaSnip]",
-                                path = "[Path]",
-                            })[entry.source.name]
-                            return vim_item
-                        end
-                    '';
+                signs = {
+                    text = {
+                        "1" = " ";
+                        "2" = " ";
+                        "3" = "󰠠 ";
+                        "4" = " ";
+                    };
                 };
-
-                mapping = {
-                    "<C-k>" = "cmp.mapping.select_prev_item()";
-                    "<C-j>" = "cmp.mapping.select_next_item()";
-                    "<C-b>" = "cmp.mapping.scroll_docs(-4)";
-                    "<C-f>" = "cmp.mapping.scroll_docs(4)";
-                    "<C-Space>" = "cmp.mapping.complete()";
-                    "<C-e>" = "cmp.mapping.abort()";
-                    "<CR>" = "cmp.mapping.confirm({ select = true })";
-                    "<Tab>" = "cmp.mapping(function(fallback) if cmp.visible() then cmp.select_next_item() else fallback() end end, {'i', 's'})";
-                    "<S-Tab>" = "cmp.mapping(function(fallback) if cmp.visible() then cmp.select_prev_item() else fallback() end end, {'i', 's'})";
-                };
+                virtual_text = true;
+                underline = true;
+                update_in_insert = false;
             };
         };
 
-        # Completion sources
-        cmp-nvim-lsp.enable = true;
-        cmp-buffer.enable = true;
-        cmp-path.enable = true;
-        cmp_luasnip.enable = true;
-
-        # Snippet engine (required for nvim-cmp)
-        luasnip.enable = true;
-        friendly-snippets.enable = true;
+        extraConfigLua = ''
+            -- Setup LSP keymaps for buffer when LSP attaches
+            vim.api.nvim_create_autocmd("LspAttach", {
+                group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+                callback = function(ev)
+                    local opts = { buffer = ev.buf, silent = true }
+                    
+                    -- Additional keymaps that use different modes
+                    opts.desc = "See available code actions"
+                    vim.keymap.set({ "n", "v" }, "<leader>vca", function() vim.lsp.buf.code_action() end, opts)
+                end,
+            })
+        '';
     };
 }
