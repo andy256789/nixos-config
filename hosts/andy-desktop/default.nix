@@ -75,6 +75,11 @@
 
     # AMD kernel module options
     boot.kernelModules = [ "amdgpu" ];
+    boot.kernelParams = [
+        "amdgpu.dc=1"
+        "amdgpu.gpu_recovery=1"
+        "amdgpu.ppfeaturemask=0xffffffff"
+    ];
 
     services.displayManager.sddm = {
         enable = true;
@@ -113,6 +118,13 @@
         WLR_RENDERER_ALLOW_SOFTWARE = "1";
         QT_QPA_PLATFORM = "wayland"; # Force Qt apps to use Wayland
         GDK_BACKEND = "wayland"; # Force GTK apps to use Wayland
+        
+        # AMD-specific fixes for rendering artifacts
+        AMD_VULKAN_ICD = "RADV";
+        RADV_PERFTEST = "gpl";
+        WLR_DRM_NO_ATOMIC = "1";
+        __GL_GSYNC_ALLOWED = "0";
+        __GL_VRR_ALLOWED = "0";
     };
 
     # System state version

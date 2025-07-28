@@ -139,6 +139,30 @@ in {
                     };
                 };
 
+                # Rendering settings - fix for screen tearing and artifacts
+                render = {
+                    explicit_sync = 2;
+                    explicit_sync_kms = 2;
+                    direct_scanout = false;
+                };
+
+                # Misc settings - important for AMD graphics
+                misc = {
+                    force_default_wallpaper = 0;
+                    disable_hyprland_logo = true;
+                    disable_splash_rendering = true;
+                    vfr = true;
+                    vrr = 1;
+                    mouse_move_enables_dpms = true;
+                    key_press_enables_dpms = false;
+                    always_follow_on_dnd = true;
+                    layers_hog_keyboard_focus = true;
+                    animate_manual_resizes = false;
+                    enable_swallow = true;
+                    swallow_regex = "^(ghostty)$";
+                    focus_on_activate = false;
+                };
+
                 # Animation settings
                 animations = {
                     enabled = true;
