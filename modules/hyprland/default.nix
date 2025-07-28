@@ -139,13 +139,6 @@ in {
                     };
                 };
 
-                # Rendering settings - fix for screen tearing and artifacts
-                render = {
-                    explicit_sync = 2;
-                    explicit_sync_kms = 2;
-                    direct_scanout = false;
-                };
-
                 # Misc settings - important for AMD graphics
                 misc = {
                     force_default_wallpaper = 0;
