@@ -87,9 +87,9 @@ in {
                 general = {
                     gaps_in = 4;
                     gaps_out = 8;
-                    border_size = 1;
+                    border_size = 2;
                     layout = "dwindle";
-                    "col.active_border" = "rgba(${builtins.substring 1 6 theme.colors.accent.primary}ee) rgba(${builtins.substring 1 6 theme.colors.accent.tertiary}ee) 45deg";
+                    "col.active_border" = "rgba(${builtins.substring 1 6 theme.colors.accent.primary}ee)";
                     "col.inactive_border" = "rgba(${builtins.substring 1 6 theme.colors.background}aa)";
                     resize_on_border = true;
                     extend_border_grab_area = 15;

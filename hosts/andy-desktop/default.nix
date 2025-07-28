@@ -42,12 +42,24 @@
     # User configuration
     users.users.${settings.username} = {
         isNormalUser = true;
-        extraGroups = [ "wheel" "networkmanager" "video" "input" "docker" ];
+        extraGroups = [ "wheel" "networkmanager" "video" "input" "docker" "bluetooth" ];
         shell = pkgs.fish;
     };
 
     # Networking
     networking.networkmanager.enable = true;
+
+    # Bluetooth
+    hardware.bluetooth = {
+        enable = true;
+        powerOnBoot = true;
+        settings = {
+            General = {
+                Experimental = true;
+            };
+        };
+    };
+    services.blueman.enable = true;
 
     # Display and window manager
     services.xserver.enable = true;
