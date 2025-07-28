@@ -42,7 +42,7 @@
     # User configuration
     users.users.${settings.username} = {
         isNormalUser = true;
-        extraGroups = [ "wheel" "networkmanager" "video" "input" ];
+        extraGroups = [ "wheel" "networkmanager" "video" "input" "docker" ];
         shell = pkgs.fish;
     };
 
@@ -70,6 +70,9 @@
     };
 
     services.flatpak.enable = true;
+
+    # Docker
+    virtualisation.docker.enable = true;
 
     programs.hyprland = {
         enable = true;
