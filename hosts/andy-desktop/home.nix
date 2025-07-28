@@ -6,9 +6,6 @@
         inputs.nixvim.homeManagerModules.nixvim
     ];
 
-    # Allow unfree packages
-    nixpkgs.config.allowUnfree = true;
-
     home = {
         username = settings.username;
         homeDirectory = "/home/${settings.username}";

@@ -49,7 +49,6 @@ in {
                     openssl
 
                     # Language servers and formatters
-                    nodejs
                     pnpm
                     docker
                     postgresql
@@ -58,7 +57,7 @@ in {
 
 
                     # Node.js and npm for Angular
-                    nodejs_20
+                    nodejs
                     nodePackages.npm
                     nodePackages."@angular/cli"
 
