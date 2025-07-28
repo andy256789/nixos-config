@@ -54,7 +54,6 @@ in {
                     docker
                     postgresql
                     prisma-engines
-                    dotnet
                     dotnet-sdk_8
 
 
