@@ -51,13 +51,11 @@ in {
                     # Language servers and formatters
                     pnpm
                     docker
-                    postgresql
                     prisma-engines
                     dotnet-sdk_8
 
 
                     # Node.js and npm for Angular
-                    nodejs
                     nodePackages.npm
                     nodePackages."@angular/cli"
 
