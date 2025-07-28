@@ -54,8 +54,19 @@ in {
                     docker
                     postgresql
                     prisma-engines
+                    dotnet
+                    dotnet-sdk_8
 
-                    
+
+                    # Node.js and npm for Angular
+                    nodejs_20
+                    nodePackages.npm
+                    nodePackages."@angular/cli"
+
+                    # Database tools
+                    postgresql
+                    sqlite
+
 
                     clang-tools
                     nodePackages.typescript-language-server
