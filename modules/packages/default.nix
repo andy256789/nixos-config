@@ -121,7 +121,7 @@ in {
                     wget
                     curl
                     rsync
-                    ifconfig
+                    nettools
                 ];
                 description = "Utility packages to install";
             };
