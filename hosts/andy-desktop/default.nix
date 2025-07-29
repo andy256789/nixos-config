@@ -42,7 +42,7 @@
     # User configuration
     users.users.${settings.username} = {
         isNormalUser = true;
-        extraGroups = [ "wheel" "networkmanager" "video" "input" "docker" "bluetooth" ];
+        extraGroups = [ "wheel" "networkmanager" "video" "input" "docker" "bluetooth" "libvirtd" ];
         shell = pkgs.fish;
     };
 
@@ -90,6 +90,11 @@
 
     # Docker
     virtualisation.docker.enable = true;
+
+    # Virtualization with virt-manager
+    programs.virt-manager.enable = true;
+    virtualisation.libvirtd.enable = true;
+    virtualisation.spiceUSBRedirection.enable = true;
 
     programs.hyprland = {
         enable = true;

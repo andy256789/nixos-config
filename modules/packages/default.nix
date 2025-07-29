@@ -54,7 +54,6 @@ in {
                     prisma-engines
                     dotnet-sdk_8
 
-
                     # Node.js and npm for Angular
                     nodePackages.npm
                     nodePackages."@angular/cli"
@@ -122,6 +121,7 @@ in {
                     wget
                     curl
                     rsync
+                    ifconfig
                 ];
                 description = "Utility packages to install";
             };
