@@ -14,6 +14,7 @@ in {
     config = mkIf cfg.enable {
         programs.ghostty = {
             enable = true;
+            enableFishIntegration = true;
             settings = {
                 # Font settings
                 "font-family" = theme.fonts.monospace;
