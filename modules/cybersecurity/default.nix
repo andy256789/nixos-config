@@ -15,9 +15,13 @@ in {
                 default = with pkgs; [
                     nmap
                     masscan
+                    zmap
                     rustscan
                     hping
+                    netdiscover
+                    arp-scan
                     fping
+                    unicornscan
                 ];
                 description = "Network scanning and discovery tools";
             };
@@ -28,10 +32,19 @@ in {
             packages = mkOption {
                 type = types.listOf types.package;
                 default = with pkgs; [
+                    burpsuite
+                    zaproxy
+                    dirb
+                    dirbuster
                     gobuster
                     ffuf
+                    wfuzz
                     nikto
+                    whatweb
+                    wafw00f
                     sqlmap
+                    commix
+                    wpscan
                 ];
                 description = "Web application testing and vulnerability scanning tools";
             };
@@ -42,10 +55,14 @@ in {
             packages = mkOption {
                 type = types.listOf types.package;
                 default = with pkgs; [
+                    openvas-scanner
                     nuclei
                     lynis
+                    chkrootkit
+                    rkhunter
                     clamav
                     yara
+                    cve-bin-tool
                 ];
                 description = "Vulnerability assessment and scanning tools";
             };
@@ -58,6 +75,10 @@ in {
                 default = with pkgs; [
                     metasploit
                     exploitdb
+                    searchsploit
+                    armitage
+                    beef
+                    powersploit
                 ];
                 description = "Exploitation frameworks and payload generators";
             };
@@ -72,7 +93,11 @@ in {
                     hashcat
                     hydra
                     medusa
+                    ncrack
+                    patator
+                    brutespray
                     crunch
+                    cewl
                     wordlists
                 ];
                 description = "Password cracking and brute force tools";
@@ -85,8 +110,15 @@ in {
                 type = types.listOf types.package;
                 default = with pkgs; [
                     aircrack-ng
+                    reaver-wps-fork
+                    wifite2
+                    hostapd-mana
                     kismet
                     wireshark
+                    bettercap
+                    mdk4
+                    cowpatty
+                    pixiewps
                 ];
                 description = "Wireless network testing and attack tools";
             };
@@ -98,11 +130,17 @@ in {
                 type = types.listOf types.package;
                 default = with pkgs; [
                     sleuthkit
+                    autopsy
+                    volatility3
                     binwalk
                     foremost
+                    scalpel
+                    ddrescue
                     testdisk
                     exiftool
                     steghide
+                    outguess
+                    stegsolve
                 ];
                 description = "Digital forensics and data recovery tools";
             };
@@ -115,10 +153,16 @@ in {
                 default = with pkgs; [
                     ghidra
                     radare2
+                    cutter
+                    ida-free
                     gdb
+                    ltrace
                     strace
                     hexedit
                     file
+                    upx
+                    objdump
+                    strings
                 ];
                 description = "Reverse engineering and binary analysis tools";
             };
@@ -130,9 +174,13 @@ in {
                 type = types.listOf types.package;
                 default = with pkgs; [
                     theharvester
+                    maltego
                     recon-ng
+                    fierce
+                    dmitry
                     enum4linux
                     samba
+                    snmp
                 ];
                 description = "Social engineering and information gathering tools";
             };
@@ -143,9 +191,17 @@ in {
             packages = mkOption {
                 type = types.listOf types.package;
                 default = with pkgs; [
+                    mimikatz
                     powershell
+                    bloodhound
+                    crackmapexec
+                    impacket
+                    evil-winrm
+                    ligolo-ng
+                    chisel
                     socat
                     netcat-gnu
+                    pwncat
                 ];
                 description = "Post-exploitation and lateral movement tools";
             };
@@ -158,12 +214,58 @@ in {
                 default = with pkgs; [
                     tor
                     proxychains
+                    macchanger
+                    ethtool
                     tcpdump
                     wireshark-cli
+                    tcpflow
+                    dsniff
+                    ettercap
+                    mitmproxy
                     sslscan
+                    sslyze
+                    testssl
                     gitleaks
+                    trufflehog
+                    semgrep
                 ];
                 description = "General cybersecurity utilities and tools";
+            };
+        };
+
+        osint = {
+            enable = mkEnableOption "Enable OSINT (Open Source Intelligence) tools";
+            packages = mkOption {
+                type = types.listOf types.package;
+                default = with pkgs; [
+                    sherlock
+                    photon
+                    spiderfoot
+                    theHarvester
+                    recon-ng
+                    sublist3r
+                    amass
+                    subfinder
+                ];
+                description = "Open Source Intelligence gathering tools";
+            };
+        };
+
+        cryptography = {
+            enable = mkEnableOption "Enable cryptography and encoding tools";
+            packages = mkOption {
+                type = types.listOf types.package;
+                default = with pkgs; [
+                    hashcat
+                    john
+                    openssl
+                    age
+                    gnupg
+                    cryptsetup
+                    veracrypt
+                    steghide
+                ];
+                description = "Cryptography, encryption, and encoding tools";
             };
         };
     };
@@ -180,7 +282,9 @@ in {
             ++ (if cfg.reverseEngineering.enable then cfg.reverseEngineering.packages else [])
             ++ (if cfg.socialEngineering.enable then cfg.socialEngineering.packages else [])
             ++ (if cfg.postExploitation.enable then cfg.postExploitation.packages else [])
-            ++ (if cfg.utilities.enable then cfg.utilities.packages else []);
+            ++ (if cfg.utilities.enable then cfg.utilities.packages else [])
+            ++ (if cfg.osint.enable then cfg.osint.packages else [])
+            ++ (if cfg.cryptography.enable then cfg.cryptography.packages else []);
 
         # Add useful aliases for common pentesting tasks
         programs.bash.shellAliases = mkIf cfg.enable {
@@ -189,6 +293,7 @@ in {
             gobuster-dir = "gobuster dir -u";
             ffuf-dir = "ffuf -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u";
             burp = "burpsuite &";
+            zap = "zaproxy &";
         };
     };
 }
