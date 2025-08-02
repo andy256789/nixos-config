@@ -208,11 +208,11 @@ in {
         }
 
         #workspaces {
-          background: rgba(30, 30, 46, ${toString theme.opacity.panel});
+          background: ${theme.utils.hexToRgba theme.colors.background theme.opacity.panel};
           margin: 3px 3px;
           padding: 0 2px;
           border-radius: ${toString theme.border.radius}px;
-          border: 1px solid rgba(137, 180, 250, 0.2);
+          border: 1px solid ${theme.utils.hexToRgba theme.colors.accent.primary 0.2};
         }
 
         #workspaces button {
@@ -225,7 +225,7 @@ in {
         }
 
         #workspaces button:hover {
-          background: rgba(166, 227, 161, 0.2);
+          background: ${theme.utils.hexToRgba theme.colors.accent.secondary 0.2};
           color: ${theme.colors.accent.primary};
           box-shadow: inherit;
           text-shadow: inherit;
@@ -243,12 +243,12 @@ in {
         }
 
         #window {
-          background: rgba(30, 30, 46, ${toString theme.opacity.panel});
+          background: ${theme.utils.hexToRgba theme.colors.background theme.opacity.panel};
           margin: 3px;
           padding: 0 10px;
           border-radius: ${toString theme.border.radius}px;
           color: ${theme.colors.foreground};
-          border: 1px solid rgba(137, 180, 250, 0.2);
+          border: 1px solid ${theme.utils.hexToRgba theme.colors.accent.primary 0.2};
         }
 
         #clock,
@@ -261,12 +261,12 @@ in {
         #bluetooth,
         #tray,
         #custom-power {
-          background: rgba(30, 30, 46, ${toString theme.opacity.panel});
+          background: ${theme.utils.hexToRgba theme.colors.background theme.opacity.panel};
           padding: 0 10px;
           margin: 3px 2px;
           border-radius: ${toString theme.border.radius}px;
           color: ${theme.colors.foreground};
-          border: 1px solid rgba(137, 180, 250, 0.2);
+          border: 1px solid ${theme.utils.hexToRgba theme.colors.accent.primary 0.2};
           transition: all 0.3s ease;
         }
 
@@ -380,7 +380,7 @@ in {
         #memory:hover,
         #backlight:hover,
         #battery:hover {
-          background: rgba(137, 180, 250, 0.2);
+          background: ${theme.utils.hexToRgba theme.colors.accent.primary 0.2};
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
            '';

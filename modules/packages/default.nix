@@ -8,27 +8,33 @@ in {
     options.modules.packages = {
         enable = mkEnableOption "Enable default packages";
 
-        terminal = {
-            enable = mkEnableOption "Enable terminal packages";
+        # Core packages - always included when packages are enabled
+        core = {
             packages = mkOption {
                 type = types.listOf types.package;
                 default = with pkgs; [
+                    # Terminal essentials
                     ghostty
                     foot
-                ];
-                description = "Terminal packages to install";
-            };
-        };
-
-        fileManagers = {
-            enable = mkEnableOption "Enable file manager packages";
-            packages = mkOption {
-                type = types.listOf types.package;
-                default = with pkgs; [
+                    
+                    # File management
                     nemo
                     yazi
+                    
+                    # Essential utilities
+                    wget
+                    curl
+                    git
+                    btop
+                    unzip
+                    eza
+                    ripgrep
+                    fd
+                    bat
+                    fzf
+                    jq
                 ];
-                description = "File manager packages to install";
+                description = "Core packages that are always installed";
             };
         };
 
@@ -37,32 +43,28 @@ in {
             packages = mkOption {
                 type = types.listOf types.package;
                 default = with pkgs; [
-                    git
+                    # Development tools
                     code-cursor
                     vscode
-
-                    # Compilers and build tools
                     gcc
                     gnumake
                     cmake
                     pkg-config
                     openssl
-
-                    # Language servers and formatters
+                    
+                    # Language support
                     pnpm
                     docker
                     prisma-engines
                     dotnet-sdk_8
-
-                    # Node.js and npm for Angular
                     nodePackages.npm
                     nodePackages."@angular/cli"
-
+                    
                     # Database tools
                     postgresql
                     sqlite
-
-
+                    
+                    # Language servers and formatters
                     clang-tools
                     nodePackages.typescript-language-server
                     nodePackages.prettier
@@ -101,27 +103,24 @@ in {
             packages = mkOption {
                 type = types.listOf types.package;
                 default = with pkgs; [
-                    flatpak
-                    btop
+                    # System monitoring
                     fastfetch
-                    ripgrep
-                    fd
-                    bat
-                    eza
-                    fzf
-                    jq
-                    yq
                     bottom
                     htop
                     duf
                     ncdu
-                    unzip
+                    
+                    # Archive utilities
                     unrar
                     p7zip
-                    wget
-                    curl
+                    
+                    # Network utilities
                     rsync
                     nettools
+                    
+                    # Misc utilities
+                    flatpak
+                    yq
                 ];
                 description = "Utility packages to install";
             };
@@ -142,8 +141,7 @@ in {
 
     config = mkIf cfg.enable {
         home.packages = with pkgs; []
-            ++ (if cfg.terminal.enable then cfg.terminal.packages else [])
-            ++ (if cfg.fileManagers.enable then cfg.fileManagers.packages else [])
+            ++ cfg.core.packages
             ++ (if cfg.development.enable then cfg.development.packages else [])
             ++ (if cfg.browsers.enable then cfg.browsers.packages else [])
             ++ (if cfg.media.enable then cfg.media.packages else [])

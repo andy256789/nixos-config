@@ -12,63 +12,52 @@
         stateVersion = "25.05";
     };
 
-    # Enable themes with default settings
+    # Base configuration
     themes.enable = true;
+    programs.fish.enable = true;
+    services.network-manager-applet.enable = true;
 
-    # Enable programs
-    programs = {
-        fish.enable = true;
-    };
-
-    # Enable services
-    services = {
-        network-manager-applet.enable = true;
-    };
-
-    # Enable modules with customizations
+    # Desktop environment modules
     modules = {
+        # Window manager and desktop components
         hyprland = {
             enable = true;
             terminal = "ghostty";
             browser = "firefox";
             fileManager = "nemo";
         };
-
         waybar.enable = true;
-
         wofi.enable = true;
-
-        cybersecurity.enable = true;
-
+        swaync.enable = true;
+        
+        # Appearance and theming
         gtk = {
             enable = true;
             iconTheme = "Papirus-Dark";
             cursorTheme = "Bibata-Modern-Ice";
         };
-
         wallpapers = {
             enable = true;
             wallpaper = "anime-black-hole.png";
         };
-
+        
+        # Applications
+        ghostty.enable = true;
+        nixvim.enable = true;
+        yazi.enable = true;
+        
+        # Package groups
         packages = {
             enable = true;
-            terminal.enable = true;
-            fileManagers.enable = true;
             development.enable = true;
             browsers.enable = true;
             media.enable = true;
             utilities.enable = true;
             communication.enable = true;
         };
-
-        ghostty.enable = true;
-
-        swaync.enable = true;
-
-        nixvim.enable = true;
         
-        yazi.enable = true;
+        # Special purposes
+        cybersecurity.enable = true;
 
     };
 }

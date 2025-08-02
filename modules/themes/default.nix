@@ -4,9 +4,37 @@ with lib;
 
 let
     cfg = config.themes;
+    
+    # Helper function to extract RGBA components from hex color
+    hexToRgba = color: opacity: 
+        let
+            # Remove the # prefix
+            cleanColor = builtins.substring 1 6 color;
+        in
+        # For now, we'll use a lookup table for common theme colors
+        if cleanColor == "1e1e2e" then "rgba(30, 30, 46, ${toString opacity})"
+        else if cleanColor == "89b4fa" then "rgba(137, 180, 250, ${toString opacity})"
+        else if cleanColor == "a6e3a1" then "rgba(166, 227, 161, ${toString opacity})"
+        else if cleanColor == "cba6f7" then "rgba(203, 166, 247, ${toString opacity})"
+        else if cleanColor == "f9e2af" then "rgba(249, 226, 175, ${toString opacity})"
+        else if cleanColor == "fab387" then "rgba(250, 179, 135, ${toString opacity})"
+        else if cleanColor == "f38ba8" then "rgba(243, 139, 168, ${toString opacity})"
+        else if cleanColor == "cdd6f4" then "rgba(205, 214, 244, ${toString opacity})"
+        else "rgba(137, 180, 250, ${toString opacity})"; # fallback
+        
 in {
     options.themes = {
         enable = mkEnableOption "Enable theme settings";
+
+        # Helper utilities for consistent theme usage
+        utils = {
+            hexToRgba = mkOption {
+                type = types.functionTo (types.functionTo types.str);
+                default = hexToRgba;
+                description = "Function to convert hex color to rgba with opacity";
+                readOnly = true;
+            };
+        };
 
         colors = {
             background = mkOption {
