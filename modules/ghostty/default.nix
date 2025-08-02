@@ -9,35 +9,6 @@ in {
     options.modules.ghostty = {
         enable = mkEnableOption "Enable ghostty terminal";
 
-        fontSize = mkOption {
-            type = types.int;
-            default = 12;
-            description = "Font size for ghostty";
-        };
-
-        paddingX = mkOption {
-            type = types.int;
-            default = 10;
-            description = "Horizontal padding";
-        };
-
-        paddingY = mkOption {
-            type = types.int;
-            default = 10;
-            description = "Vertical padding";
-        };
-
-        cursorStyle = mkOption {
-            type = types.enum [ "block" "bar" "underline" "block_hollow" ];
-            default = "bar";
-            description = "Cursor style";
-        };
-
-        extraSettings = mkOption {
-            type = types.attrsOf types.str;
-            default = {};
-            description = "Additional ghostty settings";
-        };
     };
 
     config = mkIf cfg.enable {
@@ -46,15 +17,15 @@ in {
             settings = {
                 # Font settings
                 "font-family" = theme.fonts.monospace;
-                "font-size" = cfg.fontSize;
+                "font-size" = 12;
 
                 # Window settings
-                "window-padding-x" = cfg.paddingX;
-                "window-padding-y" = cfg.paddingY;
+                "window-padding-x" = 10;
+                "window-padding-y" = 10;
                 "background-opacity" = toString theme.opacity.terminal;
 
                 # Cursor settings
-                "cursor-style" = cfg.cursorStyle;
+                "cursor-style" = "bar";
                 "cursor-style-blink" = true;
 
                 # System integration
@@ -67,7 +38,7 @@ in {
                 "selection-background" = theme.colors.accent.tertiary;
                 "selection-foreground" = theme.colors.background;
 
-            } // cfg.extraSettings;
+            };
         };
     };
 } 

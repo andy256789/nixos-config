@@ -8,52 +8,6 @@ let
 in {
     options.modules.swaync = {
         enable = mkEnableOption "Enable swaync notification daemon";
-
-        position = {
-            x = mkOption {
-                type = types.enum [ "left" "center" "right" ];
-                default = "right";
-                description = "Horizontal position";
-            };
-
-            y = mkOption {
-                type = types.enum [ "top" "center" "bottom" ];
-                default = "top";
-                description = "Vertical position";
-            };
-        };
-
-        timeout = {
-            default = mkOption {
-                type = types.int;
-                default = 10;
-                description = "Default notification timeout in seconds";
-            };
-
-            low = mkOption {
-                type = types.int;
-                default = 5;
-                description = "Low priority notification timeout in seconds";
-            };
-
-            critical = mkOption {
-                type = types.int;
-                default = 0;
-                description = "Critical notification timeout (0 for no timeout)";
-            };
-        };
-
-        margin = mkOption {
-            type = types.int;
-            default = 10;
-            description = "Margin for the control center";
-        };
-
-        iconSize = mkOption {
-            type = types.int;
-            default = 64;
-            description = "Notification icon size";
-        };
     };
 
     config = mkIf cfg.enable {
@@ -61,8 +15,8 @@ in {
             enable = true;
             settings = {
                 # Position settings
-                positionX = cfg.position.x;
-                positionY = cfg.position.y;
+                positionX = "right";
+                positionY = "top";
 
                 # Layer settings
                 layer = "overlay";
@@ -73,20 +27,20 @@ in {
                 cssPriority = "application";
 
                 # Margin settings
-                control-center-margin-top = cfg.margin;
-                control-center-margin-bottom = cfg.margin;
-                control-center-margin-right = cfg.margin;
-                control-center-margin-left = cfg.margin;
+                control-center-margin-top = 10;
+                control-center-margin-bottom = 10;
+                control-center-margin-right = 10;
+                control-center-margin-left = 10;
 
                 # Icon and image settings
-                notification-icon-size = cfg.iconSize;
+                notification-icon-size = 64;
                 notification-body-image-height = 100;
                 notification-body-image-width = 200;
 
                 # Timeout settings
-                timeout = cfg.timeout.default;
-                timeout-low = cfg.timeout.low;
-                timeout-critical = cfg.timeout.critical;
+                timeout = 10;
+                timeout-low = 5;
+                timeout-critical = 0;
 
                 # Other settings
                 fit-to-screen = true;

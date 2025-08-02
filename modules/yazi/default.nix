@@ -7,25 +7,13 @@ let
 in {
   options.modules.yazi = {
     enable = mkEnableOption "Enable yazi file manager";
-
-    theme = mkOption {
-      type = types.str;
-      default = "tokyonight";
-      description = "Theme for yazi";
-    };
-
-    transparency = mkOption {
-      type = types.float;
-      default = 1.0;
-      description = "Background transparency (0.0-1.0)";
-    };
   };
 
   config = mkIf cfg.enable {
     programs.yazi = {
       enable = true;
       enableFishIntegration = config.programs.fish.enable;
-      
+
       settings = {
         manager = {
           layout = [1 3 3];
@@ -78,14 +66,14 @@ in {
       
       [manager]
       fg = "white"
-      bg = { rgba = "black ${toString cfg.transparency}" }
+      bg = { rgba = "black 0.9" }
       preview_fg = "white"
-      preview_bg = { rgba = "black ${toString cfg.transparency}" }
+      preview_bg = { rgba = "black 0.9" }
       
       [status]
       fg = "white"
-      bg = { rgba = "#414868 ${toString cfg.transparency}" }
-      
+      bg = { rgba = "#414868 0.9" }
+
       [selection]
       fg = "black"
       bg = "blue"

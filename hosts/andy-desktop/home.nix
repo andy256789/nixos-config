@@ -62,37 +62,13 @@
             communication.enable = true;
         };
 
-        ghostty = {
-            enable = true;
-            fontSize = 12;
-            paddingX = 10;
-            paddingY = 10;
-            cursorStyle = "bar";
-        };
+        ghostty.enable = true;
 
-        swaync = {
-            enable = true;
-            position = {
-                x = "right";
-                y = "top";
-            };
-            timeout = {
-                default = 10;
-                low = 5;
-                critical = 0;
-            };
-            margin = 10;
-            iconSize = 64;
-        };
+        swaync.enable = true;
 
         nixvim.enable = true;
         
-        yazi = {
-            enable = true;
-            theme = "tokyonight";
-            transparency = 0.9;
-        };
+        yazi.enable = true;
 
-        
     };
 }
