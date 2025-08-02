@@ -13,5 +13,6 @@
         ./nixvim
         ./yazi
         ./wofi
+        ./cybersecurity
     ];
 } 
