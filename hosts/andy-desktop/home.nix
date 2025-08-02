@@ -38,6 +38,8 @@
 
         wofi.enable = true;
 
+        cybersecurity.enable = true;
+
         gtk = {
             enable = true;
             iconTheme = "Papirus-Dark";
@@ -90,6 +92,7 @@
             theme = "tokyonight";
             transparency = 0.9;
         };
+
         
     };
 }
