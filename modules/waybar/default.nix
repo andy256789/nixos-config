@@ -81,19 +81,10 @@ in {
                         interval = 1;
                         format = " {:%I:%M %p}";
                         format-alt = " {:%a, %b %d}";
-                        tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
-                        calendar = {
-                            mode = "month";
-                            format = {
-                                months = "<span color='${theme.colors.accent.tertiary}'><b>{}</b></span>";
-                                days = "<span color='${theme.colors.foreground}'>{}</span>";
-                                weekdays = "<span color='${theme.colors.accent.primary}'><b>{}</b></span>";
-                                today = "<span color='${theme.colors.accent.secondary}'><b>{}</b></span>";
-                            };
-                        };
                         actions = {
                             on-click = "mode";
                         };
+                        tooltip = false;
                     };
 
                     "tray" = {
@@ -116,9 +107,9 @@ in {
 
                     "pulseaudio" = {
                         format = "{icon} {volume}%";
-                        format-muted = " 󰖁 ";
-                        format-bluetooth = "󰂯 {volume}%";
-                        format-bluetooth-muted = " 󰂲 ";
+                        format-muted = "  0%";
+                        format-bluetooth = "󰥰 {volume}%";
+                        format-bluetooth-muted = "󰥰 0%";
                         format-icons = {
                             headphone = "";
                             hands-free = "";
@@ -164,7 +155,7 @@ in {
           font-size: ${toString theme.fonts.size.normal}px;
           font-weight: bold;
           min-height: 0;
-          transition-property: background-color, color;
+          transition-property: background-color;
           transition-duration: 0.3s;
         }
 
@@ -202,7 +193,7 @@ in {
           color: ${theme.colors.foreground};
           min-width: 36px;
           border-radius: 0;
-          transition: all 0.3s ease;
+          transition: background-color 0.3s ease;
         }
 
         #workspaces button:hover {
@@ -251,9 +242,14 @@ in {
 
         #custom-separator {
           color: #606060;
-          margin: 0 1px;
-          padding-bottom: 5px;
+          margin: 0 4px;
+          padding: 0;
           background-color: transparent;
+          font-size: ${toString (theme.fonts.size.normal - 2)}px;
+          font-weight: normal;
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
 
         #clock {
@@ -328,7 +324,7 @@ in {
           background: ${theme.utils.hexToRgba theme.colors.accent.primary 0.2};
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
-           '';
+            '';
         };
     };
 }

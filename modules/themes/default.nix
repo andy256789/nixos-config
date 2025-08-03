@@ -97,7 +97,7 @@ in {
 
             monospace = mkOption {
                 type = types.str;
-                default = "JetBrainsMono Nerd Font";
+                default = "JetBrainsMono Nerd Font Propo";
                 description = "Default monospace font";
             };
 
