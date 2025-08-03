@@ -198,6 +198,13 @@ in {
                     "float,title:^(Volume Control)$"
                     "center,class:^(wofi)$"
                     "animation windowsIn,class:^(wofi)$,slide" 
+
+                    #Workspace assignments
+                    "workspace 1, class:^(ghostty)$"
+                    "workspace 2, class:^(firefox)$"
+                    "workspace 3, class:^(code-url-handler|VSCodium|code)$"
+                    "workspace 4, class:^(spotify)$"
+                    "workspace 5, class:^(discord)$"
                 ];
 
                 # Keybindings
@@ -293,6 +300,13 @@ in {
                     "hypridle"
                     "hyprctl setcursor ${gtkCfg.cursorTheme} ${toString (config.home.pointerCursor.size or 24)}"
                     "swww-daemon"
+
+                    # auto-start for apps
+                    "sleep 1 && ${cfg.terminal}"
+                    "sleep 2 && ${cfg.browser}"
+                    "sleep 3 && code"
+                    "sleep 4 && spotify"
+                    "sleep 5 && discord"
                 ];
 
                 exec = [
