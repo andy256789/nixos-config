@@ -17,119 +17,91 @@ in {
                 mainBar = {
                     layer = "top";
                     position = "top";
-                    height = 30;
-                    spacing = 4;
-                    margin-top = 4;
-                    margin-bottom = 0;
-                    margin-left = 4;
-                    margin-right = 4;
+                    height = 32;
+                    spacing = 0;
                     modules-left = [
                         "hyprland/workspaces"
+                        "custom/lock"
+                        "custom/reboot"
+                        "custom/power"
                         "hyprland/window"
                     ];
                     modules-center = [
                         "clock"
                     ];
                     modules-right = [
-                        "cpu"
-                        "memory"
-                        "custom/separator"
-                        "tray"
-                        "custom/separator"
-                        "backlight"
                         "pulseaudio"
+                        "backlight"
+                        "custom/temperature"
+                        "memory"
+                        "cpu"
+                        "tray"
                         "battery"
-                        "custom/power"
                     ];
 
                     "hyprland/workspaces" = {
-                        format = "{icon}";
-                        format-icons = {
-                            "1" = "𝟷";
-                            "2" = "𝟸";
-                            "3" = "𝟹";
-                            "4" = "𝟺";
-                            "5" = "𝟻";
-                            "6" = "𝟼";
-                            "7" = "𝟽";
-                            "8" = "𝟾";
-                            "9" = "𝟿";
-                            "urgent" = "";
-                            "focused" = "";
-                            "default" = "";
-                        };
-                        sort-by-number = true;
-                        on-click = "activate";
-                        on-scroll-up = "hyprctl dispatch workspace e+1";
-                        on-scroll-down = "hyprctl dispatch workspace e-1";
+                        disable-scroll = false;
                         all-outputs = true;
-                        active-only = false;
-                        show-special = false;
+                        format = "{icon}";
+                        on-click = "activate";
                         persistent-workspaces = {
-                            "1" = [];
-                            "2" = [];
-                            "3" = [];
-                            "4" = [];
-                            "5" = [];
+                            "*" = [1 2 3 4 5];
+                        };
+                        format-icons = {
+                            "1" = "";
+                            "2" = "󰈹";
+                            "3" = "";
+                            "4" = "";
+                            "5" = "";
+                            "6" = "";
+                            "7" = "";
+                            "8" = "";
+                            "9" = "";
+                            "default" = "";
                         };
                     };
 
+                    "custom/lock" = {
+                        format = "<span color='#00FFFF'>  </span>";
+                        on-click = "hyprlock";
+                        tooltip = true;
+                        tooltip-format = "锁屏";
+                    };
+
+                    "custom/reboot" = {
+                        format = "<span color='#FFD700'>  </span>";
+                        on-click = "systemctl reboot";
+                        tooltip = true;
+                        tooltip-format = "重启";
+                    };
+
+                    "custom/power" = {
+                        format = "<span color='#FF4040'>  </span>";
+                        on-click = "systemctl poweroff";
+                        tooltip = true;
+                        tooltip-format = "关机";
+                    };
+
                     "hyprland/window" = {
-                        format = " {}";
-                        max-length = 35;
+                        format = "{class}";
+                        max-length = 50;
                         separate-outputs = true;
                         rewrite = {
                             "(.*) — Mozilla Firefox" = "󰈹 $1";
                             "(.*) - Visual Studio Code" = "󰨞 $1";
                             "(.*) - vim" = " $1";
-                            "ghostty" = " Terminal";
+                            "ghostty" = " ";
                         };
                     };
 
-                    "clock" = {
+                    "network" = {
+                        format-wifi = "<span color='#00FFFF'> 󰤨 </span>{essid} ";
+                        format-ethernet = "<span color='#7FFF00'>  </span>Wired ";
+                        tooltip-format = "<span color='#FF1493'> 󰅧 </span>{bandwidthUpBytes}  <span color='#00BFFF'> 󰅢 </span>{bandwidthDownBytes}";
+                        format-linked = "<span color='#FFA500'> 󱘖 </span>{ifname} (No IP) ";
+                        format-disconnected = "<span color='#FF4040'>  </span>Disconnected ";
+                        format-alt = "<span color='#00FFFF'> 󰤨 </span>{signalStrength}% ";
                         interval = 1;
-                        locale = "C";
-                        format = "󰥔 {:%H:%M}";
-                        format-alt = "󰸗 {:%A, %B %d, %Y}";
-                        tooltip-format = "{:%A, %B %d, %Y at %H:%M:%S}";
-                    };
-
-                    "cpu" = {
-                        format = "󰻠 {usage}%";
-                        tooltip-format = "CPU Usage: {usage}%\nLoad: {load}";
-                        on-click = "ghostty -e htop";
-                        interval = 3;
-                    };
-
-                    "memory" = {
-                        interval = 10;
-                        format = "󰍛 {percentage}%";
-                        tooltip-format = "RAM: {used:0.1f}GB / {total:0.1f}GB ({percentage}%)";
-                        max-length = 10;
-                        warning = 70;
-                        critical = 90;
-                    };
-
-                    "pulseaudio" = {
-                        format = "{icon} {volume}%";
-                        format-bluetooth = "󰂰 {volume}%";
-                        format-bluetooth-muted = "󰂲 Muted";
-                        format-muted = "󰖁 Muted";
-                        format-source = "󰍬 {volume}%";
-                        format-source-muted = "󰍭 Muted";
-                        format-icons = {
-                            headphone = "󰋋";
-                            hands-free = "󱠰";
-                            headset = "󰋎";
-                            phone = "󰏲";
-                            portable = "󰏲";
-                            car = "󰄋";
-                            default = ["󰕿" "󰖀" "󰕾"];
-                        };
-                        scroll-step = 5;
-                        on-click = "pavucontrol";
-                        on-click-right = "pactl set-sink-mute @DEFAULT_SINK@ toggle";
-                        tooltip-format = "Volume: {volume}%";
                     };
 
                     "battery" = {
@@ -137,264 +109,194 @@ in {
                             warning = 30;
                             critical = 15;
                         };
-                        format = "{icon} {capacity}%";
-                        format-charging = "󰂄 {capacity}%";
-                        format-plugged = "󱘖 {capacity}%";
-                        format-alt = "{icon} {time}";
-                        format-icons = ["󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹"];
-                        tooltip-format = "Battery: {capacity}%\n{timeTo}";
+                        format = "<span color='#28CD41'> {icon} </span>{capacity}% ";
+                        format-charging = " 󱐋{capacity}%";
+                        interval = 1;
+                        format-icons = ["󰂎" "󰁼" "󰁿" "󰂁" "󰁹"];
+                        tooltip = true;
+                    };
+
+                    "pulseaudio" = {
+                        format = "<span color='#00FF7F'>{icon}</span>{volume}% ";
+                        format-muted = "<span color='#FF4040'> 󰖁 </span>0% ";
+                        format-icons = {
+                            headphone = "<span color='#BF00FF'>  </span>";
+                            hands-free = "<span color='#BF00FF'>  </span>";
+                            headset = "<span color='#BF00FF'>  </span>";
+                            phone = "<span color='#00FFFF'>  </span>";
+                            car = "<span color='#FFA500'>  </span>";
+                            default = [
+                                "<span color='#808080'>  </span>"
+                                "<span color='#FFFF66'>  </span>"
+                                "<span color='#00FF7F'>  </span>"
+                            ];
+                        };
+                        on-click-right = "pavucontrol -t 3";
+                        on-click = "pactl -- set-sink-mute 0 toggle";
+                        tooltip = true;
+                        tooltip-format = "当前系统声音: {volume}%";
                     };
 
                     "backlight" = {
-                        format = "{icon} {percent}%";
-                        format-icons = ["󰃞" "󰃟" "󰃠"];
-                        on-scroll-down = "brightnessctl set 5%-";
-                        on-scroll-up = "brightnessctl set +5%";
-                        tooltip-format = "Brightness: {percent}%";
+                        device = "intel_backlight";
+                        format = "<span color='#FFD700'>{icon}</span>{percent}% ";
+                        tooltip = true;
+                        tooltip-format = "当前屏幕亮度: {percent}%";
+                        format-icons = [
+                            "<span color='#696969'> 󰃞 </span>"
+                            "<span color='#A9A9A9'> 󰃝 </span>"
+                            "<span color='#FFFF66'> 󰃟 </span>"
+                            "<span color='#FFD700'> 󰃠 </span>"
+                        ];
+                    };
+
+                    "custom/temperature" = {
+                        exec = "sensors | awk '/^Package id 0:/ {print int($4)}'";
+                        format = "<span color='#FFA500'> </span>{}°C ";
+                        interval = 5;
+                        tooltip = true;
+                        tooltip-format = "当前 CPU 温度: {}°C";
+                    };
+
+                    "memory" = {
+                        format = "<span color='#8A2BE2'>  </span>{used:0.1f}G/{total:0.1f}G ";
+                        tooltip = true;
+                        tooltip-format = "当前内存占比: {used:0.2f}G/{total:0.2f}G";
+                    };
+
+                    "cpu" = {
+                        format = "<span color='#FF9F0A'>  </span>{usage}% ";
+                        tooltip = true;
+                    };
+
+                    "clock" = {
+                        interval = 1;
+                        timezone = "Europe/Sofia";
+                        format = "<span color='#BF00FF'>  </span>{:%H:%M} ";
+                        tooltip = true;
+                        tooltip-format = "{:L%Y 年 %m 月 %d 日, %A}";
                     };
 
                     "tray" = {
-                        icon-size = 18;
-                        spacing = 8;
-                        show-passive-items = true;
-                    };
-
-                    "custom/power" = {
-                        format = "󰐥";
-                        tooltip-format = "Power Menu";
-                        on-click = "wlogout";
-                        on-click-right = "systemctl poweroff";
-                        on-click-middle = "systemctl reboot";
-                    };
-
-                    "custom/separator" = {
-                        format = "|";
-                        tooltip = false;
+                        icon-size = 17;
+                        spacing = 6;
                     };
                 };
             };
 
             style = ''
+        /* 全局设置 */
         * {
+          font-family: "CaskaydiaCove Nerd Font", "Font Awesome 6 Free", "Font Awesome 6 Free Solid";
+          font-weight: bold;
+          font-size: 16px;
+          color: #dcdfe1;
+        }
+
+        /* 透明 Waybar 背景 */
+        #waybar {
+          background-color: rgba(0, 0, 0, 0);
           border: none;
-          border-radius: 0;
-          font-family: "JetBrainsMono Nerd Font", "Font Awesome 6 Free Solid", "${theme.fonts.monospace}";
-          font-size: ${toString theme.fonts.size.normal}px;
-          font-weight: 600;
-          min-height: 0;
-          transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+          box-shadow: none;
         }
 
-        window#waybar {
-          background: linear-gradient(135deg, rgba(30, 32, 48, 0.5), rgba(24, 26, 38, 0.55));
-          color: ${theme.colors.foreground};
-          border-radius: 8px;
-          margin: 4px 8px 0px 8px;
-          padding: 3px 0px;
-          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 
-                      0 2px 8px rgba(0, 0, 0, 0.15),
-                      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        #workspaces,
+        #window,
+        #tray{
+          background-color: rgba(15,27,53,0.9);
+          padding: 4px 6px; 
+          margin-top: 6px; 
+          margin-left: 6px;
+          margin-right: 6px;
+          border-radius: 10px;
+          border-width: 0px;
         }
 
-        window#waybar.hidden {
-          opacity: 0.2;
+        #clock,
+        #custom-power{
+          background-color: rgba(15,27,53,0.9);
+          margin-top: 6px;
+          margin-right: 6px;
+          padding: 4px 2px;
+          border-radius: 0 10px 10px 0;
+          border-width: 0px;
         }
 
-        tooltip {
-          background: linear-gradient(135deg, ${theme.colors.background}, rgba(34, 36, 54, 0.98));
-          color: ${theme.colors.foreground};
-          border: 1px solid ${theme.colors.accent.primary};
-          border-radius: 8px;
-          box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-          padding: 8px 12px;
+        #network,
+        #custom-lock{
+          background-color: rgba(15,27,53,0.9);
+          margin-top: 6px;
+          margin-left: 6px;
+          padding: 4px 2px;
+          border-radius: 10px 0 0 10px;
+          border-width: 0px;
         }
 
-        tooltip label {
-          color: ${theme.colors.foreground};
-          font-weight: 500;
+        #custom-reboot,
+        #bluetooth,
+        #battery,
+        #pulseaudio,
+        #backlight,
+        #custom-temperature,
+        #memory,
+        #cpu{
+          background-color: rgba(15,27,53,0.9);
+          margin-top: 6px;
+          padding: 4px 2px;
+          border-width: 0px;
         }
 
-        /* Left modules - Workspaces and Navigation */
-        #workspaces {
-          margin: 3px 4px;
-          padding: 2px 4px;
-          background: rgba(0, 0, 0, 0.5);
-          border-radius: 6px;
+        #custpm-temperature.critical,
+        #pulseaudio.muted {
+          color: #FF0000;
+          padding-top: 0;
         }
 
-        #workspaces button {
-          padding: 0;
-          margin: 1px 2px;
-          background: rgba(0, 0, 0, 0.4);
-          color: ${theme.colors.foreground};
-          min-width: 20px;
-          min-height: 20px;
-          border-radius: 4px;
-          transition: none;
-          border: 1px solid transparent;
-          font-size: ${toString (theme.fonts.size.normal - 1)}px;
+        #bluetooth:hover,
+        #network:hover,
+        /*#tray:hover,*/
+        #backlight:hover,
+        #battery:hover,
+        #pulseaudio:hover,
+        #custom-temperature:hover,
+        #memory:hover,
+        #cpu:hover,
+        #clock:hover,
+        #custom-lock:hover,
+        #custom-reboot:hover,
+        #custom-power:hover,
+        /*#workspaces:hover,*/
+        #window:hover {
+          background-color: rgba(70, 75, 90, 0.9);
         }
 
-        #workspaces button:hover {
-          background: ${theme.utils.hexToRgba theme.colors.accent.primary 0.15};
-          color: ${theme.colors.accent.primary};
-          box-shadow: 0 4px 12px ${theme.utils.hexToRgba theme.colors.accent.primary 0.2};
-          border: 1px solid ${theme.utils.hexToRgba theme.colors.accent.primary 0.3};
+        #workspaces button:hover{
+          background-color: rgba(97, 175, 239, 0.2);
+          padding: 2px 8px;
+          margin: 0 2px;
+          border-radius: 10px;
         }
 
         #workspaces button.active {
-          background: linear-gradient(135deg, ${theme.colors.accent.primary}, ${theme.utils.hexToRgba theme.colors.accent.primary 0.8});
-          color: ${theme.colors.background};
-          box-shadow: 0 4px 16px ${theme.utils.hexToRgba theme.colors.accent.primary 0.4},
-                      inset 0 1px 0 rgba(255, 255, 255, 0.2);
-          border: 1px solid ${theme.utils.hexToRgba theme.colors.accent.primary 0.5};
+          background-color: #61afef;
+          color: #ffffff;
+          padding: 2px 8px;
+          margin: 0 2px;
+          border-radius: 10px;
         }
 
-        #workspaces button.urgent {
-          background: linear-gradient(135deg, ${theme.colors.accent.error}, ${theme.utils.hexToRgba theme.colors.accent.error 0.8});
-          color: ${theme.colors.background};
-          box-shadow: 0 4px 20px ${theme.utils.hexToRgba theme.colors.accent.error 0.6};
+        #workspaces button {
+          background: transparent;
+          border: none;
+          color: #888888;
+          padding: 2px 8px;
+          margin: 0 2px;
+          font-weight: bold;
         }
 
         #window {
-          color: ${theme.colors.foreground};
-          background: rgba(0, 0, 0, 0.5);
-          border-radius: 4px;
-          margin: 3px 2px;
-          padding: 0 8px;
-        }
-
-        /* Center modules - System Info and Clock */
-        #cpu, #memory {
-          margin: 3px 2px;
-          padding: 0 6px;
-          border-radius: 4px;
-          background: rgba(0, 0, 0, 0.5);
-        }
-
-        #cpu {
-          color: #ff7a93;
-        }
-
-        #memory {
-          color: #86e2d5;
-        }
-
-        #clock {
-          color: #7dcfff;
-          background: rgba(0, 0, 0, 0.5);
-          margin: 3px 4px;
-          padding: 0 10px;
-          border-radius: 4px;
-          font-weight: 600;
-          min-width: 80px;
-        }
-
-        /* Right modules */
-        #tray,
-        #backlight,
-        #battery,
-        #pulseaudio,
-        #custom-power {
-          margin: 3px 1px;
-          padding: 0 6px;
-          border-radius: 4px;
-          background: rgba(0, 0, 0, 0.5);
-          transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
-        }
-
-        #custom-separator {
-          color: ${theme.utils.hexToRgba theme.colors.foreground 0.3};
-          background: transparent;
-          margin: 3px 4px;
-          padding: 0;
-          font-size: ${toString (theme.fonts.size.normal - 2)}px;
-        }
-
-        #pulseaudio {
-          color: #bb9af7;
-        }
-
-        #pulseaudio.muted {
-          color: rgba(187, 154, 247, 0.5);
-          background: rgba(0, 0, 0, 0.2);
-        }
-
-        #cpu.warning,
-        #memory.warning,
-        #backlight.warning {
-          color: ${theme.colors.accent.warning};
-          background: ${theme.utils.hexToRgba theme.colors.accent.warning 0.15};
-        }
-
-        #cpu.critical,
-        #memory.critical,
-        #backlight.critical {
-          color: ${theme.colors.accent.error};
-          background: ${theme.utils.hexToRgba theme.colors.accent.error 0.15};
-          box-shadow: 0 2px 8px ${theme.utils.hexToRgba theme.colors.accent.error 0.4};
-        }
-
-        #backlight {
-          color: #9ece6a;
-        }
-
-        #battery {
-          color: #7aa2f7;
-        }
-
-        #battery.charging {
-          color: ${theme.colors.accent.secondary};
-          background: ${theme.utils.hexToRgba theme.colors.accent.secondary 0.1};
-        }
-
-        #battery.plugged {
-          color: ${theme.colors.accent.primary};
-        }
-
-        #battery.warning:not(.charging) {
-          color: ${theme.colors.accent.warning};
-          background: ${theme.utils.hexToRgba theme.colors.accent.warning 0.15};
-        }
-
-        #battery.critical:not(.charging) {
-          color: ${theme.colors.accent.error};
-          background: ${theme.utils.hexToRgba theme.colors.accent.error 0.15};
-          box-shadow: 0 2px 8px ${theme.colors.accent.error};
-        }
-
-        #tray {
-          background: rgba(0, 0, 0, 0.5);
-          margin: 3px 4px;
-          padding: 0 8px;
-          border-radius: 4px;
-          min-height: 0;
-        }        #custom-power {
-          color: ${theme.colors.accent.error};
-          background: rgba(0, 0, 0, 0.3);
-          margin-right: 4px;
-          padding: 0;
-          min-width: 24px;
-          min-height: 24px;
-          border-radius: 4px;
-          font-size: ${toString (theme.fonts.size.normal + 1)}px;
-        }
-
-        #custom-power:hover {
-          background: rgba(0, 0, 0, 0.4);
-          box-shadow: 0 4px 12px ${theme.utils.hexToRgba theme.colors.accent.error 0.3};
-        }
-
-        /* Hover effects for all modules */
-        #pulseaudio:hover,
-        #cpu:hover,
-        #memory:hover,
-        #backlight:hover,
-        #battery:hover,
-        #clock:hover,
-        #window:hover {
-          background: rgba(0, 0, 0, 0.4);
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+          font-weight: 500;
+          font-style: italic;
         }
            '';
         };
