@@ -39,6 +39,7 @@ in {
       noto-fonts
       noto-fonts-emoji
       nerd-fonts.jetbrains-mono
+      font-awesome
     ];
 
     # GTK configuration
