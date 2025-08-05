@@ -247,9 +247,6 @@ in {
           background-color: transparent;
           font-size: ${toString (theme.fonts.size.normal - 2)}px;
           font-weight: normal;
-          display: flex;
-          align-items: center;
-          justify-content: center;
         }
 
         #clock {
