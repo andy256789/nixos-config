@@ -132,6 +132,7 @@ in {
                 type = types.listOf types.package;
                 default = with pkgs; [
                     discord
+                    remmina
                     obsidian
                 ];
                 description = "Communication packages to install";
