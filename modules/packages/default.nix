@@ -134,6 +134,10 @@ in {
                     discord
                     remmina
                     obsidian
+                    steam
+                    wineWowPackages.staging
+                    winetricks
+                    lutris    
                 ];
                 description = "Communication packages to install";
             };

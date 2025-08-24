@@ -3,11 +3,8 @@
 {
     imports = [
         ../../modules
-        inputs.nixvim.homeManagerModules.nixvim
+        inputs.nixvim.homeModules.nixvim
     ];
-
-    # Allow unfree packages in home-manager
-    nixpkgs.config.allowUnfree = true;
 
     home = {
         username = settings.username;
