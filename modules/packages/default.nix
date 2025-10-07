@@ -132,13 +132,13 @@ in {
                 type = types.listOf types.package;
                 default = with pkgs; [
                     discord
+                    teams-for-linux
                     zoom-us
                     remmina
                     obsidian
                     steam
                     wineWowPackages.staging
                     winetricks
-                    lutris    
                 ];
                 description = "Communication packages to install";
             };
