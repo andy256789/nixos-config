@@ -132,6 +132,7 @@ in {
                 type = types.listOf types.package;
                 default = with pkgs; [
                     discord
+                    zoom-us
                     remmina
                     obsidian
                     steam
