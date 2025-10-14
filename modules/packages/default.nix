@@ -139,6 +139,10 @@ in {
                     steam
                     wineWowPackages.staging
                     winetricks
+
+
+                    #university
+                    kicad
                 ];
                 description = "Communication packages to install";
             };
