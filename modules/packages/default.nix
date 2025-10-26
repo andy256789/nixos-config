@@ -139,9 +139,10 @@ in {
                     steam
                     wineWowPackages.staging
                     winetricks
-
+                    foliate
 
                     #university
+                    python3
                     kicad
                 ];
                 description = "Communication packages to install";

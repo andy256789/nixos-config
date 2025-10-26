@@ -3,21 +3,26 @@
 
     inputs = {
         nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
+        nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+
         home-manager = {
             url = "github:nix-community/home-manager";
             inputs.nixpkgs.follows = "nixpkgs";
         };
+
         hyprland = {
             url = "github:hyprwm/Hyprland";
             inputs.nixpkgs.follows = "nixpkgs";
         };
+
         nixvim = {
             url = "github:nix-community/nixvim";
             inputs.nixpkgs.follows = "nixpkgs";
         };
     };
 
-    outputs = { self, nixpkgs, home-manager, hyprland, nixvim, ... }@inputs: let
+    outputs = { self, nixpkgs, home-manager, hyprland, nixvim, nixos-hardware, ... }@inputs: let
         settings = {
             stateVersion = "25.05";  
 

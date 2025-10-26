@@ -103,12 +103,11 @@ in {
                     force_split = 2;
                 };
 
-                # Input configuration
                 input = {
-                    kb_layout = "us";
+                    kb_layout = "us,bg(phonetic)";
                     kb_variant = "";
                     kb_model = "";
-                    kb_options = "";
+                    kb_options = "grp:alt_shift_toggle";
                     kb_rules = "";
                     follow_mouse = 1;
                     touchpad = {
@@ -122,7 +121,6 @@ in {
                     repeat_delay = 300;
                     numlock_by_default = true;
                 };
-
                 # Decoration settings
                 decoration = {
                     rounding = theme.border.radius;
