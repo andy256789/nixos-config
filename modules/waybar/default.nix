@@ -107,16 +107,16 @@ in {
 
                     "pulseaudio" = {
                         format = "{icon} {volume}%";
-                        format-muted = "  0%";
+                        format-muted = "  0%";
                         format-bluetooth = "󰥰 {volume}%";
                         format-bluetooth-muted = "󰥰 0%";
                         format-icons = {
-                            headphone = "";
-                            hands-free = "";
-                            headset = "";
-                            phone = "";
-                            car = "";
-                            default = [" " " " " "];
+                            headphone = "";
+                            hands-free = "";
+                            headset = "";
+                            phone = "";
+                            car = "";
+                            default = [" " " " " "];
                         };
                         on-click = "pavucontrol";
                         on-click-middle = "pactl set-sink-mute @DEFAULT_SINK@ toggle";
@@ -125,12 +125,16 @@ in {
                     };
 
                     "battery" = {
+                        bat = "BAT0";  # FIXED: Added battery identifier
+                        adapter = "AC";  # FIXED: Added AC adapter identifier
+                        interval = 60;  # FIXED: Added refresh interval
                         states = {
                             warning = 30;
                             critical = 15;
                         };
                         format = "{icon} {capacity}%";
                         format-charging = " 󱐋{capacity}%";
+                        format-plugged = " {capacity}%";  # FIXED: Added plugged format
                         format-alt = "{icon} {time}";
                         tooltip = true;
                         format-icons = ["󰂎" "󰁼" "󰁿" "󰂁" "󰁹"];

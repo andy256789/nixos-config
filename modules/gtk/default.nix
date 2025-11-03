@@ -1,72 +1,60 @@
 { config, lib, pkgs, ... }:
-
 with lib;
-
 let
   cfg = config.modules.gtk;
   theme = config.themes;
-  
   # Define common values to avoid repetition
   cursorSize = 24;
 in {
   options.modules.gtk = {
     enable = mkEnableOption "Enable GTK configuration";
-
     iconTheme = mkOption {
       type = types.str;
       default = "Papirus-Dark";
       description = "Icon theme name";
     };
-
     cursorTheme = mkOption {
       type = types.str;
       default = "Bibata-Modern-Ice";
       description = "Cursor theme name";
     };
   };
-
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
       # Theme dependencies
       gnome-themes-extra
       papirus-icon-theme
       adwaita-qt
+      adwaita-qt6  # Qt6 version
       materia-theme
       adwaita-icon-theme
       bibata-cursors
-      
       # Font dependencies
       noto-fonts
       noto-fonts-emoji
       nerd-fonts.jetbrains-mono
       font-awesome
     ];
-
     # GTK configuration
     gtk = {
       enable = true;
-      
       theme = {
         name = "Adwaita-dark";
         package = pkgs.gnome-themes-extra;
       };
-      
       iconTheme = {
         name = cfg.iconTheme;
         package = pkgs.papirus-icon-theme;
       };
-      
       cursorTheme = {
         name = cfg.cursorTheme;
         package = pkgs.bibata-cursors;
         size = cursorSize;
       };
-      
       font = {
         name = theme.fonts.sansSerif;
         size = theme.fonts.size.normal;
       };
-      
       # GTK3 specific configuration
       gtk3.extraConfig = {
         gtk-application-prefer-dark-theme = true;
@@ -76,24 +64,22 @@ in {
         gtk-toolbar-style = "GTK_TOOLBAR_BOTH_HORIZ";
         gtk-toolbar-icon-size = "GTK_ICON_SIZE_LARGE_TOOLBAR";
       };
-      
       # GTK4 specific configuration
       gtk4.extraConfig = {
         gtk-application-prefer-dark-theme = true;
         gtk-cursor-theme-size = cursorSize;
       };
     };
-
     # Qt configuration for theme consistency
+    # FIXED: Changed from "gtk" to "gtk3" to avoid qt6gtk2 dependency
     qt = {
       enable = true;
-      platformTheme.name = "gtk";
+      platformTheme.name = "gtk3";  # Changed from "gtk" to "gtk3"
       style = {
         name = "adwaita-dark";
-        package = pkgs.adwaita-qt;
+        package = pkgs.adwaita-qt6;  # Use Qt6 version
       };
     };
-
     # XDG portal configuration
     xdg = {
       mime.enable = true;
@@ -105,10 +91,8 @@ in {
         ];
       };
     };
-
     # Font configuration
     fonts.fontconfig.enable = true;
-
     # Cursor configuration for both Wayland and X11
     home.pointerCursor = {
       name = cfg.cursorTheme;
@@ -118,4 +102,4 @@ in {
       gtk.enable = true;
     };
   };
-} 
+}

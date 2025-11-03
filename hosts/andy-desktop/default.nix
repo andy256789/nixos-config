@@ -115,8 +115,6 @@
         extraPackages = with pkgs; [
             intel-media-driver  # LIBVA_DRIVER_NAME=iHD
             intel-vaapi-driver  # LIBVA_DRIVER_NAME=i965 (older but works better in some cases)
-            # intel-compute-runtime removed due to build issues on unstable
-            # Only needed for OpenCL workloads - add back if you need GPU compute
         ];
     };
 

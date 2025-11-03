@@ -29,6 +29,7 @@
         waybar.enable = true;
         wofi.enable = true;
         swaync.enable = true;
+        hyprlock.enable = true;
         
         # Appearance and theming
         gtk = {
