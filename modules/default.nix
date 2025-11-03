@@ -12,7 +12,7 @@
         ./wallpapers
         ./nixvim
         ./yazi
-        ./wofi
+        ./rofi
         ./hyprlock
         ./cybersecurity
     ];

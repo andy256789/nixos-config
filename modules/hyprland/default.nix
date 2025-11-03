@@ -30,7 +30,7 @@ in {
 
         launcher = mkOption {
             type = types.str;
-            default = "wofi --show drun";
+            default = "rofi -show drun";
             description = "Application launcher command";
         };
 
@@ -44,7 +44,7 @@ in {
     config = mkIf cfg.enable {
         # Install required packages for Hyprland
         home.packages = with pkgs; [
-            wofi
+            rofi-wayland
             libnotify
             swww
             grimblast
@@ -192,8 +192,9 @@ in {
                     "float,class:^(nwg-look)$"
                     "float,title:^(Picture-in-Picture)$"
                     "float,title:^(Volume Control)$"
-                    "center,class:^(wofi)$"
-                    "animation windowsIn,class:^(wofi)$,slide" 
+                    "float,class:^(rofi)$"
+                    "center,class:^(rofi)$"
+                    "animation windowsIn,class:^(rofi)$,slide" 
 
                     #Workspace assignments
                     "workspace 1, class:^(ghostty)$"

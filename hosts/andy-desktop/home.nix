@@ -27,7 +27,7 @@
             fileManager = "nemo";
         };
         waybar.enable = true;
-        wofi.enable = true;
+        rofi.enable = true;
         swaync.enable = true;
         hyprlock.enable = true;
         
