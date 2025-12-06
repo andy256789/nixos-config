@@ -41,26 +41,25 @@ in {
         };
     };
 
-    config = mkIf cfg.enable {
-        # Install required packages for Hyprland
-        home.packages = with pkgs; [
-            rofi-wayland
-            libnotify
-            swww
-            grimblast
-            wl-clipboard
-            cliphist
-            hypridle
-            hyprlock
-            networkmanagerapplet
-            pavucontrol
-            playerctl
-            pulseaudio
-            brightnessctl
-            wlogout
-            blueman
-            bluez
-        ];
+        config = mkIf cfg.enable {
+                # Install required packages for Hyprland
+                home.packages = with pkgs; [
+                        rofi
+                        libnotify
+                        swww
+                        grimblast
+                        wl-clipboard
+                        cliphist
+                        hypridle
+                        hyprlock
+                        networkmanagerapplet
+                        pavucontrol
+                        playerctl
+                        brightnessctl
+                        wlogout
+                        blueman
+                        bluez
+                ];
 
         wayland.windowManager.hyprland = {
             enable = true;
@@ -194,7 +193,6 @@ in {
                     "float,title:^(Volume Control)$"
                     "float,class:^(rofi)$"
                     "center,class:^(rofi)$"
-                    "animation windowsIn,class:^(rofi)$,slide" 
 
                     #Workspace assignments
                     "workspace 1, class:^(ghostty)$"
@@ -214,7 +212,7 @@ in {
 
                     # Window management
                     "SUPER, Q, killactive"
-                    "SUPER SHIFT, Q, exit"
+                    "SUPER SHIFT, Q, exec, rofi-powermenu"
                     "SUPER, F, fullscreen, 0"
                     "SUPER SHIFT, F, fullscreen, 1"
                     "SUPER, V, togglefloating"
@@ -288,25 +286,9 @@ in {
                 ];
 
                 # Startup applications
-                exec-once = [
-                    "waybar"
-                    "swaync"
-                    "nm-applet --indicator"
-                    "blueman-applet"
-                    "wl-paste --watch cliphist store"
-                    "hypridle"
-                    "hyprctl setcursor ${gtkCfg.cursorTheme} ${toString (config.home.pointerCursor.size or 24)}"
-                    "swww-daemon"
-
-                    # auto-start for apps
-                    "sleep 1 && ${cfg.terminal}"
-                    "sleep 2 && ${cfg.browser}"
-                    "sleep 3 && code"
-                    "sleep 4 && spotify"
-                    "sleep 5 && discord"
-                ];
-
-                exec = [
+                exec-once = [ ];
+                exec = 
+                [
                     "swww img ${config.home.homeDirectory}/wallpapers/${config.modules.wallpapers.wallpaper}"
                 ];
             };

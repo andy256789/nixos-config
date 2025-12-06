@@ -2,8 +2,6 @@
 {
     imports = [
         ./hardware-configuration.nix
-        # ThinkPad T490s specific optimizations from nixos-hardware
-        # inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t490s
     ];
 
     # Bootloader
@@ -32,10 +30,9 @@
             "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
             "yazi.cachix.org-1:Dcdz63NZKfvUCbDGngQDAZq6kOroIrFoyO064uvLh8k="
         ];
-        auto-optimise-store = true;  # Automatic store optimization
+        auto-optimise-store = true;
     };
-    
-    # Automatic garbage collection
+
     nix.gc = {
         automatic = true;
         dates = "weekly";
@@ -45,7 +42,7 @@
     # System settings
     networking.hostName = settings.hostname;
     time.timeZone = "Europe/Sofia";
-    
+
     # Locale settings
     i18n.defaultLocale = "en_US.UTF-8";
     i18n.extraLocaleSettings = {
@@ -69,7 +66,7 @@
 
     # Networking
     networking.networkmanager.enable = true;
-    
+
     # Firewall
     networking.firewall = {
         enable = true;
@@ -90,61 +87,57 @@
     };
     services.blueman.enable = true;
 
-    # Audio - PipeWire (modern replacement for PulseAudio)
-    security.rtkit.enable = true;  # RealtimeKit for better audio performance
+    # Audio with PipeWire
+    security.rtkit.enable = true;
     services.pipewire = {
         enable = true;
         alsa.enable = true;
         alsa.support32Bit = true;
-        pulse.enable = true;  # PulseAudio compatibility
-        jack.enable = true;   # JACK compatibility
-        wireplumber.enable = true;  # Session manager
+        pulse.enable = true;
+        jack.enable = true;
+        wireplumber.enable = true;
     };
-    # Explicitly disable PulseAudio (using PipeWire instead)
     services.pulseaudio.enable = false;
 
-    # Display and window manager
+    # Display and graphics
     services.xserver.enable = true;
-    # T490s has Intel integrated graphics, not AMD
-    services.xserver.videoDrivers = ["modesetting"];
-    
-    # Enable OpenGL and Mesa (Intel graphics)
+    services.xserver.videoDrivers = [ "modesetting" ];
+
     hardware.graphics = {
         enable = true;
-        enable32Bit = true;  # Support for 32-bit applications
+        enable32Bit = true;
         extraPackages = with pkgs; [
-            intel-media-driver  # LIBVA_DRIVER_NAME=iHD
-            intel-vaapi-driver  # LIBVA_DRIVER_NAME=i965 (older but works better in some cases)
+            intel-media-driver
+            intel-vaapi-driver
         ];
     };
 
-    # Bulgarian keyboard layout with phonetic variant
+    # Keyboard configuration
     services.xserver.xkb = {
         layout = "us,bg(phonetic)";
         options = "grp:alt_shift_toggle";
     };
 
-    # Console keyboard
     console = {
         font = "Lat2-Terminus16";
         keyMap = "us";
     };
 
-    # Intel kernel module options (T490s has Intel UHD 620)
+    # Kernel configuration
     boot.kernelModules = [ "kvm-intel" ];
     boot.kernelParams = [
-        "i915.enable_fbc=1"          # Enable framebuffer compression
-        "i915.enable_psr=1"          # Enable panel self refresh
-        "i915.fastboot=1"            # Try to skip VGA initialization
+        "i915.enable_fbc=1"
+        "i915.enable_psr=1"
+        "i915.fastboot=1"
     ];
 
-    # Display Manager
+    # Display manager
     services.displayManager.sddm = {
         enable = true;
         wayland.enable = true;
     };
-    
-    # Flatpak support
+
+    # Flatpak
     services.flatpak.enable = true;
     xdg.portal = {
         enable = true;
@@ -152,13 +145,12 @@
         config.common.default = "*";
     };
 
-    # Docker
+    # Virtualization
     virtualisation.docker = {
         enable = true;
-        enableOnBoot = false;  # Don't start on boot to save resources
+        enableOnBoot = false;
     };
 
-    # Virtualization with virt-manager
     programs.virt-manager.enable = true;
     virtualisation.libvirtd = {
         enable = true;
@@ -166,7 +158,6 @@
             package = pkgs.qemu_kvm;
             runAsRoot = true;
             swtpm.enable = true;
-            # OVMF firmware is now available by default, no need to configure
         };
     };
     virtualisation.spiceUSBRedirection.enable = true;
@@ -178,7 +169,7 @@
         xwayland.enable = true;
     };
 
-    # Essential system packages
+    # System packages
     environment.systemPackages = with pkgs; [
         home-manager
         git
@@ -187,10 +178,10 @@
         wget
         curl
         htop
-        btop  # Modern resource monitor
+        btop
         mesa
         wayland-utils
-        wl-clipboard  # Wayland clipboard utilities
+        wl-clipboard
         xdg-utils
         pciutils
         usbutils
@@ -198,14 +189,14 @@
         tree
         unzip
         zip
-        pavucontrol  # PulseAudio/PipeWire volume control
+        pavucontrol
         networkmanagerapplet
     ];
 
     # Shell
     programs.fish.enable = true;
-    
-    # SSH daemon
+
+    # SSH
     services.openssh = {
         enable = true;
         settings = {
@@ -214,60 +205,39 @@
         };
     };
 
-    # Power Management for Laptops
-    services.thermald.enable = true;  # Thermal management for Intel/AMD
-    
-    # Choose ONE of these power management tools:
-    # Option 1: TLP (traditional, very stable)
+    # Power management
+    services.thermald.enable = true;
+
     services.tlp = {
         enable = true;
         settings = {
             CPU_SCALING_GOVERNOR_ON_AC = "performance";
             CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-            
+
             CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
             CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
-            
+
             CPU_MIN_PERF_ON_AC = 0;
             CPU_MAX_PERF_ON_AC = 100;
             CPU_MIN_PERF_ON_BAT = 0;
             CPU_MAX_PERF_ON_BAT = 30;
-            
-            START_CHARGE_THRESH_BAT0 = 40;  # Battery charge thresholds
-            STOP_CHARGE_THRESH_BAT0 = 80;   # Extend battery lifespan
-        };
-    };
-    
-    # Option 2: auto-cpufreq (modern alternative, comment out TLP if using this)
-    # services.auto-cpufreq = {
-    #     enable = true;
-    #     settings = {
-    #         battery = {
-    #             governor = "powersave";
-    #             turbo = "never";
-    #         };
-    #         charger = {
-    #             governor = "performance";
-    #             turbo = "auto";
-    #         };
-    #     };
-    # };
 
-    # Laptop lid behavior
-    services.logind.settings = {
-        Login = {
-            HandleLidSwitch = "suspend";
-            HandleLidSwitchExternalPower = "lock";
-            HandlePowerKey = "suspend";
-            IdleAction = "suspend";
-            IdleActionSec = "30min";
+            START_CHARGE_THRESH_BAT0 = 75;
+            STOP_CHARGE_THRESH_BAT0 = 80;
         };
     };
 
-    # Enable firmware updates
+    services.logind.settings.Login = {
+        HandleLidSwitch = "suspend";
+        HandleLidSwitchExternalPower = "lock";
+        HandlePowerKey = "suspend";
+        IdleAction = "suspend";
+        IdleActionSec = "30min";
+    };
+    # Firmware updates
     services.fwupd.enable = true;
 
-    # Enable TRIM for SSD
+    # SSD optimization
     services.fstrim.enable = true;
 
     # Environment variables
@@ -277,15 +247,11 @@
         WLR_RENDERER_ALLOW_SOFTWARE = "1";
         QT_QPA_PLATFORM = "wayland";
         GDK_BACKEND = "wayland";
-        
-        # Intel-specific optimizations
-        LIBVA_DRIVER_NAME = "iHD";  # Use Intel iHD driver for hardware acceleration
-        
-        # Additional Wayland variables
+        LIBVA_DRIVER_NAME = "iHD";
         MOZ_ENABLE_WAYLAND = "1";
         XDG_SESSION_TYPE = "wayland";
     };
 
-    # System state version - NEVER change this after initial install!
+    # System state version
     system.stateVersion = "25.05";
 }

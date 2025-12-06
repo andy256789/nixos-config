@@ -5,15 +5,87 @@ with lib;
 let
     cfg = config.modules.rofi;
     theme = config.themes;
+    
+    powermenu = pkgs.writeShellScriptBin "rofi-powermenu" ''
+        red='#cc241d'
+        green='#98971a'
+        blue='#458588'
+        yellow='#d79921'
+        gray='#a89984'
+
+        shutdown="<span color='$red'>󰐥</span>"
+        reboot="<span color='$green'>󰜉</span>"
+        lock="<span color='$blue'>󰌾</span>"
+        suspend="<span color='$yellow'>󰤄</span>"
+        quit="<span color='$gray'>✘</span>"
+
+        yes="<span color='$green'>✔</span>"
+        no="<span color='$red'>✘</span>"
+
+        theme="$HOME/.config/rofi/powermenu-theme.rasi"
+
+        rofi_cmd() {
+            ${pkgs.rofi}/bin/rofi -dmenu -theme $theme -markup-rows
+        }
+
+        run_rofi() {
+            echo -e "$shutdown\n$reboot\n$lock\n$suspend\n$quit" | rofi_cmd
+        }
+
+        confirm_cmd() {
+            ${pkgs.rofi}/bin/rofi -theme-str 'window {width: 200px;}' \
+                -theme-str 'listview { columns: 2; }' \
+                -dmenu -theme $theme -markup-rows
+        }
+
+        rofi_confirm() {
+            echo -e "$yes"
+        }
+
+        run_cmd() {
+            selected="$(rofi_confirm)"
+            if [[ "$selected" == "$yes" ]]; then
+                if [[ $1 == '--shutdown' ]]; then
+                    systemctl poweroff
+                elif [[ $1 == '--reboot' ]]; then
+                    systemctl reboot
+                elif [[ $1 == '--suspend' ]]; then
+                    ${pkgs.hyprlock}/bin/hyprlock &
+                    systemctl suspend
+                fi
+            else
+                exit 0
+            fi
+        }
+
+        chosen="$(run_rofi)"
+        case ''${chosen} in
+            $shutdown)
+                run_cmd --shutdown
+                ;;
+            $reboot)
+                run_cmd --reboot
+                ;;
+            $lock)
+                sleep 0.1
+                ${pkgs.hyprlock}/bin/hyprlock
+                ;;
+            $suspend)
+                sleep 0.1
+                run_cmd --suspend
+                ;;
+        esac
+    '';
 in {
     options.modules.rofi = {
         enable = mkEnableOption "Enable rofi";
     };
 
     config = mkIf cfg.enable {
+        home.packages = [ powermenu ];
         programs.rofi = {
             enable = true;
-            package = pkgs.rofi-wayland;
+            package = pkgs.rofi;
             terminal = "${pkgs.ghostty}/bin/ghostty";
             
             extraConfig = {
@@ -149,5 +221,85 @@ in {
                     };
                 };
         };
+
+        # Power menu theme
+        home.file.".config/rofi/powermenu-theme.rasi".text = ''
+            * {
+                bg-col: ${theme.colors.background};
+                bg-col-transparent: ${theme.utils.hexToRgba theme.colors.background 0.95};
+                border-col: ${theme.colors.accent.primary};
+                selected-col: ${theme.colors.accent.primary};
+                fg-col: ${theme.colors.foreground};
+                urgent: #cc241d;
+                background-color: transparent;
+                text-color: @fg-col;
+                font: "JetBrainsMono Nerd Font 12";
+            }
+
+            window {
+                transparency: "real";
+                location: center;
+                anchor: center;
+                fullscreen: false;
+                width: 600px;
+                height: 180px;
+                background-color: @bg-col-transparent;
+                border: 2px solid;
+                border-color: @border-col;
+                border-radius: ${toString theme.border.radius}px;
+            }
+
+            mainbox {
+                enabled: true;
+                spacing: 0px;
+                background-color: transparent;
+                children: [ "listview" ];
+            }
+
+            listview {
+                enabled: true;
+                columns: 5;
+                lines: 1;
+                cycle: true;
+                dynamic: true;
+                scrollbar: false;
+                layout: vertical;
+                reverse: false;
+                fixed-height: true;
+                fixed-columns: true;
+                spacing: 15px;
+                margin: 30px;
+                background-color: transparent;
+            }
+
+            element {
+                enabled: true;
+                padding: 25px 10px;
+                background-color: ${theme.utils.hexToRgba theme.colors.background 0.3};
+                text-color: @fg-col;
+                border-radius: ${toString theme.border.radius}px;
+                cursor: pointer;
+            }
+
+            element-text {
+                font: "JetBrainsMono Nerd Font 32";
+                background-color: transparent;
+                text-color: inherit;
+                cursor: inherit;
+                vertical-align: 0.5;
+                horizontal-align: 0.5;
+            }
+
+            element selected.normal {
+                background-color: @selected-col;
+                text-color: @bg-col;
+                background-image: linear-gradient(${theme.colors.accent.primary}, ${theme.colors.accent.tertiary});
+                border-radius: ${toString theme.border.radius}px;
+            }
+
+            element.urgent {
+                background-color: @urgent;
+            }
+        '';
     };
 }

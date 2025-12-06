@@ -44,6 +44,7 @@ in {
                 type = types.listOf types.package;
                 default = with pkgs; [
                     # Development tools
+                    claude-code
                     code-cursor
                     vscode
                     gcc
@@ -143,7 +144,6 @@ in {
 
                     #university
                     python3
-                    kicad
                 ];
                 description = "Communication packages to install";
             };
