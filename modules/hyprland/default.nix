@@ -286,7 +286,17 @@ in {
                 ];
 
                 # Startup applications
-                exec-once = [ ];
+                exec-once = [ 
+                    "waybar"
+                    "swaync"
+                    "nm-applet --indicator"
+                    "blueman-applet"
+                    "wl-paste --watch cliphist store"
+                    "hypridle"
+                    "hyprctl setcursor ${gtkCfg.cursorTheme} ${toString (config.home.pointerCursor.size or 24)}"
+                    "swww-daemon"
+                ];
+
                 exec = 
                 [
                     "swww img ${config.home.homeDirectory}/wallpapers/${config.modules.wallpapers.wallpaper}"
