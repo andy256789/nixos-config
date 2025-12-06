@@ -100,6 +100,8 @@ in {
                 display-window = " 﩯  Window";
                 display-Network = " 󰤨  Network";
                 sidebar-mode = true;
+                icon-theme = "Papirus-Dark";
+                font = "JetBrainsMono Nerd Font 11";
             };
 
             theme = 
@@ -115,7 +117,8 @@ in {
                         fg-col = mkLiteral theme.colors.foreground;
                         fg-col2 = mkLiteral theme.colors.accent.secondary;
                         grey = mkLiteral "${theme.utils.hexToRgba theme.colors.foreground 0.5}";
-                        width = 600;
+                        width = 650;
+                        font = "JetBrainsMono Nerd Font 11";
                     };
 
                     "element-text, element-icon , mode-switcher" = {
@@ -124,11 +127,13 @@ in {
                     };
 
                     "window" = {
-                        height = 380;
-                        border = mkLiteral "2px";
+                        height = 520;
+                        border = mkLiteral "3px";
                         border-color = mkLiteral "@border-col";
                         background-color = mkLiteral "@bg-col";
                         border-radius = mkLiteral "${toString theme.border.radius}px";
+                        padding = mkLiteral "15px";
+                        transparency = "real";
                     };
 
                     "mainbox" = {
@@ -137,18 +142,21 @@ in {
 
                     "inputbar" = {
                         children = mkLiteral "[prompt,entry]";
-                        background-color = mkLiteral "@bg-col";
+                        background-color = mkLiteral "${theme.utils.hexToRgba theme.colors.background 0.4}";
                         border-radius = mkLiteral "${toString theme.border.radius}px";
-                        padding = mkLiteral "2px";
-                        margin = mkLiteral "10px";
+                        padding = mkLiteral "4px";
+                        margin = mkLiteral "0px 0px 15px 0px";
+                        border = mkLiteral "2px solid";
+                        border-color = mkLiteral "${theme.utils.hexToRgba theme.colors.accent.primary 0.3}";
                     };
 
                     "prompt" = {
                         background-color = mkLiteral "@blue";
-                        padding = mkLiteral "10px";
+                        padding = mkLiteral "12px 16px";
                         text-color = mkLiteral "@bg-col";
                         border-radius = mkLiteral "${toString theme.border.radius}px";
-                        margin = mkLiteral "5px 0px 0px 5px";
+                        margin = mkLiteral "0px";
+                        font = "JetBrainsMono Nerd Font Bold 11";
                     };
 
                     "textbox-prompt-colon" = {
@@ -157,36 +165,45 @@ in {
                     };
 
                     "entry" = {
-                        padding = mkLiteral "10px";
-                        margin = mkLiteral "5px 5px 5px 10px";
+                        padding = mkLiteral "12px 16px";
+                        margin = mkLiteral "0px 0px 0px 10px";
                         text-color = mkLiteral "@fg-col";
-                        background-color = mkLiteral "@bg-col";
+                        background-color = mkLiteral "transparent";
+                        placeholder = "Search...";
+                        placeholder-color = mkLiteral "@grey";
                     };
 
                     "listview" = {
                         border = mkLiteral "0px 0px 0px";
-                        padding = mkLiteral "6px 0px 0px";
-                        margin = mkLiteral "10px 10px 0px 10px";
+                        padding = mkLiteral "0px";
+                        margin = mkLiteral "0px";
                         columns = 1;
-                        lines = 8;
+                        lines = 9;
                         background-color = mkLiteral "@bg-col";
+                        spacing = mkLiteral "8px";
+                        scrollbar = false;
+                        fixed-height = true;
                     };
 
                     "element" = {
-                        padding = mkLiteral "8px";
-                        margin = mkLiteral "5px";
-                        background-color = mkLiteral "@bg-col";
+                        padding = mkLiteral "12px 16px";
+                        margin = mkLiteral "0px";
+                        background-color = mkLiteral "transparent";
                         text-color = mkLiteral "@fg-col";
                         border-radius = mkLiteral "${toString theme.border.radius}px";
+                        spacing = mkLiteral "12px";
                     };
 
                     "element-icon" = {
-                        size = mkLiteral "28px";
+                        size = mkLiteral "32px";
+                        margin = mkLiteral "0px 8px 0px 0px";
                     };
 
                     "element selected" = {
-                        background-color = mkLiteral "@blue";
-                        text-color = mkLiteral "@bg-col";
+                        background-color = mkLiteral "${theme.utils.hexToRgba theme.colors.accent.primary 0.2}";
+                        text-color = mkLiteral "@blue";
+                        border = mkLiteral "2px solid";
+                        border-color = mkLiteral "@blue";
                     };
 
                     "mode-switcher" = {
@@ -194,16 +211,19 @@ in {
                     };
 
                     "button" = {
-                        padding = mkLiteral "10px";
-                        background-color = mkLiteral "@bg-col-light";
+                        padding = mkLiteral "12px 16px";
+                        background-color = mkLiteral "${theme.utils.hexToRgba theme.colors.background 0.4}";
                         text-color = mkLiteral "@grey";
                         vertical-align = mkLiteral "0.5";
                         horizontal-align = mkLiteral "0.5";
+                        border-radius = mkLiteral "${toString theme.border.radius}px";
                     };
 
                     "button selected" = {
-                        background-color = mkLiteral "@bg-col";
+                        background-color = mkLiteral "${theme.utils.hexToRgba theme.colors.accent.primary 0.2}";
                         text-color = mkLiteral "@blue";
+                        border = mkLiteral "2px solid";
+                        border-color = mkLiteral "@blue";
                     };
 
                     "message" = {
@@ -241,12 +261,13 @@ in {
                 location: center;
                 anchor: center;
                 fullscreen: false;
-                width: 600px;
-                height: 180px;
+                width: 700px;
+                height: 200px;
                 background-color: @bg-col-transparent;
-                border: 2px solid;
+                border: 3px solid;
                 border-color: @border-col;
                 border-radius: ${toString theme.border.radius}px;
+                padding: 20px;
             }
 
             mainbox {
@@ -267,22 +288,24 @@ in {
                 reverse: false;
                 fixed-height: true;
                 fixed-columns: true;
-                spacing: 15px;
-                margin: 30px;
+                spacing: 20px;
+                margin: 10px;
                 background-color: transparent;
             }
 
             element {
                 enabled: true;
-                padding: 25px 10px;
+                padding: 30px 15px;
                 background-color: ${theme.utils.hexToRgba theme.colors.background 0.3};
                 text-color: @fg-col;
                 border-radius: ${toString theme.border.radius}px;
                 cursor: pointer;
+                border: 2px solid;
+                border-color: transparent;
             }
 
             element-text {
-                font: "JetBrainsMono Nerd Font 32";
+                font: "JetBrainsMono Nerd Font 36";
                 background-color: transparent;
                 text-color: inherit;
                 cursor: inherit;
@@ -291,9 +314,10 @@ in {
             }
 
             element selected.normal {
-                background-color: @selected-col;
-                text-color: @bg-col;
-                background-image: linear-gradient(${theme.colors.accent.primary}, ${theme.colors.accent.tertiary});
+                background-color: ${theme.utils.hexToRgba theme.colors.accent.primary 0.2};
+                text-color: @selected-col;
+                border-color: @selected-col;
+                border: 2px solid;
                 border-radius: ${toString theme.border.radius}px;
             }
 
