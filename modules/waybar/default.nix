@@ -119,9 +119,9 @@ in {
                             default = [" " " " " "];
                         };
                         on-click = "pavucontrol";
-                        on-click-middle = "pactl set-sink-mute @DEFAULT_SINK@ toggle";
-                        on-scroll-up = "pactl set-sink-volume @DEFAULT_SINK@ +1%";
-                        on-scroll-down = "pactl set-sink-volume @DEFAULT_SINK@ -1%";
+                        on-click-middle = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
+                        on-scroll-up = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%+";
+                        on-scroll-down = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-";
                     };
 
                     "battery" = {
