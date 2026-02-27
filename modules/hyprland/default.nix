@@ -44,7 +44,6 @@ in {
         config = mkIf cfg.enable {
                 # Install required packages for Hyprland
                 home.packages = with pkgs; [
-                        rofi
                         libnotify
                         swww
                         grimblast
@@ -52,14 +51,12 @@ in {
                         cliphist
                         hypridle
                         hyprlock
-                        networkmanagerapplet
                         pavucontrol
                         pamixer
                         playerctl
                         brightnessctl
                         wlogout
-                        blueman
-                        bluez
+                        qt5ct
                 ];
 
         wayland.windowManager.hyprland = {
@@ -177,6 +174,7 @@ in {
 
                 # Gestures
                 gestures = {
+                    workspace_swipe = true;
                     workspace_swipe_invert = false;
                     workspace_swipe_distance = 200;
                     workspace_swipe_min_speed_to_force = 30;
@@ -290,7 +288,6 @@ in {
                 exec-once = [ 
                     "waybar"
                     "swaync"
-                    "nm-applet --indicator"
                     "blueman-applet"
                     "wl-paste --watch cliphist store"
                     "hypridle"

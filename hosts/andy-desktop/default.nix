@@ -108,7 +108,6 @@
         enable32Bit = true;
         extraPackages = with pkgs; [
             intel-media-driver
-            intel-vaapi-driver
         ];
     };
 
@@ -172,25 +171,15 @@
     # System packages
     environment.systemPackages = with pkgs; [
         home-manager
-        git
         vim
-        neovim
-        wget
-        curl
-        htop
-        btop
         mesa
         wayland-utils
-        wl-clipboard
         xdg-utils
         pciutils
         usbutils
         file
         tree
-        unzip
         zip
-        pavucontrol
-        networkmanagerapplet
     ];
 
     # Shell
@@ -243,8 +232,6 @@
     # Environment variables
     environment.sessionVariables = {
         NIXOS_OZONE_WL = "1";
-        WLR_NO_HARDWARE_CURSORS = "1";
-        WLR_RENDERER_ALLOW_SOFTWARE = "1";
         QT_QPA_PLATFORM = "wayland";
         GDK_BACKEND = "wayland";
         LIBVA_DRIVER_NAME = "iHD";

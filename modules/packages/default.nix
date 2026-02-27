@@ -13,13 +13,8 @@ in {
             packages = mkOption {
                 type = types.listOf types.package;
                 default = with pkgs; [
-                    # Terminal essentials
-                    ghostty
-                    foot
-                    
                     # File management
                     nemo
-                    yazi
                     
                     # Essential utilities
                     wget
@@ -118,7 +113,6 @@ in {
                     nettools
                     
                     # Misc utilities
-                    flatpak
                     yq
                 ];
                 description = "Utility packages to install";
