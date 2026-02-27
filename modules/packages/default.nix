@@ -142,6 +142,8 @@ in {
                     winetricks
                     foliate
 
+                    anki-bin
+
                     #university
                     python3
                 ];
