@@ -184,23 +184,23 @@ in {
                 };
 
                 # Window/workspace rules
-                windowrulev2 = [
-                    "opacity 0.9 0.9,class:^(ghostty)$"
-                    "opacity 0.9 0.9,class:^(yazi)$"
-                    "float,class:^(pavucontrol)$"
-                    "float,class:^(nm-connection-editor)$"
-                    "float,class:^(nwg-look)$"
-                    "float,title:^(Picture-in-Picture)$"
-                    "float,title:^(Volume Control)$"
-                    "float,class:^(rofi)$"
-                    "center,class:^(rofi)$"
+                windowrule = [
+                    "opacity 0.9 0.9, match:class ^(ghostty)$"
+                    "opacity 0.9 0.9, match:class ^(yazi)$"
+                    "float 1, match:class ^(pavucontrol)$"
+                    "float 1, match:class ^(nm-connection-editor)$"
+                    "float 1, match:class ^(nwg-look)$"
+                    "float 1, match:title ^(Picture-in-Picture)$"
+                    "float 1, match:title ^(Volume Control)$"
+                    "float 1, match:class ^(rofi)$"
+                    "center 1, match:class ^(rofi)$"
 
                     #Workspace assignments
-                    "workspace 1, class:^(ghostty)$"
-                    "workspace 2, class:^(firefox)$"
-                    "workspace 3, class:^(code-url-handler|VSCodium|code)$"
-                    "workspace 4, class:^(spotify)$"
-                    "workspace 5, class:^(discord)$"
+                    "workspace 1, match:class ^(ghostty)$"
+                    "workspace 2, match:class ^(firefox)$"
+                    "workspace 3, match:class ^(code-url-handler|VSCodium|code)$"
+                    "workspace 4, match:class ^(spotify)$"
+                    "workspace 5, match:class ^(discord)$"
                 ];
 
                 # Keybindings
