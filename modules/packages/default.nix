@@ -125,14 +125,7 @@ in {
                 type = types.listOf types.package;
                 default = with pkgs; [
                     discord
-                    teams-for-linux
-                    zoom-us
-                    remmina
                     obsidian
-                    steam
-                    wineWow64Packages.staging
-                    winetricks
-                    foliate
 
                     anki-bin
 

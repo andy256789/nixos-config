@@ -170,16 +170,11 @@
 
     # System packages
     environment.systemPackages = with pkgs; [
-        home-manager
-        vim
         mesa
         wayland-utils
         xdg-utils
         pciutils
         usbutils
-        file
-        tree
-        zip
     ];
 
     # Shell

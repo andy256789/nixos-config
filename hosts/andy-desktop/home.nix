@@ -9,7 +9,7 @@
     home = {
         username = settings.username;
         homeDirectory = "/home/${settings.username}";
-        stateVersion = "26.05";
+        stateVersion = settings.stateVersion;
     };
 
     # Base configuration

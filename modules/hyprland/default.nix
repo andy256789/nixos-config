@@ -45,7 +45,6 @@ in {
                 # Install required packages for Hyprland
                 home.packages = with pkgs; [
                         libnotify
-                        swww
                         grimblast
                         wl-clipboard
                         cliphist
@@ -56,7 +55,6 @@ in {
                         playerctl
                         brightnessctl
                         wlogout
-                        qt5ct
                 ];
 
         wayland.windowManager.hyprland = {
@@ -174,12 +172,15 @@ in {
 
                 # Gestures
                 gestures = {
-                    workspace_swipe = true;
                     workspace_swipe_invert = false;
                     workspace_swipe_distance = 200;
                     workspace_swipe_min_speed_to_force = 30;
                     workspace_swipe_cancel_ratio = 0.5;
                 };
+
+                gesture = [
+                    "3, horizontal, workspace"
+                ];
 
                 # Window/workspace rules
                 windowrule = [
