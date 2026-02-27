@@ -14,6 +14,5 @@
         ./yazi
         ./rofi
         ./hyprlock
-        ./cybersecurity
     ];
 } 

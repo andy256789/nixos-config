@@ -56,9 +56,6 @@
             utilities.enable = true;
             communication.enable = true;
         };
-        
-        # Special purposes
-        cybersecurity.enable = true;
 
     };
 }

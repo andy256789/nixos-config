@@ -58,8 +58,6 @@ in {
                     docker
                     prisma-engines
                     dotnet-sdk_8
-                    nodePackages.npm
-                    nodePackages."@angular/cli"
                     
                     # Database tools
                     postgresql
@@ -138,7 +136,7 @@ in {
                     remmina
                     obsidian
                     steam
-                    wineWowPackages.staging
+                    wineWow64Packages.staging
                     winetricks
                     foliate
 
