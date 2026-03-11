@@ -86,6 +86,7 @@
         };
     };
     services.blueman.enable = true;
+    services.udev.packages = [ pkgs.game-devices-udev-rules ];
 
     # Audio with PipeWire
     security.rtkit.enable = true;
@@ -171,6 +172,7 @@
     # System packages
     environment.systemPackages = with pkgs; [
         mesa
+        bluez
         wayland-utils
         xdg-utils
         pciutils

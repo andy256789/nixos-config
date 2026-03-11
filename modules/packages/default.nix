@@ -126,6 +126,9 @@ in {
                 default = with pkgs; [
                     discord
                     obsidian
+                    retroarch-full
+                    stremio
+                    shipwright #Zelda Oscarina of Time
 
                     anki-bin
 
