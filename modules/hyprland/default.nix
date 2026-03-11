@@ -286,7 +286,7 @@ in {
                 ];
 
                 # Startup applications
-                exec-once = [ 
+                exec-once = [
                     "waybar"
                     "swaync"
                     "blueman-applet"
@@ -296,11 +296,11 @@ in {
                     "swww-daemon"
                 ];
 
-                exec = 
+                exec =
                 [
                     "swww img ${config.home.homeDirectory}/wallpapers/${config.modules.wallpapers.wallpaper}"
                 ];
             };
         };
     };
-} 
+}

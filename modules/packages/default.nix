@@ -114,6 +114,7 @@ in {
                     
                     # Misc utilities
                     yq
+                    mcp-nixos
                 ];
                 description = "Utility packages to install";
             };
@@ -127,12 +128,12 @@ in {
                     discord
                     obsidian
                     retroarch-full
-                    stremio
-                    shipwright #Zelda Oscarina of Time
+                    stremio-linux-shell
+                    shipwright # Zelda Ocarina of Time
 
                     anki-bin
 
-                    #university
+                    # University
                     python3
                 ];
                 description = "Communication packages to install";
@@ -149,4 +150,4 @@ in {
             ++ (if cfg.utilities.enable then cfg.utilities.packages else [])
             ++ (if cfg.communication.enable then cfg.communication.packages else []);
     };
-} 
+}

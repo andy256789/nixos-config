@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ ... }:
 
 {
     imports = [
@@ -15,4 +15,4 @@
         ./rofi
         ./hyprlock
     ];
-} 
+}

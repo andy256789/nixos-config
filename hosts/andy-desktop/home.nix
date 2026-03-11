@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, settings, ... }:
+{ inputs, settings, ... }:
 
 {
     imports = [
@@ -30,7 +30,7 @@
         rofi.enable = true;
         swaync.enable = true;
         hyprlock.enable = true;
-        
+
         # Appearance and theming
         gtk = {
             enable = true;
@@ -41,12 +41,12 @@
             enable = true;
             wallpaper = "anime-black-hole.png";
         };
-        
+
         # Applications
         ghostty.enable = true;
         nixvim.enable = true;
         yazi.enable = true;
-        
+
         # Package groups
         packages = {
             enable = true;

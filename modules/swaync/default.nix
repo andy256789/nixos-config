@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, ... }:
 
 with lib;
 
@@ -130,4 +130,4 @@ in {
             '';
         };
     };
-} 
+}

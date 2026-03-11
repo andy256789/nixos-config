@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, ... }:
 
 with lib;
 
@@ -37,15 +37,15 @@ in {
           j = "down";
           k = "up";
           l = "enter";
-          
+
           # Common operations
           y = "copy";
           p = "paste";
           d = "cut";
-          
+
           "g" = "goto_top";
           "G" = "goto_bottom";
-          
+
           "/" = "search";
           "n" = "search_next";
           "N" = "search_prev";
@@ -64,13 +64,13 @@ in {
       magenta = "#bb9af7"
       cyan = "#7dcfff"
       white = "#a9b1d6"
-      
+
       [manager]
       fg = "white"
       bg = { rgba = "black 0.9" }
       preview_fg = "white"
       preview_bg = { rgba = "black 0.9" }
-      
+
       [status]
       fg = "white"
       bg = { rgba = "#414868 0.9" }
@@ -78,14 +78,14 @@ in {
       [selection]
       fg = "black"
       bg = "blue"
-      
+
       [visual]
       bg = "#414868"
-      
+
       [file]
       directory = { fg = "blue", bold = true }
       executable = { fg = "green", bold = true }
       symlink = { fg = "cyan", italic = true }
     '';
   };
-} 
+}

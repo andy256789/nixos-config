@@ -1,12 +1,12 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, ... }:
 
 with lib;
 
 let
     cfg = config.themes;
-    
+
     # Helper function to extract RGBA components from hex color
-    hexToRgba = color: opacity: 
+    hexToRgba = color: opacity:
         let
             # Remove the # prefix
             cleanColor = builtins.substring 1 6 color;
@@ -21,7 +21,7 @@ let
         else if cleanColor == "f38ba8" then "rgba(243, 139, 168, ${toString opacity})"
         else if cleanColor == "cdd6f4" then "rgba(205, 214, 244, ${toString opacity})"
         else "rgba(137, 180, 250, ${toString opacity})"; # fallback
-        
+
 in {
     options.themes = {
         enable = mkEnableOption "Enable theme settings";
@@ -148,4 +148,4 @@ in {
     config = mkIf cfg.enable {
         # No direct configuration - this module just provides options for other modules
     };
-} 
+}

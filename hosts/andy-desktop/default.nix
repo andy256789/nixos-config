@@ -1,4 +1,4 @@
-{ config, pkgs, hyprland, settings, inputs, ... }:
+{ pkgs, settings, ... }:
 {
     imports = [
         ./hardware-configuration.nix
@@ -12,12 +12,15 @@
         efiSupport = true;
         useOSProber = true;
         devices = [ "nodev" ];
+        configurationLimit = 10;
     };
 
     # Nix settings
     nixpkgs.config.allowUnfree = true;
     nix.settings = {
         experimental-features = [ "nix-command" "flakes" ];
+        allowed-users = [ "@wheel" ];
+        trusted-users = [ "root" "@wheel" ];
         substituters = [
             "https://cache.nixos.org?priority=10"
             "https://nix-community.cachix.org"
@@ -37,6 +40,14 @@
         automatic = true;
         dates = "weekly";
         options = "--delete-older-than 7d";
+    };
+
+    system.autoUpgrade = {
+        enable = true;
+        operation = "boot";
+        dates = "daily";
+        randomizedDelaySec = "45min";
+        allowReboot = false;
     };
 
     # System settings
@@ -167,6 +178,7 @@
         enable = true;
         package = pkgs.hyprland;
         xwayland.enable = true;
+        withUWSM = true;
     };
 
     # System packages
@@ -185,11 +197,15 @@
     # SSH
     services.openssh = {
         enable = true;
+        openFirewall = true;
         settings = {
             PermitRootLogin = "no";
             PasswordAuthentication = false;
         };
     };
+
+    # SSH abuse protection
+    services.fail2ban.enable = true;
 
     # Power management
     services.thermald.enable = true;
@@ -237,5 +253,5 @@
     };
 
     # System state version
-    system.stateVersion = "25.05";
+    system.stateVersion = settings.stateVersion;
 }
